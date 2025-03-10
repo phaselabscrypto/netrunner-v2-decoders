@@ -1,0 +1,22 @@
+[package]
+name = "netrunner-v2-decoders"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+carbon-core = "0.6"
+carbon-proc-macros = "0.6"
+carbon-macros = "0.6"
+
+[workspace.dependencies]
+carbon-core = "0.6"
+carbon-proc-macros = "0.6"
+carbon-macros = "0.6"
+
+
+[workspace]
+members = ["src/generated_decoders/*"]
+
+[[bin]]
+name = "generate_decoders"
+path = "src/bin/generate_decoders.rs"
