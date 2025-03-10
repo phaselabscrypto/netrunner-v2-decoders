@@ -4,9 +4,10 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-carbon-core = "0.6"
+carbon-core = { version = "0.6", default-features = false }
 carbon-proc-macros = "0.6"
 carbon-macros = "0.6"
+solana-sdk = "2.1"
 
 [workspace.dependencies]
 carbon-core = "0.6"
