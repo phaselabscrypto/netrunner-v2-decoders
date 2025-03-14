@@ -52,7 +52,7 @@ pub enum VaultInstruction {
     TotalAmountEvent(total_amount_event::TotalAmountEvent),
 }
 
-impl<'a> carbon_core::instruction::InstructionDecoder<'a> for VaultDecoder {
+impl carbon_core::instruction::InstructionDecoder<'_> for VaultDecoder {
     type InstructionType = VaultInstruction;
 
     fn decode_instruction(

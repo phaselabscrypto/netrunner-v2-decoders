@@ -34,7 +34,7 @@ pub enum CandyMachineInstruction {
     UnlockFunds(unlock_funds::UnlockFunds),
 }
 
-impl<'a> carbon_core::instruction::InstructionDecoder<'a> for CandyMachineDecoder {
+impl carbon_core::instruction::InstructionDecoder<'_> for CandyMachineDecoder {
     type InstructionType = CandyMachineInstruction;
 
     fn decode_instruction(

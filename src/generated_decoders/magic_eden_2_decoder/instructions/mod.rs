@@ -56,7 +56,7 @@ pub enum M2Instruction {
     CoreExecuteSaleV2(core_execute_sale_v2::CoreExecuteSaleV2),
 }
 
-impl<'a> carbon_core::instruction::InstructionDecoder<'a> for M2Decoder {
+impl carbon_core::instruction::InstructionDecoder<'_> for M2Decoder {
     type InstructionType = M2Instruction;
 
     fn decode_instruction(

@@ -96,7 +96,7 @@ pub enum AmmInstruction {
     PartnerClaimFeesEvent(partner_claim_fees_event::PartnerClaimFeesEvent),
 }
 
-impl<'a> carbon_core::instruction::InstructionDecoder<'a> for AmmDecoder {
+impl carbon_core::instruction::InstructionDecoder<'_> for AmmDecoder {
     type InstructionType = AmmInstruction;
 
     fn decode_instruction(

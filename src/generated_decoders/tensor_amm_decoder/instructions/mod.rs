@@ -52,7 +52,7 @@ pub enum AmmProgramInstruction {
     SellNftTradePoolT22(sell_nft_trade_pool_t22::SellNftTradePoolT22),
 }
 
-impl<'a> carbon_core::instruction::InstructionDecoder<'a> for AmmProgramDecoder {
+impl carbon_core::instruction::InstructionDecoder<'_> for AmmProgramDecoder {
     type InstructionType = AmmProgramInstruction;
 
     fn decode_instruction(

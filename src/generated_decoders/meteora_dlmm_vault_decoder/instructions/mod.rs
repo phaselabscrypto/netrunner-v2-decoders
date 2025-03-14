@@ -76,7 +76,7 @@ pub enum AlphaVaultInstruction {
     EscrowClaimTokenEvent(escrow_claim_token_event::EscrowClaimTokenEvent),
 }
 
-impl<'a> carbon_core::instruction::InstructionDecoder<'a> for AlphaVaultDecoder {
+impl carbon_core::instruction::InstructionDecoder<'_> for AlphaVaultDecoder {
     type InstructionType = AlphaVaultInstruction;
 
     fn decode_instruction(

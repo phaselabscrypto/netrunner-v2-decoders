@@ -104,7 +104,7 @@ pub enum TensorswapInstruction {
     DelistEvent(delist_event::DelistEvent),
 }
 
-impl<'a> carbon_core::instruction::InstructionDecoder<'a> for TensorswapDecoder {
+impl carbon_core::instruction::InstructionDecoder<'_> for TensorswapDecoder {
     type InstructionType = TensorswapInstruction;
 
     fn decode_instruction(

@@ -26,7 +26,7 @@ pub enum CandyGuardInstruction {
     Wrap(wrap::Wrap),
 }
 
-impl<'a> carbon_core::instruction::InstructionDecoder<'a> for CandyGuardDecoder {
+impl carbon_core::instruction::InstructionDecoder<'_> for CandyGuardDecoder {
     type InstructionType = CandyGuardInstruction;
 
     fn decode_instruction(

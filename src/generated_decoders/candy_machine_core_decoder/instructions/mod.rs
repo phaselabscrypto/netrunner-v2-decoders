@@ -24,7 +24,7 @@ pub enum CandyMachineCoreInstruction {
     Withdraw(withdraw::Withdraw),
 }
 
-impl<'a> carbon_core::instruction::InstructionDecoder<'a> for CandyMachineCoreDecoder {
+impl carbon_core::instruction::InstructionDecoder<'_> for CandyMachineCoreDecoder {
     type InstructionType = CandyMachineCoreInstruction;
 
     fn decode_instruction(

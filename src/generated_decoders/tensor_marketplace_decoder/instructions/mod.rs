@@ -50,7 +50,7 @@ pub enum TcompInstruction {
     TakeBidCore(take_bid_core::TakeBidCore),
 }
 
-impl<'a> carbon_core::instruction::InstructionDecoder<'a> for TcompDecoder {
+impl carbon_core::instruction::InstructionDecoder<'_> for TcompDecoder {
     type InstructionType = TcompInstruction;
 
     fn decode_instruction(

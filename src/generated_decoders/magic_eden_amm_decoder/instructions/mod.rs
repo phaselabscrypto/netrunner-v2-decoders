@@ -66,7 +66,7 @@ pub enum MmmInstruction {
     CnftFulfillBuy(cnft_fulfill_buy::CnftFulfillBuy),
 }
 
-impl<'a> carbon_core::instruction::InstructionDecoder<'a> for MmmDecoder {
+impl carbon_core::instruction::InstructionDecoder<'_> for MmmDecoder {
     type InstructionType = MmmInstruction;
 
     fn decode_instruction(

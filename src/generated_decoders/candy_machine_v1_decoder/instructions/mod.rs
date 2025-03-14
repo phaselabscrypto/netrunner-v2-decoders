@@ -22,7 +22,7 @@ pub enum NftCandyMachineInstruction {
     WithdrawFunds(withdraw_funds::WithdrawFunds),
 }
 
-impl<'a> carbon_core::instruction::InstructionDecoder<'a> for NftCandyMachineDecoder {
+impl carbon_core::instruction::InstructionDecoder<'_> for NftCandyMachineDecoder {
     type InstructionType = NftCandyMachineInstruction;
 
     fn decode_instruction(
