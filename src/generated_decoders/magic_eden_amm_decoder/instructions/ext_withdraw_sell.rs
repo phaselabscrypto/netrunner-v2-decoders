@@ -28,7 +28,7 @@ pub struct ExtWithdrawSellInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for ExtWithdrawSell {
     type ArrangedAccounts = ExtWithdrawSellInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let owner = accounts.get(0)?;
         let cosigner = accounts.get(1)?;
         let pool = accounts.get(2)?;

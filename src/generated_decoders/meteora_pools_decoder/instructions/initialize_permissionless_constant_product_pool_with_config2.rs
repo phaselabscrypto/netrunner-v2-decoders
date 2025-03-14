@@ -43,7 +43,7 @@ pub struct InitializePermissionlessConstantProductPoolWithConfig2InstructionAcco
 impl carbon_core::deserialize::ArrangeAccounts for InitializePermissionlessConstantProductPoolWithConfig2 {
     type ArrangedAccounts = InitializePermissionlessConstantProductPoolWithConfig2InstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let pool = accounts.get(0)?;
         let config = accounts.get(1)?;
         let lp_mint = accounts.get(2)?;

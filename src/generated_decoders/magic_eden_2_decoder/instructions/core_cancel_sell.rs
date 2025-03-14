@@ -26,7 +26,7 @@ pub struct CoreCancelSellInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for CoreCancelSell {
     type ArrangedAccounts = CoreCancelSellInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let payer = accounts.get(0)?;
         let wallet = accounts.get(1)?;
         let notary = accounts.get(2)?;

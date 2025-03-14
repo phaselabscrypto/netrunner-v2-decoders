@@ -33,7 +33,7 @@ pub struct ClaimFeeInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for ClaimFee {
     type ArrangedAccounts = ClaimFeeInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let pool = accounts.get(0)?;
         let lp_mint = accounts.get(1)?;
         let lock_escrow = accounts.get(2)?;

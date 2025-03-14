@@ -20,7 +20,7 @@ pub struct CloseEscrowInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for CloseEscrow {
     type ArrangedAccounts = CloseEscrowInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let vault = accounts.get(0)?;
         let escrow = accounts.get(1)?;
         let owner = accounts.get(2)?;

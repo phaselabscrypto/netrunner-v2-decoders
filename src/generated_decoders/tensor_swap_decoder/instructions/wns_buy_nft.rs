@@ -38,7 +38,7 @@ pub struct WnsBuyNftInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for WnsBuyNft {
     type ArrangedAccounts = WnsBuyNftInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let tswap = accounts.get(0)?;
         let fee_vault = accounts.get(1)?;
         let pool = accounts.get(2)?;

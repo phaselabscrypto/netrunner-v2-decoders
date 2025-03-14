@@ -22,7 +22,7 @@ pub struct WithdrawMarginAccountCpiTcompInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for WithdrawMarginAccountCpiTcomp {
     type ArrangedAccounts = WithdrawMarginAccountCpiTcompInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let margin_account = accounts.get(0)?;
         let bid_state = accounts.get(1)?;
         let owner = accounts.get(2)?;

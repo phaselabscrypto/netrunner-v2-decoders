@@ -17,7 +17,7 @@ pub struct SellNftTokenPoolCoreInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for SellNftTokenPoolCore {
     type ArrangedAccounts = SellNftTokenPoolCoreInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let trade = accounts.get(0)?;
         let core = accounts.get(1)?;
 

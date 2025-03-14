@@ -17,7 +17,7 @@ pub struct TammNoopInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for TammNoop {
     type ArrangedAccounts = TammNoopInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let pool = accounts.get(0)?;
 
         Some(TammNoopInstructionAccounts {

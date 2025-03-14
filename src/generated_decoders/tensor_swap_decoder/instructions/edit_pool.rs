@@ -28,7 +28,7 @@ pub struct EditPoolInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for EditPool {
     type ArrangedAccounts = EditPoolInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let tswap = accounts.get(0)?;
         let old_pool = accounts.get(1)?;
         let new_pool = accounts.get(2)?;

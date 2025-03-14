@@ -33,7 +33,7 @@ pub struct RemoveBalanceLiquidityInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for RemoveBalanceLiquidity {
     type ArrangedAccounts = RemoveBalanceLiquidityInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let pool = accounts.get(0)?;
         let lp_mint = accounts.get(1)?;
         let user_pool_lp = accounts.get(2)?;

@@ -24,7 +24,7 @@ pub struct InitializeCandyMachineInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for InitializeCandyMachine {
     type ArrangedAccounts = InitializeCandyMachineInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let candy_machine = accounts.get(0)?;
         let wallet = accounts.get(1)?;
         let config = accounts.get(2)?;

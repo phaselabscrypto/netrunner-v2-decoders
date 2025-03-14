@@ -22,7 +22,7 @@ pub struct CreateMerkleRootConfigInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for CreateMerkleRootConfig {
     type ArrangedAccounts = CreateMerkleRootConfigInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let vault = accounts.get(0)?;
         let merkle_root_config = accounts.get(1)?;
         let admin = accounts.get(2)?;

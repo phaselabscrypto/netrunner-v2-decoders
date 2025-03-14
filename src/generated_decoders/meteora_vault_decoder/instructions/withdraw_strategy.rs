@@ -25,7 +25,7 @@ pub struct WithdrawStrategyInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for WithdrawStrategy {
     type ArrangedAccounts = WithdrawStrategyInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let vault = accounts.get(0)?;
         let strategy = accounts.get(1)?;
         let token_vault = accounts.get(2)?;

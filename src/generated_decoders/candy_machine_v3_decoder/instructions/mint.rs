@@ -35,7 +35,7 @@ pub struct MintInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for Mint {
     type ArrangedAccounts = MintInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let candy_guard = accounts.get(0)?;
         let candy_machine_program = accounts.get(1)?;
         let candy_machine = accounts.get(2)?;

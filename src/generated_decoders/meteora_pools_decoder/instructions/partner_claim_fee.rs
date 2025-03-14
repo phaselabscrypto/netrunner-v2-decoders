@@ -24,7 +24,7 @@ pub struct PartnerClaimFeeInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for PartnerClaimFee {
     type ArrangedAccounts = PartnerClaimFeeInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let pool = accounts.get(0)?;
         let a_vault_lp = accounts.get(1)?;
         let protocol_token_a_fee = accounts.get(2)?;

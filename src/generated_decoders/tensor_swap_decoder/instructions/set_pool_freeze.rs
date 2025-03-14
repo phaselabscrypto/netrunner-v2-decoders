@@ -18,7 +18,7 @@ pub struct SetPoolFreezeInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for SetPoolFreeze {
     type ArrangedAccounts = SetPoolFreezeInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let system_program = accounts.get(0)?;
 
         Some(SetPoolFreezeInstructionAccounts {

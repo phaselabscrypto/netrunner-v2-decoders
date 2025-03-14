@@ -19,7 +19,7 @@ pub struct UpdateAllowlistsInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for UpdateAllowlists {
     type ArrangedAccounts = UpdateAllowlistsInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let cosigner = accounts.get(0)?;
         let owner = accounts.get(1)?;
         let pool = accounts.get(2)?;

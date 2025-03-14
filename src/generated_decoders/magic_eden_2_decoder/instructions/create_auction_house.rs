@@ -28,7 +28,7 @@ pub struct CreateAuctionHouseInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for CreateAuctionHouse {
     type ArrangedAccounts = CreateAuctionHouseInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let payer = accounts.get(0)?;
         let notary = accounts.get(1)?;
         let authority = accounts.get(2)?;

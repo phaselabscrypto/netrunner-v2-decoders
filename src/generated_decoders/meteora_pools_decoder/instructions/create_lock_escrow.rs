@@ -20,7 +20,7 @@ pub struct CreateLockEscrowInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for CreateLockEscrow {
     type ArrangedAccounts = CreateLockEscrowInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let pool = accounts.get(0)?;
         let lock_escrow = accounts.get(1)?;
         let owner = accounts.get(2)?;

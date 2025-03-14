@@ -37,7 +37,7 @@ pub struct CoreExecuteSaleV2InstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for CoreExecuteSaleV2 {
     type ArrangedAccounts = CoreExecuteSaleV2InstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let payer = accounts.get(0)?;
         let buyer = accounts.get(1)?;
         let seller = accounts.get(2)?;

@@ -17,7 +17,7 @@ pub struct TcompNoopInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for TcompNoop {
     type ArrangedAccounts = TcompNoopInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let tcomp_signer = accounts.get(0)?;
 
         Some(TcompNoopInstructionAccounts {

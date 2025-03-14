@@ -27,7 +27,7 @@ pub struct ListCoreInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for ListCore {
     type ArrangedAccounts = ListCoreInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let asset = accounts.get(0)?;
         let collection = accounts.get(1)?;
         let list_state = accounts.get(2)?;

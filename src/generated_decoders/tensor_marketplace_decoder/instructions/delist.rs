@@ -29,7 +29,7 @@ pub struct DelistInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for Delist {
     type ArrangedAccounts = DelistInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let tree_authority = accounts.get(0)?;
         let merkle_tree = accounts.get(1)?;
         let log_wrapper = accounts.get(2)?;

@@ -19,7 +19,7 @@ pub struct BuyNftCoreInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for BuyNftCore {
     type ArrangedAccounts = BuyNftCoreInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let trade = accounts.get(0)?;
         let core = accounts.get(1)?;
         let nft_receipt = accounts.get(2)?;

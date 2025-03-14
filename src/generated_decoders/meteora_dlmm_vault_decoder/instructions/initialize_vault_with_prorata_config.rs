@@ -24,7 +24,7 @@ pub struct InitializeVaultWithProrataConfigInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for InitializeVaultWithProrataConfig {
     type ArrangedAccounts = InitializeVaultWithProrataConfigInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let vault = accounts.get(0)?;
         let pool = accounts.get(1)?;
         let quote_mint = accounts.get(2)?;

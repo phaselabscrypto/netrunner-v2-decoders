@@ -33,7 +33,7 @@ pub struct FillDynamicAmmInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for FillDynamicAmm {
     type ArrangedAccounts = FillDynamicAmmInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let vault = accounts.get(0)?;
         let token_vault = accounts.get(1)?;
         let token_out_vault = accounts.get(2)?;

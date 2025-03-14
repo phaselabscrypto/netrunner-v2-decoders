@@ -19,7 +19,7 @@ pub struct WithdrawFromTreasuryInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for WithdrawFromTreasury {
     type ArrangedAccounts = WithdrawFromTreasuryInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let treasury_withdrawal_destination = accounts.get(0)?;
         let auction_house_treasury = accounts.get(1)?;
         let auction_house = accounts.get(2)?;

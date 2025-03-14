@@ -22,7 +22,7 @@ pub struct CreatePoolInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for CreatePool {
     type ArrangedAccounts = CreatePoolInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let rent_payer = accounts.get(0)?;
         let owner = accounts.get(1)?;
         let pool = accounts.get(2)?;

@@ -22,7 +22,7 @@ pub struct WithdrawNftT22InstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for WithdrawNftT22 {
     type ArrangedAccounts = WithdrawNftT22InstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let transfer = accounts.get(0)?;
         let t22 = accounts.get(1)?;
         let nft_receipt = accounts.get(2)?;

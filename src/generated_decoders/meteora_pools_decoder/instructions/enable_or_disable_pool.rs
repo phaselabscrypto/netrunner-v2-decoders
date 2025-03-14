@@ -17,7 +17,7 @@ pub struct EnableOrDisablePoolInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for EnableOrDisablePool {
     type ArrangedAccounts = EnableOrDisablePoolInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let pool = accounts.get(0)?;
         let admin = accounts.get(1)?;
 

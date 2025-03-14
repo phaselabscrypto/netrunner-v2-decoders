@@ -19,7 +19,7 @@ pub struct CollectDustInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for CollectDust {
     type ArrangedAccounts = CollectDustInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let vault = accounts.get(0)?;
         let token_vault = accounts.get(1)?;
         let token_admin = accounts.get(2)?;

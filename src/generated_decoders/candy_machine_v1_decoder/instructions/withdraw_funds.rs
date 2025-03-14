@@ -16,7 +16,7 @@ pub struct WithdrawFundsInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for WithdrawFunds {
     type ArrangedAccounts = WithdrawFundsInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let config = accounts.get(0)?;
         let authority = accounts.get(1)?;
 

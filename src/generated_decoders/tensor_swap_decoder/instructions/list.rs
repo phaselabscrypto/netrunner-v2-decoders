@@ -35,7 +35,7 @@ pub struct ListInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for List {
     type ArrangedAccounts = ListInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let tswap = accounts.get(0)?;
         let nft_source = accounts.get(1)?;
         let nft_mint = accounts.get(2)?;

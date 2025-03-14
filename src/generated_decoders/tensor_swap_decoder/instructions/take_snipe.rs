@@ -19,7 +19,7 @@ pub struct TakeSnipeInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for TakeSnipe {
     type ArrangedAccounts = TakeSnipeInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let system_program = accounts.get(0)?;
 
         Some(TakeSnipeInstructionAccounts {

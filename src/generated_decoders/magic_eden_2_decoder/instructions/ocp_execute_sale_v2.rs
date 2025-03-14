@@ -42,7 +42,7 @@ pub struct OcpExecuteSaleV2InstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for OcpExecuteSaleV2 {
     type ArrangedAccounts = OcpExecuteSaleV2InstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let payer = accounts.get(0)?;
         let buyer = accounts.get(1)?;
         let seller = accounts.get(2)?;

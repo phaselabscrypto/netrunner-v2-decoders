@@ -28,7 +28,7 @@ pub struct BuyCoreInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for BuyCore {
     type ArrangedAccounts = BuyCoreInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let tcomp = accounts.get(0)?;
         let list_state = accounts.get(1)?;
         let asset = accounts.get(2)?;

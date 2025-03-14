@@ -20,7 +20,7 @@ pub struct WithdrawByMmmInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for WithdrawByMmm {
     type ArrangedAccounts = WithdrawByMmmInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let mmm_pool = accounts.get(0)?;
         let to = accounts.get(1)?;
         let escrow_payment_account = accounts.get(2)?;

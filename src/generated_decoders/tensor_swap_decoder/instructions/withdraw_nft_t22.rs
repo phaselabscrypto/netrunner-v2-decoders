@@ -27,7 +27,7 @@ pub struct WithdrawNftT22InstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for WithdrawNftT22 {
     type ArrangedAccounts = WithdrawNftT22InstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let tswap = accounts.get(0)?;
         let pool = accounts.get(1)?;
         let whitelist = accounts.get(2)?;

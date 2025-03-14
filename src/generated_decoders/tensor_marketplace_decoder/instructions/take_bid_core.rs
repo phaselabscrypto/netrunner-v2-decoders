@@ -32,7 +32,7 @@ pub struct TakeBidCoreInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for TakeBidCore {
     type ArrangedAccounts = TakeBidCoreInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let tcomp = accounts.get(0)?;
         let seller = accounts.get(1)?;
         let bid_state = accounts.get(2)?;

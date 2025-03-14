@@ -30,7 +30,7 @@ pub struct WnsDelistInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for WnsDelist {
     type ArrangedAccounts = WnsDelistInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let tswap = accounts.get(0)?;
         let nft_dest = accounts.get(1)?;
         let nft_mint = accounts.get(2)?;

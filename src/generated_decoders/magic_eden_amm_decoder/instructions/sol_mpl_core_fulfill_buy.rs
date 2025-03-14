@@ -27,7 +27,7 @@ pub struct SolMplCoreFulfillBuyInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for SolMplCoreFulfillBuy {
     type ArrangedAccounts = SolMplCoreFulfillBuyInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let payer = accounts.get(0)?;
         let owner = accounts.get(1)?;
         let cosigner = accounts.get(2)?;

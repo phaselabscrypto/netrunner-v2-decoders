@@ -24,7 +24,7 @@ pub struct ThawNftInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for ThawNft {
     type ArrangedAccounts = ThawNftInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let freeze_pda = accounts.get(0)?;
         let candy_machine = accounts.get(1)?;
         let token_account = accounts.get(2)?;

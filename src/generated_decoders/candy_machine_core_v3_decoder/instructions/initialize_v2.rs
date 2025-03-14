@@ -32,7 +32,7 @@ pub struct InitializeV2InstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for InitializeV2 {
     type ArrangedAccounts = InitializeV2InstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let candy_machine = accounts.get(0)?;
         let authority_pda = accounts.get(1)?;
         let authority = accounts.get(2)?;

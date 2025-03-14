@@ -19,7 +19,7 @@ pub struct DepositMarginAccountInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for DepositMarginAccount {
     type ArrangedAccounts = DepositMarginAccountInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let tswap = accounts.get(0)?;
         let margin_account = accounts.get(1)?;
         let owner = accounts.get(2)?;

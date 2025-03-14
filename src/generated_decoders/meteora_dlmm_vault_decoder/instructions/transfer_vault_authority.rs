@@ -17,7 +17,7 @@ pub struct TransferVaultAuthorityInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for TransferVaultAuthority {
     type ArrangedAccounts = TransferVaultAuthorityInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let vault = accounts.get(0)?;
         let vault_authority = accounts.get(1)?;
 

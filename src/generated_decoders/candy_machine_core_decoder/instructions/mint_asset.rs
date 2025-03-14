@@ -27,7 +27,7 @@ pub struct MintAssetInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for MintAsset {
     type ArrangedAccounts = MintAssetInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let candy_machine = accounts.get(0)?;
         let authority_pda = accounts.get(1)?;
         let mint_authority = accounts.get(2)?;

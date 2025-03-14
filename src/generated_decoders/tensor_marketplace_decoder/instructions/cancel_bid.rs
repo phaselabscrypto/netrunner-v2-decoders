@@ -19,7 +19,7 @@ pub struct CancelBidInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for CancelBid {
     type ArrangedAccounts = CancelBidInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let bid_state = accounts.get(0)?;
         let owner = accounts.get(1)?;
         let system_program = accounts.get(2)?;

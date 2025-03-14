@@ -22,7 +22,7 @@ pub struct CloseExpiredListingCoreInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for CloseExpiredListingCore {
     type ArrangedAccounts = CloseExpiredListingCoreInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let list_state = accounts.get(0)?;
         let asset = accounts.get(1)?;
         let collection = accounts.get(2)?;

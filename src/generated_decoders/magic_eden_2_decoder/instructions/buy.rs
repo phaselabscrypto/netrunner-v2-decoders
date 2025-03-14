@@ -31,7 +31,7 @@ pub struct BuyInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for Buy {
     type ArrangedAccounts = BuyInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let wallet = accounts.get(0)?;
         let notary = accounts.get(1)?;
         let token_mint = accounts.get(2)?;

@@ -24,7 +24,7 @@ pub struct SellNftTradePoolT22InstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for SellNftTradePoolT22 {
     type ArrangedAccounts = SellNftTradePoolT22InstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let shared = accounts.get(0)?;
         let nft_escrow = accounts.get(1)?;
         let nft_receipt = accounts.get(2)?;

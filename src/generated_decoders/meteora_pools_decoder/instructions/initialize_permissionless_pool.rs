@@ -44,7 +44,7 @@ pub struct InitializePermissionlessPoolInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for InitializePermissionlessPool {
     type ArrangedAccounts = InitializePermissionlessPoolInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let pool = accounts.get(0)?;
         let lp_mint = accounts.get(1)?;
         let token_a_mint = accounts.get(2)?;

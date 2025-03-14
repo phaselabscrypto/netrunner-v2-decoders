@@ -27,7 +27,7 @@ pub struct InitializeStrategyInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for InitializeStrategy {
     type ArrangedAccounts = InitializeStrategyInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let vault = accounts.get(0)?;
         let strategy_program = accounts.get(1)?;
         let strategy = accounts.get(2)?;

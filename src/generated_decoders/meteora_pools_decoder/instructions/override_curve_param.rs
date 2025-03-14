@@ -18,7 +18,7 @@ pub struct OverrideCurveParamInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for OverrideCurveParam {
     type ArrangedAccounts = OverrideCurveParamInstructionAccounts;
 
-    fn arrange_accounts(accounts: Vec<solana_sdk::instruction::AccountMeta>) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
         let pool = accounts.get(0)?;
         let admin = accounts.get(1)?;
 
