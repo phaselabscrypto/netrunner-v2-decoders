@@ -2,6 +2,8 @@
 #[allow(clippy::all)]
 pub mod tensor_marketplace_decoder;
 #[allow(clippy::all)]
+pub mod raydium_concentrated_liquidity_decoder;
+#[allow(clippy::all)]
 pub mod magic_eden_2_decoder;
 #[allow(clippy::all)]
 pub mod tensor_swap_decoder;
