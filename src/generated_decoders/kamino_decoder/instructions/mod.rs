@@ -89,7 +89,7 @@ pub enum YvaultsInstruction {
     UpdateStrategyAdmin(update_strategy_admin::UpdateStrategyAdmin),
 }
 
-impl<'a> carbon_core::instruction::InstructionDecoder<'a> for YvaultsDecoder {
+impl carbon_core::instruction::InstructionDecoder<'_> for YvaultsDecoder {
     type InstructionType = YvaultsInstruction;
 
     fn decode_instruction(
