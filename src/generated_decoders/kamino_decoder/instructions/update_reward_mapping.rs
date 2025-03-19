@@ -27,7 +27,7 @@ impl carbon_core::deserialize::ArrangeAccounts for UpdateRewardMapping {
     type ArrangedAccounts = UpdateRewardMappingInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
         let [payer, strategy, global_config, pool, reward_mint, reward_vault, base_vault_authority, token_infos, system_program, rent, token_program, _remaining @ ..] =
             accounts.as_slice()

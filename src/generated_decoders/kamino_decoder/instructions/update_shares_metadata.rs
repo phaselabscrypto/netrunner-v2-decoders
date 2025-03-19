@@ -24,7 +24,7 @@ impl carbon_core::deserialize::ArrangeAccounts for UpdateSharesMetadata {
     type ArrangedAccounts = UpdateSharesMetadataInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
         let [admin_authority, strategy, global_config, shares_mint, shares_metadata, shares_mint_authority, metadata_program, _remaining @ ..] =
             accounts.as_slice()

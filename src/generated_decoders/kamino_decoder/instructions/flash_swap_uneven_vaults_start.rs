@@ -36,7 +36,7 @@ impl carbon_core::deserialize::ArrangeAccounts for FlashSwapUnevenVaultsStart {
     type ArrangedAccounts = FlashSwapUnevenVaultsStartInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
         let [swapper, strategy, global_config, token_a_vault, token_b_vault, token_a_ata, token_b_ata, base_vault_authority, pool, position, scope_prices, token_infos, tick_array_lower, tick_array_upper, token_a_mint, token_b_mint, token_a_token_program, token_b_token_program, instruction_sysvar_account, consensus_account, _remaining @ ..] =
             accounts.as_slice()

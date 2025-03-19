@@ -24,7 +24,7 @@ impl carbon_core::deserialize::ArrangeAccounts for WithdrawFromTreasury {
     type ArrangedAccounts = WithdrawFromTreasuryInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
         let [admin_authority, global_config, mint, treasury_fee_vault, treasury_fee_vault_authority, token_account, system_program, rent, token_program, _remaining @ ..] =
             accounts.as_slice()

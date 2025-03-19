@@ -15,7 +15,7 @@ impl carbon_core::deserialize::ArrangeAccounts for UpdateStrategyAdmin {
     type ArrangedAccounts = UpdateStrategyAdminInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
         let [pending_admin, strategy, _remaining @ ..] = accounts.as_slice() else {
             return None;

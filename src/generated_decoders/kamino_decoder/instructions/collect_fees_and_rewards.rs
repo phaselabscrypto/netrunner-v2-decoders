@@ -46,7 +46,7 @@ impl carbon_core::deserialize::ArrangeAccounts for CollectFeesAndRewards {
     type ArrangedAccounts = CollectFeesAndRewardsInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
         let [user, strategy, global_config, base_vault_authority, pool, tick_array_lower, tick_array_upper, position, raydium_protocol_position_or_base_vault_authority, position_token_account, token_a_vault, pool_token_vault_a, token_b_vault, pool_token_vault_b, treasury_fee_token_a_vault, treasury_fee_token_b_vault, treasury_fee_vault_authority, reward0_vault, reward1_vault, reward2_vault, pool_reward_vault0, pool_reward_vault1, pool_reward_vault2, token_a_mint, token_b_mint, token_a_token_program, token_b_token_program, memo_program, token_program, token_program2022, pool_program, instruction_sysvar_account, event_authority, _remaining @ ..] =
             accounts.as_slice()

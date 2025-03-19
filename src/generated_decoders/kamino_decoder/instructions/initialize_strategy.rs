@@ -34,7 +34,7 @@ impl carbon_core::deserialize::ArrangeAccounts for InitializeStrategy {
     type ArrangedAccounts = InitializeStrategyInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
         let [admin_authority, global_config, pool, token_a_mint, token_b_mint, token_a_vault, token_b_vault, base_vault_authority, shares_mint, shares_mint_authority, token_infos, system_program, rent, token_program, token_a_token_program, token_b_token_program, strategy, _remaining @ ..] =
             accounts.as_slice()

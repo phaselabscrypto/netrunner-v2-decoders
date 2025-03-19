@@ -19,7 +19,7 @@ impl carbon_core::deserialize::ArrangeAccounts for SignTerms {
     type ArrangedAccounts = SignTermsInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
         let [owner, owner_signature_state, system_program, rent, _remaining @ ..] = accounts.as_slice() else {
             return None;

@@ -38,7 +38,7 @@ impl carbon_core::deserialize::ArrangeAccounts for EmergencySwap {
     type ArrangedAccounts = EmergencySwapInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
         let [admin_authority, strategy, global_config, token_a_mint, token_b_mint, token_a_vault, token_b_vault, base_vault_authority, pool, position, pool_token_vault_a, pool_token_vault_b, tick_array0, tick_array1, tick_array2, oracle, pool_program, scope_prices, token_infos, token_a_token_program, token_b_token_program, memo_program, _remaining @ ..] =
             accounts.as_slice()

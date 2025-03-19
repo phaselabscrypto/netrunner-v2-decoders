@@ -36,7 +36,7 @@ impl carbon_core::deserialize::ArrangeAccounts for OrcaSwap {
     type ArrangedAccounts = OrcaSwapInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
         let [funder, token_a_token_program, token_b_token_program, memo_program, token_authority, whirlpool, token_owner_account_a, token_vault_a, token_owner_account_b, token_vault_b, token_mint_a, token_mint_b, tick_array0, tick_array1, tick_array2, oracle, whirlpool_program, _remaining @ ..] =
             accounts.as_slice()

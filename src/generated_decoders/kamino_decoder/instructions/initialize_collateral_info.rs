@@ -17,7 +17,7 @@ impl carbon_core::deserialize::ArrangeAccounts for InitializeCollateralInfo {
     type ArrangedAccounts = InitializeCollateralInfoInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
         let [admin_authority, global_config, coll_info, system_program, _remaining @ ..] =
             accounts.as_slice()

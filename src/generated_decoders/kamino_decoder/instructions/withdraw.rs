@@ -44,7 +44,7 @@ impl carbon_core::deserialize::ArrangeAccounts for Withdraw {
     type ArrangedAccounts = WithdrawInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
         let [user, strategy, global_config, pool, position, tick_array_lower, tick_array_upper, token_a_vault, token_b_vault, base_vault_authority, pool_token_vault_a, pool_token_vault_b, token_a_ata, token_b_ata, token_a_mint, token_b_mint, user_shares_ata, shares_mint, treasury_fee_token_a_vault, treasury_fee_token_b_vault, token_program, token_program2022, token_a_token_program, token_b_token_program, memo_program, position_token_account, pool_program, instruction_sysvar_account, event_authority, _remaining @ ..] =
             accounts.as_slice()

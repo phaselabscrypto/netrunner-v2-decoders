@@ -46,7 +46,7 @@ impl carbon_core::deserialize::ArrangeAccounts for CloseStrategy {
     type ArrangedAccounts = CloseStrategyInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
         let [admin_authority, strategy, old_position_or_base_vault_authority, old_position_mint_or_base_vault_authority, old_position_token_account_or_base_vault_authority, old_tick_array_lower_or_base_vault_authority, old_tick_array_upper_or_base_vault_authority, pool, token_a_vault, token_b_vault, user_token_a_ata, user_token_b_ata, token_a_mint, token_b_mint, reward0_vault, reward1_vault, reward2_vault, kamino_reward0_vault, kamino_reward1_vault, kamino_reward2_vault, user_reward0_ata, user_reward1_ata, user_reward2_ata, user_kamino_reward0_ata, user_kamino_reward1_ata, user_kamino_reward2_ata, base_vault_authority, pool_program, token_program, token_a_token_program, token_b_token_program, system, event_authority, _remaining @ ..] =
             accounts.as_slice()

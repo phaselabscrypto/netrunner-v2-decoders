@@ -52,7 +52,7 @@ impl carbon_core::deserialize::ArrangeAccounts for OpenLiquidityPosition {
     type ArrangedAccounts = OpenLiquidityPositionInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
         let [admin_authority, strategy, global_config, pool, tick_array_lower, tick_array_upper, base_vault_authority, position, position_mint, position_metadata_account, position_token_account, rent, system, token_program, token_program2022, token_a_token_program, token_b_token_program, memo_program, associated_token_program, pool_program, old_tick_array_lower_or_base_vault_authority, old_tick_array_upper_or_base_vault_authority, old_position_or_base_vault_authority, old_position_mint_or_base_vault_authority, old_position_token_account_or_base_vault_authority, token_a_vault, token_b_vault, token_a_mint, token_b_mint, pool_token_vault_a, pool_token_vault_b, scope_prices, token_infos, event_authority, consensus_account, _remaining @ ..] =
             accounts.as_slice()

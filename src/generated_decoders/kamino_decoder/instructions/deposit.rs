@@ -39,7 +39,7 @@ impl carbon_core::deserialize::ArrangeAccounts for Deposit {
     type ArrangedAccounts = DepositInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
         let [user, strategy, global_config, pool, position, tick_array_lower, tick_array_upper, token_a_vault, token_b_vault, base_vault_authority, token_a_ata, token_b_ata, token_a_mint, token_b_mint, user_shares_ata, shares_mint, shares_mint_authority, scope_prices, token_infos, token_program, token_a_token_program, token_b_token_program, instruction_sysvar_account, _remaining @ ..] =
             accounts.as_slice()

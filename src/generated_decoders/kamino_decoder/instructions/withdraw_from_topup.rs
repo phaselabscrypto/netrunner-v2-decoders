@@ -18,7 +18,7 @@ impl carbon_core::deserialize::ArrangeAccounts for WithdrawFromTopup {
     type ArrangedAccounts = WithdrawFromTopupInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
         let [admin_authority, topup_vault, system, _remaining @ ..] = accounts.as_slice() else {
             return None;

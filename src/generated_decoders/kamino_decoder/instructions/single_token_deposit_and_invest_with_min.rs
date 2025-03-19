@@ -47,7 +47,7 @@ impl carbon_core::deserialize::ArrangeAccounts for SingleTokenDepositAndInvestWi
     type ArrangedAccounts = SingleTokenDepositAndInvestWithMinInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
         let [user, strategy, global_config, pool, position, raydium_protocol_position_or_base_vault_authority, position_token_account, token_a_vault, token_b_vault, pool_token_vault_a, pool_token_vault_b, tick_array_lower, tick_array_upper, base_vault_authority, token_a_ata, token_b_ata, token_a_mint, token_b_mint, user_shares_ata, shares_mint, shares_mint_authority, scope_prices, token_infos, token_program, token_program2022, token_a_token_program, token_b_token_program, memo_program, pool_program, instruction_sysvar_account, event_authority, _remaining @ ..] =
             accounts.as_slice()

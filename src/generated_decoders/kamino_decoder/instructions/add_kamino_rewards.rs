@@ -23,7 +23,7 @@ impl carbon_core::deserialize::ArrangeAccounts for AddKaminoRewards {
     type ArrangedAccounts = AddKaminoRewardsInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
         let [admin_authority, strategy, reward_mint, reward_vault, base_vault_authority, reward_ata, token_program, _remaining @ ..] =
             accounts.as_slice()

@@ -21,7 +21,7 @@ impl carbon_core::deserialize::ArrangeAccounts for ChangePool {
     type ArrangedAccounts = ChangePoolInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
         let [admin_authority, strategy, old_position, base_vault_authority, new_pool, strategy_reward_vault0_or_base_vault_authority, strategy_reward_vault1_or_base_vault_authority, strategy_reward_vault2_or_base_vault_authority, _remaining @ ..] =
             accounts.as_slice()

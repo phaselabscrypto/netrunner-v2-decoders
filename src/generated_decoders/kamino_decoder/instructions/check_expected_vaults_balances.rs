@@ -19,7 +19,7 @@ impl carbon_core::deserialize::ArrangeAccounts for CheckExpectedVaultsBalances {
     type ArrangedAccounts = CheckExpectedVaultsBalancesInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
         let [user, token_a_ata, token_b_ata, _remaining @ ..] = accounts.as_slice() else {
             return None;

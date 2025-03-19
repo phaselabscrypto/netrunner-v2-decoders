@@ -43,7 +43,7 @@ impl carbon_core::deserialize::ArrangeAccounts for SwapRewards {
     type ArrangedAccounts = SwapRewardsInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
         let [user, strategy, global_config, pool, token_a_vault, token_b_vault, reward_vault, base_vault_authority, treasury_fee_token_a_vault, treasury_fee_token_b_vault, treasury_fee_vault_authority, token_a_mint, token_b_mint, reward_mint, user_token_a_ata, user_token_b_ata, user_reward_token_account, scope_prices, token_infos, system_program, token_a_token_program, token_b_token_program, reward_token_program, instruction_sysvar_account, _remaining @ ..] =
             accounts.as_slice()

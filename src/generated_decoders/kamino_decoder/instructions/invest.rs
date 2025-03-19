@@ -39,7 +39,7 @@ impl carbon_core::deserialize::ArrangeAccounts for Invest {
     type ArrangedAccounts = InvestInstructionAccounts;
 
     fn arrange_accounts(
-        accounts: Vec<solana_sdk::instruction::AccountMeta>,
+        accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
         let [payer, strategy, global_config, token_a_vault, token_b_vault, token_a_mint, token_b_mint, base_vault_authority, pool, token_a_token_program, token_b_token_program, memo_program, token_program, token_program2022, position, raydium_protocol_position_or_base_vault_authority, position_token_account, pool_token_vault_a, pool_token_vault_b, tick_array_lower, tick_array_upper, scope_prices, token_infos, pool_program, instruction_sysvar_account, event_authority, _remaining @ ..] =
             accounts.as_slice()
