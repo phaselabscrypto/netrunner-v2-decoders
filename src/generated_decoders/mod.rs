@@ -27,3 +27,5 @@ pub mod meteora_vault_decoder;
 pub mod magic_eden_amm_decoder;
 #[allow(clippy::all)]
 pub mod candy_machine_v2_decoder;
+#[allow(clippy::all)]
+pub mod kamino_decoder;
