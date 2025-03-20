@@ -1,10 +1,11 @@
-use carbon_core::{borsh, CarbonDeserialize};
 
-#[derive(
-    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
-)]
+
+use carbon_core::{CarbonDeserialize, borsh};
+
+
+#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
 #[carbon(discriminator = "0x030fac72c8008320")]
-pub struct InitializeSharesMetadata {
+pub struct InitializeSharesMetadata{
     pub name: String,
     pub symbol: String,
     pub uri: String,
@@ -25,14 +26,16 @@ pub struct InitializeSharesMetadataInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for InitializeSharesMetadata {
     type ArrangedAccounts = InitializeSharesMetadataInstructionAccounts;
 
-    fn arrange_accounts(
-        accounts: &[solana_sdk::instruction::AccountMeta],
-    ) -> Option<Self::ArrangedAccounts> {
-        let [admin_authority, strategy, global_config, shares_mint, shares_metadata, shares_mint_authority, system_program, rent, metadata_program, _remaining @ ..] =
-            accounts.as_slice()
-        else {
-            return None;
-        };
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+        let admin_authority = accounts.get(0)?;
+        let strategy = accounts.get(1)?;
+        let global_config = accounts.get(2)?;
+        let shares_mint = accounts.get(3)?;
+        let shares_metadata = accounts.get(4)?;
+        let shares_mint_authority = accounts.get(5)?;
+        let system_program = accounts.get(6)?;
+        let rent = accounts.get(7)?;
+        let metadata_program = accounts.get(8)?;
 
         Some(InitializeSharesMetadataInstructionAccounts {
             admin_authority: admin_authority.pubkey,

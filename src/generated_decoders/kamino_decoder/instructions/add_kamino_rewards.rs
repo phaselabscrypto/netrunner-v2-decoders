@@ -1,10 +1,11 @@
-use carbon_core::{borsh, CarbonDeserialize};
 
-#[derive(
-    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
-)]
+
+use carbon_core::{CarbonDeserialize, borsh};
+
+
+#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
 #[carbon(discriminator = "0xaeae8ec12f4deb41")]
-pub struct AddKaminoRewards {
+pub struct AddKaminoRewards{
     pub kamino_reward_index: u64,
     pub amount: u64,
 }
@@ -22,14 +23,14 @@ pub struct AddKaminoRewardsInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for AddKaminoRewards {
     type ArrangedAccounts = AddKaminoRewardsInstructionAccounts;
 
-    fn arrange_accounts(
-        accounts: &[solana_sdk::instruction::AccountMeta],
-    ) -> Option<Self::ArrangedAccounts> {
-        let [admin_authority, strategy, reward_mint, reward_vault, base_vault_authority, reward_ata, token_program, _remaining @ ..] =
-            accounts.as_slice()
-        else {
-            return None;
-        };
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+        let admin_authority = accounts.get(0)?;
+        let strategy = accounts.get(1)?;
+        let reward_mint = accounts.get(2)?;
+        let reward_vault = accounts.get(3)?;
+        let base_vault_authority = accounts.get(4)?;
+        let reward_ata = accounts.get(5)?;
+        let token_program = accounts.get(6)?;
 
         Some(AddKaminoRewardsInstructionAccounts {
             admin_authority: admin_authority.pubkey,

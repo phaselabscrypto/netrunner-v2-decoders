@@ -1,10 +1,11 @@
-use carbon_core::{borsh, CarbonDeserialize};
 
-#[derive(
-    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
-)]
+
+use carbon_core::{CarbonDeserialize, borsh};
+
+
+#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
 #[carbon(discriminator = "0x4c5e832c893da16e")]
-pub struct UpdateCollateralInfo {
+pub struct UpdateCollateralInfo{
     pub index: u64,
     pub mode: u64,
     pub value: [u8; 32],
@@ -19,12 +20,10 @@ pub struct UpdateCollateralInfoInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for UpdateCollateralInfo {
     type ArrangedAccounts = UpdateCollateralInfoInstructionAccounts;
 
-    fn arrange_accounts(
-        accounts: &[solana_sdk::instruction::AccountMeta],
-    ) -> Option<Self::ArrangedAccounts> {
-        let [admin_authority, global_config, token_infos, _remaining @ ..] = accounts.as_slice() else {
-            return None;
-        };
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+        let admin_authority = accounts.get(0)?;
+        let global_config = accounts.get(1)?;
+        let token_infos = accounts.get(2)?;
 
         Some(UpdateCollateralInfoInstructionAccounts {
             admin_authority: admin_authority.pubkey,

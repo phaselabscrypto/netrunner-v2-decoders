@@ -1,10 +1,11 @@
-use carbon_core::{borsh, CarbonDeserialize};
 
-#[derive(
-    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
-)]
+
+use carbon_core::{CarbonDeserialize, borsh};
+
+
+#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
 #[carbon(discriminator = "0x09f15e5bad4aa677")]
-pub struct UpdateTreasuryFeeVault {
+pub struct UpdateTreasuryFeeVault{
     pub collateral_id: u16,
 }
 
@@ -23,14 +24,16 @@ pub struct UpdateTreasuryFeeVaultInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for UpdateTreasuryFeeVault {
     type ArrangedAccounts = UpdateTreasuryFeeVaultInstructionAccounts;
 
-    fn arrange_accounts(
-        accounts: &[solana_sdk::instruction::AccountMeta],
-    ) -> Option<Self::ArrangedAccounts> {
-        let [signer, global_config, fee_mint, treasury_fee_vault, treasury_fee_vault_authority, token_infos, system_program, rent, token_program, _remaining @ ..] =
-            accounts.as_slice()
-        else {
-            return None;
-        };
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+        let signer = accounts.get(0)?;
+        let global_config = accounts.get(1)?;
+        let fee_mint = accounts.get(2)?;
+        let treasury_fee_vault = accounts.get(3)?;
+        let treasury_fee_vault_authority = accounts.get(4)?;
+        let token_infos = accounts.get(5)?;
+        let system_program = accounts.get(6)?;
+        let rent = accounts.get(7)?;
+        let token_program = accounts.get(8)?;
 
         Some(UpdateTreasuryFeeVaultInstructionAccounts {
             signer: signer.pubkey,

@@ -1,10 +1,12 @@
-use carbon_core::{borsh, CarbonDeserialize};
 
-#[derive(
-    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
-)]
+
+use carbon_core::{CarbonDeserialize, borsh};
+
+
+#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
 #[carbon(discriminator = "0x71d87a83e1d11637")]
-pub struct InitializeGlobalConfig {}
+pub struct InitializeGlobalConfig{
+}
 
 pub struct InitializeGlobalConfigInstructionAccounts {
     pub admin_authority: solana_sdk::pubkey::Pubkey,
@@ -15,13 +17,10 @@ pub struct InitializeGlobalConfigInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for InitializeGlobalConfig {
     type ArrangedAccounts = InitializeGlobalConfigInstructionAccounts;
 
-    fn arrange_accounts(
-        accounts: &[solana_sdk::instruction::AccountMeta],
-    ) -> Option<Self::ArrangedAccounts> {
-        let [admin_authority, global_config, system_program, _remaining @ ..] = accounts.as_slice()
-        else {
-            return None;
-        };
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+        let admin_authority = accounts.get(0)?;
+        let global_config = accounts.get(1)?;
+        let system_program = accounts.get(2)?;
 
         Some(InitializeGlobalConfigInstructionAccounts {
             admin_authority: admin_authority.pubkey,

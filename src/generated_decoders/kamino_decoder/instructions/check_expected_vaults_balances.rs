@@ -1,10 +1,11 @@
-use carbon_core::{borsh, CarbonDeserialize};
 
-#[derive(
-    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
-)]
+
+use carbon_core::{CarbonDeserialize, borsh};
+
+
+#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
 #[carbon(discriminator = "0x4b97bb7d32040b47")]
-pub struct CheckExpectedVaultsBalances {
+pub struct CheckExpectedVaultsBalances{
     pub token_a_ata_balance: u64,
     pub token_b_ata_balance: u64,
 }
@@ -18,12 +19,10 @@ pub struct CheckExpectedVaultsBalancesInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for CheckExpectedVaultsBalances {
     type ArrangedAccounts = CheckExpectedVaultsBalancesInstructionAccounts;
 
-    fn arrange_accounts(
-        accounts: &[solana_sdk::instruction::AccountMeta],
-    ) -> Option<Self::ArrangedAccounts> {
-        let [user, token_a_ata, token_b_ata, _remaining @ ..] = accounts.as_slice() else {
-            return None;
-        };
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+        let user = accounts.get(0)?;
+        let token_a_ata = accounts.get(1)?;
+        let token_b_ata = accounts.get(2)?;
 
         Some(CheckExpectedVaultsBalancesInstructionAccounts {
             user: user.pubkey,

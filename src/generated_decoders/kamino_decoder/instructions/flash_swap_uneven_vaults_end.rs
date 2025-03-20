@@ -1,10 +1,11 @@
-use carbon_core::{borsh, CarbonDeserialize};
 
-#[derive(
-    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
-)]
+
+use carbon_core::{CarbonDeserialize, borsh};
+
+
+#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
 #[carbon(discriminator = "0xe202be65ca849c14")]
-pub struct FlashSwapUnevenVaultsEnd {
+pub struct FlashSwapUnevenVaultsEnd{
     pub min_repay_amount: u64,
     pub amount_to_leave_to_user: u64,
     pub a_to_b: bool,
@@ -36,14 +37,27 @@ pub struct FlashSwapUnevenVaultsEndInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for FlashSwapUnevenVaultsEnd {
     type ArrangedAccounts = FlashSwapUnevenVaultsEndInstructionAccounts;
 
-    fn arrange_accounts(
-        accounts: &[solana_sdk::instruction::AccountMeta],
-    ) -> Option<Self::ArrangedAccounts> {
-        let [swapper, strategy, global_config, token_a_vault, token_b_vault, token_a_ata, token_b_ata, base_vault_authority, pool, position, scope_prices, token_infos, tick_array_lower, tick_array_upper, token_a_mint, token_b_mint, token_a_token_program, token_b_token_program, instruction_sysvar_account, consensus_account, _remaining @ ..] =
-            accounts.as_slice()
-        else {
-            return None;
-        };
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+        let swapper = accounts.get(0)?;
+        let strategy = accounts.get(1)?;
+        let global_config = accounts.get(2)?;
+        let token_a_vault = accounts.get(3)?;
+        let token_b_vault = accounts.get(4)?;
+        let token_a_ata = accounts.get(5)?;
+        let token_b_ata = accounts.get(6)?;
+        let base_vault_authority = accounts.get(7)?;
+        let pool = accounts.get(8)?;
+        let position = accounts.get(9)?;
+        let scope_prices = accounts.get(10)?;
+        let token_infos = accounts.get(11)?;
+        let tick_array_lower = accounts.get(12)?;
+        let tick_array_upper = accounts.get(13)?;
+        let token_a_mint = accounts.get(14)?;
+        let token_b_mint = accounts.get(15)?;
+        let token_a_token_program = accounts.get(16)?;
+        let token_b_token_program = accounts.get(17)?;
+        let instruction_sysvar_account = accounts.get(18)?;
+        let consensus_account = accounts.get(19)?;
 
         Some(FlashSwapUnevenVaultsEndInstructionAccounts {
             swapper: swapper.pubkey,

@@ -1,51 +1,46 @@
+
+
+
+
 use super::YvaultsDecoder;
-pub mod add_kamino_rewards;
-pub mod change_pool;
-pub mod check_expected_vaults_balances;
-pub mod close_program_account;
-pub mod close_strategy;
-pub mod collect_fees_and_rewards;
-pub mod deposit;
-pub mod deposit_and_invest;
-pub mod emergency_swap;
-pub mod executive_withdraw;
-pub mod flash_swap_uneven_vaults_end;
-pub mod flash_swap_uneven_vaults_start;
-pub mod initialize_collateral_info;
-pub mod initialize_global_config;
-pub mod initialize_kamino_reward;
-pub mod initialize_shares_metadata;
 pub mod initialize_strategy;
+pub mod initialize_kamino_reward;
+pub mod add_kamino_rewards;
+pub mod initialize_global_config;
+pub mod initialize_collateral_info;
+pub mod update_collateral_info;
 pub mod insert_collateral_info;
-pub mod invest;
+pub mod initialize_shares_metadata;
+pub mod update_shares_metadata;
+pub mod update_global_config;
+pub mod update_treasury_fee_vault;
+pub mod update_strategy_config;
+pub mod update_reward_mapping;
 pub mod open_liquidity_position;
-pub mod orca_swap;
-pub mod permisionless_withdraw_from_treasury;
-pub mod sign_terms;
+pub mod close_strategy;
+pub mod deposit;
+pub mod invest;
+pub mod deposit_and_invest;
+pub mod withdraw;
+pub mod executive_withdraw;
+pub mod collect_fees_and_rewards;
+pub mod swap_rewards;
+pub mod check_expected_vaults_balances;
 pub mod single_token_deposit_and_invest_with_min;
 pub mod single_token_deposit_with_min;
-pub mod swap_rewards;
-pub mod update_collateral_info;
-pub mod update_global_config;
-pub mod update_reward_mapping;
-pub mod update_shares_metadata;
-pub mod update_strategy_admin;
-pub mod update_strategy_config;
-pub mod update_treasury_fee_vault;
-pub mod withdraw;
-pub mod withdraw_from_topup;
+pub mod flash_swap_uneven_vaults_start;
+pub mod flash_swap_uneven_vaults_end;
+pub mod emergency_swap;
 pub mod withdraw_from_treasury;
+pub mod permisionless_withdraw_from_treasury;
+pub mod withdraw_from_topup;
+pub mod change_pool;
+pub mod close_program_account;
+pub mod orca_swap;
+pub mod sign_terms;
+pub mod update_strategy_admin;
 
-#[derive(
-    carbon_core::InstructionType,
-    serde::Serialize,
-    serde::Deserialize,
-    PartialEq,
-    Eq,
-    Debug,
-    Clone,
-    Hash,
-)]
+#[derive(carbon_core::InstructionType, serde::Serialize, serde::Deserialize, PartialEq, Eq, Debug, Clone, Hash)]
 pub enum YvaultsInstruction {
     InitializeStrategy(initialize_strategy::InitializeStrategy),
     InitializeKaminoReward(initialize_kamino_reward::InitializeKaminoReward),
@@ -70,17 +65,13 @@ pub enum YvaultsInstruction {
     CollectFeesAndRewards(collect_fees_and_rewards::CollectFeesAndRewards),
     SwapRewards(swap_rewards::SwapRewards),
     CheckExpectedVaultsBalances(check_expected_vaults_balances::CheckExpectedVaultsBalances),
-    SingleTokenDepositAndInvestWithMin(
-        single_token_deposit_and_invest_with_min::SingleTokenDepositAndInvestWithMin,
-    ),
+    SingleTokenDepositAndInvestWithMin(single_token_deposit_and_invest_with_min::SingleTokenDepositAndInvestWithMin),
     SingleTokenDepositWithMin(single_token_deposit_with_min::SingleTokenDepositWithMin),
     FlashSwapUnevenVaultsStart(flash_swap_uneven_vaults_start::FlashSwapUnevenVaultsStart),
     FlashSwapUnevenVaultsEnd(flash_swap_uneven_vaults_end::FlashSwapUnevenVaultsEnd),
     EmergencySwap(emergency_swap::EmergencySwap),
     WithdrawFromTreasury(withdraw_from_treasury::WithdrawFromTreasury),
-    PermisionlessWithdrawFromTreasury(
-        permisionless_withdraw_from_treasury::PermisionlessWithdrawFromTreasury,
-    ),
+    PermisionlessWithdrawFromTreasury(permisionless_withdraw_from_treasury::PermisionlessWithdrawFromTreasury),
     WithdrawFromTopup(withdraw_from_topup::WithdrawFromTopup),
     ChangePool(change_pool::ChangePool),
     CloseProgramAccount(close_program_account::CloseProgramAccount),

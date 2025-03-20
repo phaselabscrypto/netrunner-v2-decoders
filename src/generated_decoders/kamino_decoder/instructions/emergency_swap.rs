@@ -1,10 +1,11 @@
-use carbon_core::{borsh, CarbonDeserialize};
 
-#[derive(
-    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
-)]
+
+use carbon_core::{CarbonDeserialize, borsh};
+
+
+#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
 #[carbon(discriminator = "0x49e2f8d705c5d3e5")]
-pub struct EmergencySwap {
+pub struct EmergencySwap{
     pub a_to_b: bool,
     pub target_limit_bps: u64,
 }
@@ -37,14 +38,29 @@ pub struct EmergencySwapInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for EmergencySwap {
     type ArrangedAccounts = EmergencySwapInstructionAccounts;
 
-    fn arrange_accounts(
-        accounts: &[solana_sdk::instruction::AccountMeta],
-    ) -> Option<Self::ArrangedAccounts> {
-        let [admin_authority, strategy, global_config, token_a_mint, token_b_mint, token_a_vault, token_b_vault, base_vault_authority, pool, position, pool_token_vault_a, pool_token_vault_b, tick_array0, tick_array1, tick_array2, oracle, pool_program, scope_prices, token_infos, token_a_token_program, token_b_token_program, memo_program, _remaining @ ..] =
-            accounts.as_slice()
-        else {
-            return None;
-        };
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+        let admin_authority = accounts.get(0)?;
+        let strategy = accounts.get(1)?;
+        let global_config = accounts.get(2)?;
+        let token_a_mint = accounts.get(3)?;
+        let token_b_mint = accounts.get(4)?;
+        let token_a_vault = accounts.get(5)?;
+        let token_b_vault = accounts.get(6)?;
+        let base_vault_authority = accounts.get(7)?;
+        let pool = accounts.get(8)?;
+        let position = accounts.get(9)?;
+        let pool_token_vault_a = accounts.get(10)?;
+        let pool_token_vault_b = accounts.get(11)?;
+        let tick_array0 = accounts.get(12)?;
+        let tick_array1 = accounts.get(13)?;
+        let tick_array2 = accounts.get(14)?;
+        let oracle = accounts.get(15)?;
+        let pool_program = accounts.get(16)?;
+        let scope_prices = accounts.get(17)?;
+        let token_infos = accounts.get(18)?;
+        let token_a_token_program = accounts.get(19)?;
+        let token_b_token_program = accounts.get(20)?;
+        let memo_program = accounts.get(21)?;
 
         Some(EmergencySwapInstructionAccounts {
             admin_authority: admin_authority.pubkey,

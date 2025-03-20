@@ -1,10 +1,11 @@
-use carbon_core::{borsh, CarbonDeserialize};
 
-#[derive(
-    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
-)]
+
+use carbon_core::{CarbonDeserialize, borsh};
+
+
+#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
 #[carbon(discriminator = "0xcb2525601755e92a")]
-pub struct UpdateRewardMapping {
+pub struct UpdateRewardMapping{
     pub reward_index: u8,
     pub collateral_token: u8,
 }
@@ -26,14 +27,18 @@ pub struct UpdateRewardMappingInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for UpdateRewardMapping {
     type ArrangedAccounts = UpdateRewardMappingInstructionAccounts;
 
-    fn arrange_accounts(
-        accounts: &[solana_sdk::instruction::AccountMeta],
-    ) -> Option<Self::ArrangedAccounts> {
-        let [payer, strategy, global_config, pool, reward_mint, reward_vault, base_vault_authority, token_infos, system_program, rent, token_program, _remaining @ ..] =
-            accounts.as_slice()
-        else {
-            return None;
-        };
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+        let payer = accounts.get(0)?;
+        let strategy = accounts.get(1)?;
+        let global_config = accounts.get(2)?;
+        let pool = accounts.get(3)?;
+        let reward_mint = accounts.get(4)?;
+        let reward_vault = accounts.get(5)?;
+        let base_vault_authority = accounts.get(6)?;
+        let token_infos = accounts.get(7)?;
+        let system_program = accounts.get(8)?;
+        let rent = accounts.get(9)?;
+        let token_program = accounts.get(10)?;
 
         Some(UpdateRewardMappingInstructionAccounts {
             payer: payer.pubkey,

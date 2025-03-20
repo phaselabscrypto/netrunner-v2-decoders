@@ -1,11 +1,15 @@
-use carbon_core::{borsh, CarbonDeserialize};
 
-#[derive(
-    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
-)]
+
+use carbon_core::{CarbonDeserialize, borsh};
+use serde_with::{serde_as, Bytes};
+
+
+#[serde_as]
+#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
 #[carbon(discriminator = "0x51d9b14128e308a5")]
-pub struct UpdateStrategyConfig {
+pub struct UpdateStrategyConfig{
     pub mode: u16,
+    #[serde_as(as = "Bytes")]
     pub value: [u8; 128],
 }
 
@@ -20,14 +24,12 @@ pub struct UpdateStrategyConfigInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for UpdateStrategyConfig {
     type ArrangedAccounts = UpdateStrategyConfigInstructionAccounts;
 
-    fn arrange_accounts(
-        accounts: &[solana_sdk::instruction::AccountMeta],
-    ) -> Option<Self::ArrangedAccounts> {
-        let [admin_authority, new_account, strategy, global_config, system_program, _remaining @ ..] =
-            accounts.as_slice()
-        else {
-            return None;
-        };
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+        let admin_authority = accounts.get(0)?;
+        let new_account = accounts.get(1)?;
+        let strategy = accounts.get(2)?;
+        let global_config = accounts.get(3)?;
+        let system_program = accounts.get(4)?;
 
         Some(UpdateStrategyConfigInstructionAccounts {
             admin_authority: admin_authority.pubkey,

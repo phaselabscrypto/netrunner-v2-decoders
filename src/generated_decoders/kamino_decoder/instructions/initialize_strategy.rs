@@ -1,10 +1,11 @@
-use carbon_core::{borsh, CarbonDeserialize};
 
-#[derive(
-    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
-)]
+
+use carbon_core::{CarbonDeserialize, borsh};
+
+
+#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
 #[carbon(discriminator = "0xd0779091b23969fc")]
-pub struct InitializeStrategy {
+pub struct InitializeStrategy{
     pub strategy_type: u64,
     pub token_a_collateral_id: u64,
     pub token_b_collateral_id: u64,
@@ -33,14 +34,24 @@ pub struct InitializeStrategyInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for InitializeStrategy {
     type ArrangedAccounts = InitializeStrategyInstructionAccounts;
 
-    fn arrange_accounts(
-        accounts: &[solana_sdk::instruction::AccountMeta],
-    ) -> Option<Self::ArrangedAccounts> {
-        let [admin_authority, global_config, pool, token_a_mint, token_b_mint, token_a_vault, token_b_vault, base_vault_authority, shares_mint, shares_mint_authority, token_infos, system_program, rent, token_program, token_a_token_program, token_b_token_program, strategy, _remaining @ ..] =
-            accounts.as_slice()
-        else {
-            return None;
-        };
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+        let admin_authority = accounts.get(0)?;
+        let global_config = accounts.get(1)?;
+        let pool = accounts.get(2)?;
+        let token_a_mint = accounts.get(3)?;
+        let token_b_mint = accounts.get(4)?;
+        let token_a_vault = accounts.get(5)?;
+        let token_b_vault = accounts.get(6)?;
+        let base_vault_authority = accounts.get(7)?;
+        let shares_mint = accounts.get(8)?;
+        let shares_mint_authority = accounts.get(9)?;
+        let token_infos = accounts.get(10)?;
+        let system_program = accounts.get(11)?;
+        let rent = accounts.get(12)?;
+        let token_program = accounts.get(13)?;
+        let token_a_token_program = accounts.get(14)?;
+        let token_b_token_program = accounts.get(15)?;
+        let strategy = accounts.get(16)?;
 
         Some(InitializeStrategyInstructionAccounts {
             admin_authority: admin_authority.pubkey,

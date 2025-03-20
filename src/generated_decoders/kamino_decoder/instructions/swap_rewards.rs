@@ -1,10 +1,11 @@
-use carbon_core::{borsh, CarbonDeserialize};
 
-#[derive(
-    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
-)]
+
+use carbon_core::{CarbonDeserialize, borsh};
+
+
+#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
 #[carbon(discriminator = "0x5c29ac1ebe41ae5a")]
-pub struct SwapRewards {
+pub struct SwapRewards{
     pub token_a_in: u64,
     pub token_b_in: u64,
     pub reward_index: u64,
@@ -42,14 +43,31 @@ pub struct SwapRewardsInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for SwapRewards {
     type ArrangedAccounts = SwapRewardsInstructionAccounts;
 
-    fn arrange_accounts(
-        accounts: &[solana_sdk::instruction::AccountMeta],
-    ) -> Option<Self::ArrangedAccounts> {
-        let [user, strategy, global_config, pool, token_a_vault, token_b_vault, reward_vault, base_vault_authority, treasury_fee_token_a_vault, treasury_fee_token_b_vault, treasury_fee_vault_authority, token_a_mint, token_b_mint, reward_mint, user_token_a_ata, user_token_b_ata, user_reward_token_account, scope_prices, token_infos, system_program, token_a_token_program, token_b_token_program, reward_token_program, instruction_sysvar_account, _remaining @ ..] =
-            accounts.as_slice()
-        else {
-            return None;
-        };
+    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+        let user = accounts.get(0)?;
+        let strategy = accounts.get(1)?;
+        let global_config = accounts.get(2)?;
+        let pool = accounts.get(3)?;
+        let token_a_vault = accounts.get(4)?;
+        let token_b_vault = accounts.get(5)?;
+        let reward_vault = accounts.get(6)?;
+        let base_vault_authority = accounts.get(7)?;
+        let treasury_fee_token_a_vault = accounts.get(8)?;
+        let treasury_fee_token_b_vault = accounts.get(9)?;
+        let treasury_fee_vault_authority = accounts.get(10)?;
+        let token_a_mint = accounts.get(11)?;
+        let token_b_mint = accounts.get(12)?;
+        let reward_mint = accounts.get(13)?;
+        let user_token_a_ata = accounts.get(14)?;
+        let user_token_b_ata = accounts.get(15)?;
+        let user_reward_token_account = accounts.get(16)?;
+        let scope_prices = accounts.get(17)?;
+        let token_infos = accounts.get(18)?;
+        let system_program = accounts.get(19)?;
+        let token_a_token_program = accounts.get(20)?;
+        let token_b_token_program = accounts.get(21)?;
+        let reward_token_program = accounts.get(22)?;
+        let instruction_sysvar_account = accounts.get(23)?;
 
         Some(SwapRewardsInstructionAccounts {
             user: user.pubkey,
