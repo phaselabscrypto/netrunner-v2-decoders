@@ -38,7 +38,7 @@ pub enum UnstakeInstruction {
     RepayFlashLoan(repay_flash_loan::RepayFlashLoan),
 }
 
-impl<'a> carbon_core::instruction::InstructionDecoder<'a> for UnstakeDecoder {
+impl carbon_core::instruction::InstructionDecoder<'_> for UnstakeDecoder {
     type InstructionType = UnstakeInstruction;
 
     fn decode_instruction(

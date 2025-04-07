@@ -38,7 +38,7 @@ pub enum JitoTipDistributionInstruction {
     ClaimStatusClosedEvent(claim_status_closed_event::ClaimStatusClosedEvent),
 }
 
-impl<'a> carbon_core::instruction::InstructionDecoder<'a> for JitoTipDistributionDecoder {
+impl carbon_core::instruction::InstructionDecoder<'_> for JitoTipDistributionDecoder {
     type InstructionType = JitoTipDistributionInstruction;
 
     fn decode_instruction(

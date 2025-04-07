@@ -92,7 +92,7 @@ pub enum ValidatorBondsInstruction {
     ClaimSettlementEvent(claim_settlement_event::ClaimSettlementEvent),
 }
 
-impl<'a> carbon_core::instruction::InstructionDecoder<'a> for ValidatorBondsDecoder {
+impl carbon_core::instruction::InstructionDecoder<'_> for ValidatorBondsDecoder {
     type InstructionType = ValidatorBondsInstruction;
 
     fn decode_instruction(
