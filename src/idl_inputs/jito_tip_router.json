@@ -1,0 +1,3887 @@
+{
+  "version": "0.0.1",
+  "name": "jito_tip_router",
+  "instructions": [
+    {
+      "name": "InitializeConfig",
+      "accounts": [
+        {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "feeWallet",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ncnAdmin",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "tieBreakerAdmin",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "accountPayer",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "blockEngineFeeBps",
+          "type": "u16"
+        },
+        {
+          "name": "daoFeeBps",
+          "type": "u16"
+        },
+        {
+          "name": "defaultNcnFeeBps",
+          "type": "u16"
+        },
+        {
+          "name": "epochsBeforeStall",
+          "type": "u64"
+        },
+        {
+          "name": "epochsAfterConsensusBeforeClose",
+          "type": "u64"
+        },
+        {
+          "name": "validSlotsAfterConsensus",
+          "type": "u64"
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 0
+      }
+    },
+    {
+      "name": "InitializeVaultRegistry",
+      "accounts": [
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "vaultRegistry",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "accountPayer",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [],
+      "discriminant": {
+        "type": "u8",
+        "value": 1
+      }
+    },
+    {
+      "name": "ReallocVaultRegistry",
+      "accounts": [
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "vaultRegistry",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "accountPayer",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [],
+      "discriminant": {
+        "type": "u8",
+        "value": 2
+      }
+    },
+    {
+      "name": "RegisterVault",
+      "accounts": [
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "vaultRegistry",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "vault",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ncnVaultTicket",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [],
+      "discriminant": {
+        "type": "u8",
+        "value": 3
+      }
+    },
+    {
+      "name": "InitializeEpochState",
+      "accounts": [
+        {
+          "name": "epochMarker",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "epochState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "accountPayer",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "epoch",
+          "type": "u64"
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 4
+      }
+    },
+    {
+      "name": "ReallocEpochState",
+      "accounts": [
+        {
+          "name": "epochState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "accountPayer",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "epoch",
+          "type": "u64"
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 5
+      }
+    },
+    {
+      "name": "InitializeWeightTable",
+      "accounts": [
+        {
+          "name": "epochMarker",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "epochState",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "vaultRegistry",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "weightTable",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "accountPayer",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "epoch",
+          "type": "u64"
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 6
+      }
+    },
+    {
+      "name": "ReallocWeightTable",
+      "accounts": [
+        {
+          "name": "epochState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "weightTable",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "vaultRegistry",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "accountPayer",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "epoch",
+          "type": "u64"
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 7
+      }
+    },
+    {
+      "name": "SwitchboardSetWeight",
+      "accounts": [
+        {
+          "name": "epochState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "weightTable",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "switchboardFeed",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "stMint",
+          "type": "publicKey"
+        },
+        {
+          "name": "epoch",
+          "type": "u64"
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 8
+      }
+    },
+    {
+      "name": "InitializeEpochSnapshot",
+      "accounts": [
+        {
+          "name": "epochMarker",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "epochState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "weightTable",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "epochSnapshot",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "accountPayer",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "epoch",
+          "type": "u64"
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 9
+      }
+    },
+    {
+      "name": "InitializeOperatorSnapshot",
+      "accounts": [
+        {
+          "name": "epochMarker",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "epochState",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "operator",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ncnOperatorState",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "epochSnapshot",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "operatorSnapshot",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "accountPayer",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "epoch",
+          "type": "u64"
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 10
+      }
+    },
+    {
+      "name": "ReallocOperatorSnapshot",
+      "accounts": [
+        {
+          "name": "epochState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "restakingConfig",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "operator",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ncnOperatorState",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "epochSnapshot",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "operatorSnapshot",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "accountPayer",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "epoch",
+          "type": "u64"
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 11
+      }
+    },
+    {
+      "name": "SnapshotVaultOperatorDelegation",
+      "accounts": [
+        {
+          "name": "epochState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "restakingConfig",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "operator",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "vault",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "vaultNcnTicket",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ncnVaultTicket",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "vaultOperatorDelegation",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "weightTable",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "epochSnapshot",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "operatorSnapshot",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "epoch",
+          "type": "u64"
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 12
+      }
+    },
+    {
+      "name": "InitializeBallotBox",
+      "accounts": [
+        {
+          "name": "epochMarker",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "epochState",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ballotBox",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "accountPayer",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "epoch",
+          "type": "u64"
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 13
+      }
+    },
+    {
+      "name": "ReallocBallotBox",
+      "accounts": [
+        {
+          "name": "epochState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ballotBox",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "accountPayer",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "epoch",
+          "type": "u64"
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 14
+      }
+    },
+    {
+      "name": "CastVote",
+      "accounts": [
+        {
+          "name": "epochState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ballotBox",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "epochSnapshot",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "operatorSnapshot",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "operator",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "operatorVoter",
+          "isMut": false,
+          "isSigner": true
+        }
+      ],
+      "args": [
+        {
+          "name": "metaMerkleRoot",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "epoch",
+          "type": "u64"
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 15
+      }
+    },
+    {
+      "name": "SetMerkleRoot",
+      "accounts": [
+        {
+          "name": "epochState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ballotBox",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "voteAccount",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tipDistributionAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tipDistributionConfig",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tipDistributionProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "proof",
+          "type": {
+            "vec": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          }
+        },
+        {
+          "name": "merkleRoot",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "maxTotalClaim",
+          "type": "u64"
+        },
+        {
+          "name": "maxNumNodes",
+          "type": "u64"
+        },
+        {
+          "name": "epoch",
+          "type": "u64"
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 16
+      }
+    },
+    {
+      "name": "InitializeBaseRewardRouter",
+      "accounts": [
+        {
+          "name": "epochMarker",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "epochState",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "baseRewardRouter",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "baseRewardReceiver",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "accountPayer",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "epoch",
+          "type": "u64"
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 17
+      }
+    },
+    {
+      "name": "ReallocBaseRewardRouter",
+      "accounts": [
+        {
+          "name": "epochState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "baseRewardRouter",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "accountPayer",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "epoch",
+          "type": "u64"
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 18
+      }
+    },
+    {
+      "name": "InitializeNcnRewardRouter",
+      "accounts": [
+        {
+          "name": "epochMarker",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "epochState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "operator",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "operatorSnapshot",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ncnRewardRouter",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ncnRewardReceiver",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "accountPayer",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "ncnFeeGroup",
+          "type": "u8"
+        },
+        {
+          "name": "epoch",
+          "type": "u64"
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 19
+      }
+    },
+    {
+      "name": "RouteBaseRewards",
+      "accounts": [
+        {
+          "name": "epochState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "epochSnapshot",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ballotBox",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "baseRewardRouter",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "baseRewardReceiver",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "maxIterations",
+          "type": "u16"
+        },
+        {
+          "name": "epoch",
+          "type": "u64"
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 20
+      }
+    },
+    {
+      "name": "RouteNcnRewards",
+      "accounts": [
+        {
+          "name": "epochState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "operator",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "operatorSnapshot",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ncnRewardRouter",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ncnRewardReceiver",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "ncnFeeGroup",
+          "type": "u8"
+        },
+        {
+          "name": "maxIterations",
+          "type": "u16"
+        },
+        {
+          "name": "epoch",
+          "type": "u64"
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 21
+      }
+    },
+    {
+      "name": "DistributeBaseRewards",
+      "accounts": [
+        {
+          "name": "epochState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "baseRewardRouter",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "baseRewardReceiver",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "baseFeeWallet",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "baseFeeWalletAta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stakePoolProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stakePool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stakePoolWithdrawAuthority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "reserveStake",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "managerFeeAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "referrerPoolTokensAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "baseFeeGroup",
+          "type": "u8"
+        },
+        {
+          "name": "epoch",
+          "type": "u64"
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 22
+      }
+    },
+    {
+      "name": "DistributeBaseNcnRewardRoute",
+      "accounts": [
+        {
+          "name": "epochState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "operator",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "baseRewardRouter",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "baseRewardReceiver",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ncnRewardRouter",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ncnRewardReceiver",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "ncnFeeGroup",
+          "type": "u8"
+        },
+        {
+          "name": "epoch",
+          "type": "u64"
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 23
+      }
+    },
+    {
+      "name": "DistributeNcnOperatorRewards",
+      "accounts": [
+        {
+          "name": "epochState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "operator",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "operatorAta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "operatorSnapshot",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ncnRewardRouter",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ncnRewardReceiver",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stakePoolProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stakePool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stakePoolWithdrawAuthority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "reserveStake",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "managerFeeAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "referrerPoolTokensAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "ncnFeeGroup",
+          "type": "u8"
+        },
+        {
+          "name": "epoch",
+          "type": "u64"
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 24
+      }
+    },
+    {
+      "name": "DistributeNcnVaultRewards",
+      "accounts": [
+        {
+          "name": "epochState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "operator",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "vault",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "vaultAta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "operatorSnapshot",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ncnRewardRouter",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ncnRewardReceiver",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stakePoolProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stakePool",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stakePoolWithdrawAuthority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "reserveStake",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "managerFeeAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "referrerPoolTokensAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "ncnFeeGroup",
+          "type": "u8"
+        },
+        {
+          "name": "epoch",
+          "type": "u64"
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 25
+      }
+    },
+    {
+      "name": "ClaimWithPayer",
+      "accounts": [
+        {
+          "name": "accountPayer",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tipDistributionConfig",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tipDistributionAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "claimStatus",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "claimant",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tipDistributionProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "proof",
+          "type": {
+            "vec": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          }
+        },
+        {
+          "name": "amount",
+          "type": "u64"
+        },
+        {
+          "name": "bump",
+          "type": "u8"
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 26
+      }
+    },
+    {
+      "name": "CloseEpochAccount",
+      "accounts": [
+        {
+          "name": "epochMarker",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "epochState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "accountToClose",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "accountPayer",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "daoWallet",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "receiverToClose",
+          "isMut": true,
+          "isSigner": false,
+          "isOptional": true
+        }
+      ],
+      "args": [
+        {
+          "name": "epoch",
+          "type": "u64"
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 27
+      }
+    },
+    {
+      "name": "AdminSetParameters",
+      "accounts": [
+        {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ncnAdmin",
+          "isMut": false,
+          "isSigner": true
+        }
+      ],
+      "args": [
+        {
+          "name": "startingValidEpoch",
+          "type": {
+            "option": "u64"
+          }
+        },
+        {
+          "name": "epochsBeforeStall",
+          "type": {
+            "option": "u64"
+          }
+        },
+        {
+          "name": "epochsAfterConsensusBeforeClose",
+          "type": {
+            "option": "u64"
+          }
+        },
+        {
+          "name": "validSlotsAfterConsensus",
+          "type": {
+            "option": "u64"
+          }
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 28
+      }
+    },
+    {
+      "name": "AdminSetConfigFees",
+      "accounts": [
+        {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ncnAdmin",
+          "isMut": false,
+          "isSigner": true
+        }
+      ],
+      "args": [
+        {
+          "name": "newBlockEngineFeeBps",
+          "type": {
+            "option": "u16"
+          }
+        },
+        {
+          "name": "baseFeeGroup",
+          "type": {
+            "option": "u8"
+          }
+        },
+        {
+          "name": "newBaseFeeWallet",
+          "type": {
+            "option": "publicKey"
+          }
+        },
+        {
+          "name": "newBaseFeeBps",
+          "type": {
+            "option": "u16"
+          }
+        },
+        {
+          "name": "ncnFeeGroup",
+          "type": {
+            "option": "u8"
+          }
+        },
+        {
+          "name": "newNcnFeeBps",
+          "type": {
+            "option": "u16"
+          }
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 29
+      }
+    },
+    {
+      "name": "AdminSetNewAdmin",
+      "accounts": [
+        {
+          "name": "config",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ncnAdmin",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "newAdmin",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "role",
+          "type": {
+            "defined": "ConfigAdminRole"
+          }
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 30
+      }
+    },
+    {
+      "name": "AdminSetTieBreaker",
+      "accounts": [
+        {
+          "name": "epochState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ballotBox",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tieBreakerAdmin",
+          "isMut": false,
+          "isSigner": true
+        }
+      ],
+      "args": [
+        {
+          "name": "metaMerkleRoot",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "epoch",
+          "type": "u64"
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 31
+      }
+    },
+    {
+      "name": "AdminSetWeight",
+      "accounts": [
+        {
+          "name": "epochState",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "weightTable",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "weightTableAdmin",
+          "isMut": false,
+          "isSigner": true
+        }
+      ],
+      "args": [
+        {
+          "name": "stMint",
+          "type": "publicKey"
+        },
+        {
+          "name": "weight",
+          "type": "u128"
+        },
+        {
+          "name": "epoch",
+          "type": "u64"
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 32
+      }
+    },
+    {
+      "name": "AdminRegisterStMint",
+      "accounts": [
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "stMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "vaultRegistry",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "admin",
+          "isMut": true,
+          "isSigner": true
+        }
+      ],
+      "args": [
+        {
+          "name": "ncnFeeGroup",
+          "type": "u8"
+        },
+        {
+          "name": "rewardMultiplierBps",
+          "type": "u64"
+        },
+        {
+          "name": "switchboardFeed",
+          "type": {
+            "option": "publicKey"
+          }
+        },
+        {
+          "name": "noFeedWeight",
+          "type": {
+            "option": "u128"
+          }
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 33
+      }
+    },
+    {
+      "name": "AdminSetStMint",
+      "accounts": [
+        {
+          "name": "config",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "ncn",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "vaultRegistry",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "admin",
+          "isMut": true,
+          "isSigner": true
+        }
+      ],
+      "args": [
+        {
+          "name": "stMint",
+          "type": "publicKey"
+        },
+        {
+          "name": "ncnFeeGroup",
+          "type": {
+            "option": "u8"
+          }
+        },
+        {
+          "name": "rewardMultiplierBps",
+          "type": {
+            "option": "u64"
+          }
+        },
+        {
+          "name": "switchboardFeed",
+          "type": {
+            "option": "publicKey"
+          }
+        },
+        {
+          "name": "noFeedWeight",
+          "type": {
+            "option": "u128"
+          }
+        }
+      ],
+      "discriminant": {
+        "type": "u8",
+        "value": 34
+      }
+    }
+  ],
+  "accounts": [
+    {
+      "name": "BallotBox",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "ncn",
+            "type": "publicKey"
+          },
+          {
+            "name": "epoch",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "slotCreated",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "slotConsensusReached",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "reserved",
+            "type": {
+              "array": [
+                "u8",
+                128
+              ]
+            }
+          },
+          {
+            "name": "operatorsVoted",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "uniqueBallots",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "winningBallot",
+            "type": {
+              "defined": "Ballot"
+            }
+          },
+          {
+            "name": "operatorVotes",
+            "type": {
+              "array": [
+                {
+                  "defined": "OperatorVote"
+                },
+                256
+              ]
+            }
+          },
+          {
+            "name": "ballotTallies",
+            "type": {
+              "array": [
+                {
+                  "defined": "BallotTally"
+                },
+                256
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "BaseRewardRouter",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "ncn",
+            "type": "publicKey"
+          },
+          {
+            "name": "epoch",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "slotCreated",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "totalRewards",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "rewardPool",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "rewardsProcessed",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "reserved",
+            "type": {
+              "array": [
+                "u8",
+                128
+              ]
+            }
+          },
+          {
+            "name": "lastNcnGroupIndex",
+            "type": "u8"
+          },
+          {
+            "name": "lastVoteIndex",
+            "type": {
+              "defined": "PodU16"
+            }
+          },
+          {
+            "name": "lastRewardsToProcess",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "baseFeeGroupRewards",
+            "type": {
+              "array": [
+                {
+                  "defined": "BaseRewardRouterRewards"
+                },
+                8
+              ]
+            }
+          },
+          {
+            "name": "ncnFeeGroupRewards",
+            "type": {
+              "array": [
+                {
+                  "defined": "BaseRewardRouterRewards"
+                },
+                8
+              ]
+            }
+          },
+          {
+            "name": "ncnFeeGroupRewardRoutes",
+            "type": {
+              "array": [
+                {
+                  "defined": "NcnRewardRoute"
+                },
+                256
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Config",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "ncn",
+            "type": "publicKey"
+          },
+          {
+            "name": "tieBreakerAdmin",
+            "type": "publicKey"
+          },
+          {
+            "name": "feeAdmin",
+            "type": "publicKey"
+          },
+          {
+            "name": "validSlotsAfterConsensus",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "epochsBeforeStall",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "feeConfig",
+            "type": {
+              "defined": "FeeConfig"
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "epochsAfterConsensusBeforeClose",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "startingValidEpoch",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "reserved",
+            "type": {
+              "array": [
+                "u8",
+                111
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "EpochMarker",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "ncn",
+            "type": "publicKey"
+          },
+          {
+            "name": "epoch",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "slotClosed",
+            "type": {
+              "defined": "PodU64"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "EpochSnapshot",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "ncn",
+            "type": "publicKey"
+          },
+          {
+            "name": "epoch",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "slotCreated",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "slotFinalized",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "fees",
+            "type": {
+              "defined": "Fees"
+            }
+          },
+          {
+            "name": "operatorCount",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "vaultCount",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "operatorsRegistered",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "validOperatorVaultDelegations",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "stakeWeights",
+            "type": {
+              "defined": "StakeWeights"
+            }
+          },
+          {
+            "name": "reserved",
+            "type": {
+              "array": [
+                "u8",
+                128
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "OperatorSnapshot",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "operator",
+            "type": "publicKey"
+          },
+          {
+            "name": "ncn",
+            "type": "publicKey"
+          },
+          {
+            "name": "ncnEpoch",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "slotCreated",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "slotFinalized",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "isActive",
+            "type": {
+              "defined": "PodBool"
+            }
+          },
+          {
+            "name": "ncnOperatorIndex",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "operatorIndex",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "operatorFeeBps",
+            "type": {
+              "defined": "PodU16"
+            }
+          },
+          {
+            "name": "vaultOperatorDelegationCount",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "vaultOperatorDelegationsRegistered",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "validOperatorVaultDelegations",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "stakeWeights",
+            "type": {
+              "defined": "StakeWeights"
+            }
+          },
+          {
+            "name": "reserved",
+            "type": {
+              "array": [
+                "u8",
+                256
+              ]
+            }
+          },
+          {
+            "name": "vaultOperatorStakeWeight",
+            "type": {
+              "array": [
+                {
+                  "defined": "VaultOperatorStakeWeight"
+                },
+                64
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "EpochState",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "ncn",
+            "type": "publicKey"
+          },
+          {
+            "name": "epoch",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "slotCreated",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "wasTieBreakerSet",
+            "type": {
+              "defined": "PodBool"
+            }
+          },
+          {
+            "name": "slotConsensusReached",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "operatorCount",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "vaultCount",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "accountStatus",
+            "type": {
+              "defined": "EpochAccountStatus"
+            }
+          },
+          {
+            "name": "setWeightProgress",
+            "type": {
+              "defined": "Progress"
+            }
+          },
+          {
+            "name": "epochSnapshotProgress",
+            "type": {
+              "defined": "Progress"
+            }
+          },
+          {
+            "name": "operatorSnapshotProgress",
+            "type": {
+              "array": [
+                {
+                  "defined": "Progress"
+                },
+                256
+              ]
+            }
+          },
+          {
+            "name": "votingProgress",
+            "type": {
+              "defined": "Progress"
+            }
+          },
+          {
+            "name": "validationProgress",
+            "type": {
+              "defined": "Progress"
+            }
+          },
+          {
+            "name": "uploadProgress",
+            "type": {
+              "defined": "Progress"
+            }
+          },
+          {
+            "name": "totalDistributionProgress",
+            "type": {
+              "defined": "Progress"
+            }
+          },
+          {
+            "name": "baseDistributionProgress",
+            "type": {
+              "defined": "Progress"
+            }
+          },
+          {
+            "name": "ncnDistributionProgress",
+            "type": {
+              "array": [
+                {
+                  "defined": "Progress"
+                },
+                2048
+              ]
+            }
+          },
+          {
+            "name": "isClosing",
+            "type": {
+              "defined": "PodBool"
+            }
+          },
+          {
+            "name": "reserved",
+            "type": {
+              "array": [
+                "u8",
+                1023
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "NcnRewardRouter",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "ncnFeeGroup",
+            "type": {
+              "defined": "NcnFeeGroup"
+            }
+          },
+          {
+            "name": "operator",
+            "type": "publicKey"
+          },
+          {
+            "name": "ncn",
+            "type": "publicKey"
+          },
+          {
+            "name": "epoch",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "slotCreated",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "ncnOperatorIndex",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "totalRewards",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "rewardPool",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "rewardsProcessed",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "operatorRewards",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "reserved",
+            "type": {
+              "array": [
+                "u8",
+                128
+              ]
+            }
+          },
+          {
+            "name": "lastRewardsToProcess",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "lastVaultOperatorDelegationIndex",
+            "type": {
+              "defined": "PodU16"
+            }
+          },
+          {
+            "name": "vaultRewardRoutes",
+            "type": {
+              "array": [
+                {
+                  "defined": "VaultRewardRoute"
+                },
+                64
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "VaultRegistry",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "ncn",
+            "type": "publicKey"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "reserved",
+            "type": {
+              "array": [
+                "u8",
+                127
+              ]
+            }
+          },
+          {
+            "name": "stMintList",
+            "type": {
+              "array": [
+                {
+                  "defined": "StMintEntry"
+                },
+                64
+              ]
+            }
+          },
+          {
+            "name": "vaultList",
+            "type": {
+              "array": [
+                {
+                  "defined": "VaultEntry"
+                },
+                64
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "WeightTable",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "ncn",
+            "type": "publicKey"
+          },
+          {
+            "name": "epoch",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "slotCreated",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "vaultCount",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "reserved",
+            "type": {
+              "array": [
+                "u8",
+                128
+              ]
+            }
+          },
+          {
+            "name": "vaultRegistry",
+            "type": {
+              "array": [
+                {
+                  "defined": "VaultEntry"
+                },
+                64
+              ]
+            }
+          },
+          {
+            "name": "table",
+            "type": {
+              "array": [
+                {
+                  "defined": "WeightEntry"
+                },
+                64
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "name": "Ballot",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "metaMerkleRoot",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "isValid",
+            "type": {
+              "defined": "PodBool"
+            }
+          },
+          {
+            "name": "reserved",
+            "type": {
+              "array": [
+                "u8",
+                63
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "BallotTally",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "index",
+            "type": {
+              "defined": "PodU16"
+            }
+          },
+          {
+            "name": "ballot",
+            "type": {
+              "defined": "Ballot"
+            }
+          },
+          {
+            "name": "stakeWeights",
+            "type": {
+              "defined": "StakeWeights"
+            }
+          },
+          {
+            "name": "tally",
+            "type": {
+              "defined": "PodU64"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "OperatorVote",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "operator",
+            "type": "publicKey"
+          },
+          {
+            "name": "slotVoted",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "stakeWeights",
+            "type": {
+              "defined": "StakeWeights"
+            }
+          },
+          {
+            "name": "ballotIndex",
+            "type": {
+              "defined": "PodU16"
+            }
+          },
+          {
+            "name": "reserved",
+            "type": {
+              "array": [
+                "u8",
+                64
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "BaseFeeGroup",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "group",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "NcnRewardRoute",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "operator",
+            "type": "publicKey"
+          },
+          {
+            "name": "ncnFeeGroupRewards",
+            "type": {
+              "array": [
+                {
+                  "defined": "BaseRewardRouterRewards"
+                },
+                8
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "BaseRewardRouterRewards",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "rewards",
+            "type": {
+              "defined": "PodU64"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "VaultOperatorStakeWeight",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "publicKey"
+          },
+          {
+            "name": "vaultIndex",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "ncnFeeGroup",
+            "type": {
+              "defined": "NcnFeeGroup"
+            }
+          },
+          {
+            "name": "stakeWeight",
+            "type": {
+              "defined": "StakeWeights"
+            }
+          },
+          {
+            "name": "reserved",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "EpochAccountStatus",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "epochState",
+            "type": "u8"
+          },
+          {
+            "name": "weightTable",
+            "type": "u8"
+          },
+          {
+            "name": "epochSnapshot",
+            "type": "u8"
+          },
+          {
+            "name": "operatorSnapshot",
+            "type": {
+              "array": [
+                "u8",
+                256
+              ]
+            }
+          },
+          {
+            "name": "ballotBox",
+            "type": "u8"
+          },
+          {
+            "name": "baseRewardRouter",
+            "type": "u8"
+          },
+          {
+            "name": "ncnRewardRouter",
+            "type": {
+              "array": [
+                "u8",
+                2048
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Progress",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "tally",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "total",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "reserved",
+            "type": {
+              "array": [
+                "u8",
+                8
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "FeeConfig",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "blockEngineFeeBps",
+            "type": {
+              "defined": "PodU16"
+            }
+          },
+          {
+            "name": "baseFeeWallets",
+            "type": {
+              "array": [
+                "publicKey",
+                8
+              ]
+            }
+          },
+          {
+            "name": "reserved",
+            "type": {
+              "array": [
+                "u8",
+                128
+              ]
+            }
+          },
+          {
+            "name": "fee1",
+            "type": {
+              "defined": "Fees"
+            }
+          },
+          {
+            "name": "fee2",
+            "type": {
+              "defined": "Fees"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Fees",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "activationEpoch",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "reserved",
+            "type": {
+              "array": [
+                "u8",
+                128
+              ]
+            }
+          },
+          {
+            "name": "baseFeeGroupsBps",
+            "type": {
+              "array": [
+                {
+                  "defined": "Fee"
+                },
+                8
+              ]
+            }
+          },
+          {
+            "name": "ncnFeeGroupsBps",
+            "type": {
+              "array": [
+                {
+                  "defined": "Fee"
+                },
+                8
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Fee",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "fee",
+            "type": {
+              "defined": "PodU16"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "NcnFeeGroup",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "group",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VaultRewardRoute",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "publicKey"
+          },
+          {
+            "name": "rewards",
+            "type": {
+              "defined": "PodU64"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "StakeWeights",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "stakeWeight",
+            "type": {
+              "defined": "PodU128"
+            }
+          },
+          {
+            "name": "ncnFeeGroupStakeWeights",
+            "type": {
+              "array": [
+                {
+                  "defined": "NcnFeeGroupWeight"
+                },
+                8
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "NcnFeeGroupWeight",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "weight",
+            "type": {
+              "defined": "PodU128"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "StMintEntry",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "stMint",
+            "type": "publicKey"
+          },
+          {
+            "name": "ncnFeeGroup",
+            "type": {
+              "defined": "NcnFeeGroup"
+            }
+          },
+          {
+            "name": "rewardMultiplierBps",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "switchboardFeed",
+            "type": "publicKey"
+          },
+          {
+            "name": "noFeedWeight",
+            "type": {
+              "defined": "PodU128"
+            }
+          },
+          {
+            "name": "reserved",
+            "type": {
+              "array": [
+                "u8",
+                128
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "VaultEntry",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "vault",
+            "type": "publicKey"
+          },
+          {
+            "name": "stMint",
+            "type": "publicKey"
+          },
+          {
+            "name": "vaultIndex",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "slotRegistered",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "reserved",
+            "type": {
+              "array": [
+                "u8",
+                128
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "WeightEntry",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "stMintEntry",
+            "type": {
+              "defined": "StMintEntry"
+            }
+          },
+          {
+            "name": "weight",
+            "type": {
+              "defined": "PodU128"
+            }
+          },
+          {
+            "name": "slotSet",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "slotUpdated",
+            "type": {
+              "defined": "PodU64"
+            }
+          },
+          {
+            "name": "reserved",
+            "type": {
+              "array": [
+                "u8",
+                128
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "ConfigAdminRole",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "FeeAdmin"
+          },
+          {
+            "name": "TieBreakerAdmin"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 8448,
+      "name": "DenominatorIsZero",
+      "msg": "Zero in the denominator"
+    },
+    {
+      "code": 8449,
+      "name": "ArithmeticOverflow",
+      "msg": "Overflow"
+    },
+    {
+      "code": 8450,
+      "name": "ArithmeticUnderflowError",
+      "msg": "Underflow"
+    },
+    {
+      "code": 8451,
+      "name": "ArithmeticFloorError",
+      "msg": "Floor Overflow"
+    },
+    {
+      "code": 8452,
+      "name": "ModuloOverflow",
+      "msg": "Modulo Overflow"
+    },
+    {
+      "code": 8453,
+      "name": "NewPreciseNumberError",
+      "msg": "New precise number error"
+    },
+    {
+      "code": 8454,
+      "name": "CastToImpreciseNumberError",
+      "msg": "Cast to imprecise number error"
+    },
+    {
+      "code": 8455,
+      "name": "CastToU64Error",
+      "msg": "Cast to u64 error"
+    },
+    {
+      "code": 8456,
+      "name": "CastToU128Error",
+      "msg": "Cast to u128 error"
+    },
+    {
+      "code": 8704,
+      "name": "IncorrectWeightTableAdmin",
+      "msg": "Incorrect weight table admin"
+    },
+    {
+      "code": 8705,
+      "name": "DuplicateMintsInTable",
+      "msg": "Duplicate mints in table"
+    },
+    {
+      "code": 8706,
+      "name": "NoMintsInTable",
+      "msg": "There are no mints in the table"
+    },
+    {
+      "code": 8707,
+      "name": "TableNotInitialized",
+      "msg": "Table not initialized"
+    },
+    {
+      "code": 8708,
+      "name": "RegistryNotInitialized",
+      "msg": "Registry not initialized"
+    },
+    {
+      "code": 8709,
+      "name": "NoVaultsInRegistry",
+      "msg": "There are no vaults in the registry"
+    },
+    {
+      "code": 8710,
+      "name": "VaultNotInRegistry",
+      "msg": "Vault not in weight table registry"
+    },
+    {
+      "code": 8711,
+      "name": "MintInTable",
+      "msg": "Mint is already in the table"
+    },
+    {
+      "code": 8712,
+      "name": "TooManyMintsForTable",
+      "msg": "Too many mints for table"
+    },
+    {
+      "code": 8713,
+      "name": "TooManyVaultsForRegistry",
+      "msg": "Too many vaults for registry"
+    },
+    {
+      "code": 8714,
+      "name": "WeightTableAlreadyInitialized",
+      "msg": "Weight table already initialized"
+    },
+    {
+      "code": 8715,
+      "name": "CannotCreateFutureWeightTables",
+      "msg": "Cannnot create future weight tables"
+    },
+    {
+      "code": 8716,
+      "name": "WeightMintsDoNotMatchLength",
+      "msg": "Weight mints do not match - length"
+    },
+    {
+      "code": 8717,
+      "name": "WeightMintsDoNotMatchMintHash",
+      "msg": "Weight mints do not match - mint hash"
+    },
+    {
+      "code": 8718,
+      "name": "InvalidMintForWeightTable",
+      "msg": "Invalid mint for weight table"
+    },
+    {
+      "code": 8719,
+      "name": "ConfigMintsNotUpdated",
+      "msg": "Config supported mints do not match NCN Vault Count"
+    },
+    {
+      "code": 8720,
+      "name": "ConfigMintListFull",
+      "msg": "NCN config vaults are at capacity"
+    },
+    {
+      "code": 8721,
+      "name": "VaultRegistryListFull",
+      "msg": "Vault Registry mints are at capacity"
+    },
+    {
+      "code": 8722,
+      "name": "VaultRegistryVaultLocked",
+      "msg": "Vault registry are locked for the epoch"
+    },
+    {
+      "code": 8723,
+      "name": "VaultIndexAlreadyInUse",
+      "msg": "Vault index already in use by a different mint"
+    },
+    {
+      "code": 8724,
+      "name": "MintEntryNotFound",
+      "msg": "Mint Entry not found"
+    },
+    {
+      "code": 8725,
+      "name": "FeeCapExceeded",
+      "msg": "Fee cap exceeded"
+    },
+    {
+      "code": 8726,
+      "name": "TotalFeesCannotBeZero",
+      "msg": "Total fees cannot be 0"
+    },
+    {
+      "code": 8727,
+      "name": "DefaultDaoWallet",
+      "msg": "DAO wallet cannot be default"
+    },
+    {
+      "code": 8728,
+      "name": "IncorrectNcnAdmin",
+      "msg": "Incorrect NCN Admin"
+    },
+    {
+      "code": 8729,
+      "name": "IncorrectNcn",
+      "msg": "Incorrect NCN"
+    },
+    {
+      "code": 8730,
+      "name": "IncorrectFeeAdmin",
+      "msg": "Incorrect fee admin"
+    },
+    {
+      "code": 8731,
+      "name": "WeightTableNotFinalized",
+      "msg": "Weight table not finalized"
+    },
+    {
+      "code": 8732,
+      "name": "WeightNotFound",
+      "msg": "Weight not found"
+    },
+    {
+      "code": 8733,
+      "name": "NoOperators",
+      "msg": "No operators in ncn"
+    },
+    {
+      "code": 8734,
+      "name": "VaultOperatorDelegationFinalized",
+      "msg": "Vault operator delegation is already finalized - should not happen"
+    },
+    {
+      "code": 8735,
+      "name": "OperatorFinalized",
+      "msg": "Operator is already finalized - should not happen"
+    },
+    {
+      "code": 8736,
+      "name": "TooManyVaultOperatorDelegations",
+      "msg": "Too many vault operator delegations"
+    },
+    {
+      "code": 8737,
+      "name": "DuplicateVaultOperatorDelegation",
+      "msg": "Duplicate vault operator delegation"
+    },
+    {
+      "code": 8738,
+      "name": "DuplicateVoteCast",
+      "msg": "Duplicate Vote Cast"
+    },
+    {
+      "code": 8739,
+      "name": "OperatorVotesFull",
+      "msg": "Operator votes full"
+    },
+    {
+      "code": 8740,
+      "name": "BallotTallyFull",
+      "msg": "Merkle root tally full"
+    },
+    {
+      "code": 8741,
+      "name": "BallotTallyNotFoundFull",
+      "msg": "Ballot tally not found"
+    },
+    {
+      "code": 8742,
+      "name": "BallotTallyNotEmpty",
+      "msg": "Ballot tally not empty"
+    },
+    {
+      "code": 8743,
+      "name": "ConsensusAlreadyReached",
+      "msg": "Consensus already reached, cannot change vote"
+    },
+    {
+      "code": 8744,
+      "name": "ConsensusNotReached",
+      "msg": "Consensus not reached"
+    },
+    {
+      "code": 8745,
+      "name": "EpochSnapshotNotFinalized",
+      "msg": "Epoch snapshot not finalized"
+    },
+    {
+      "code": 8746,
+      "name": "VotingNotValid",
+      "msg": "Voting not valid, too many slots after consensus reached"
+    },
+    {
+      "code": 8747,
+      "name": "TieBreakerAdminInvalid",
+      "msg": "Tie breaker admin invalid"
+    },
+    {
+      "code": 8748,
+      "name": "VotingNotFinalized",
+      "msg": "Voting not finalized"
+    },
+    {
+      "code": 8749,
+      "name": "TieBreakerNotInPriorVotes",
+      "msg": "Tie breaking ballot must be one of the prior votes"
+    },
+    {
+      "code": 8750,
+      "name": "InvalidMerkleProof",
+      "msg": "Invalid merkle proof"
+    },
+    {
+      "code": 8751,
+      "name": "InvalidOperatorVoter",
+      "msg": "Operator voter needs to sign its vote"
+    },
+    {
+      "code": 8752,
+      "name": "InvalidNcnFeeGroup",
+      "msg": "Not a valid NCN fee group"
+    },
+    {
+      "code": 8753,
+      "name": "InvalidBaseFeeGroup",
+      "msg": "Not a valid base fee group"
+    },
+    {
+      "code": 8754,
+      "name": "OperatorRewardListFull",
+      "msg": "Operator reward list full"
+    },
+    {
+      "code": 8755,
+      "name": "OperatorRewardNotFound",
+      "msg": "Operator Reward not found"
+    },
+    {
+      "code": 8756,
+      "name": "VaultRewardNotFound",
+      "msg": "Vault Reward not found"
+    },
+    {
+      "code": 8757,
+      "name": "DestinationMismatch",
+      "msg": "Destination mismatch"
+    },
+    {
+      "code": 8758,
+      "name": "NcnRewardRouteNotFound",
+      "msg": "Ncn reward route not found"
+    },
+    {
+      "code": 8759,
+      "name": "FeeNotActive",
+      "msg": "Fee not active"
+    },
+    {
+      "code": 8760,
+      "name": "NoRewards",
+      "msg": "No rewards to distribute"
+    },
+    {
+      "code": 8761,
+      "name": "NoFeedWeightNotSet",
+      "msg": "No Feed Weight not set"
+    },
+    {
+      "code": 8762,
+      "name": "SwitchboardNotRegistered",
+      "msg": "Switchboard not registered"
+    },
+    {
+      "code": 8763,
+      "name": "BadSwitchboardFeed",
+      "msg": "Bad switchboard feed"
+    },
+    {
+      "code": 8764,
+      "name": "BadSwitchboardValue",
+      "msg": "Bad switchboard value"
+    },
+    {
+      "code": 8765,
+      "name": "StaleSwitchboardFeed",
+      "msg": "Stale switchboard feed"
+    },
+    {
+      "code": 8766,
+      "name": "NoFeedWeightOrSwitchboardFeed",
+      "msg": "Weight entry needs either a feed or a no feed weight"
+    },
+    {
+      "code": 8767,
+      "name": "RouterStillRouting",
+      "msg": "Router still routing"
+    },
+    {
+      "code": 8768,
+      "name": "InvalidEpochsBeforeStall",
+      "msg": "Invalid epochs before stall"
+    },
+    {
+      "code": 8769,
+      "name": "InvalidEpochsBeforeClose",
+      "msg": "Invalid epochs before accounts can close"
+    },
+    {
+      "code": 8770,
+      "name": "InvalidSlotsAfterConsensus",
+      "msg": "Invalid slots after consensus"
+    },
+    {
+      "code": 8771,
+      "name": "VaultNeedsUpdate",
+      "msg": "Vault needs to be updated"
+    },
+    {
+      "code": 8772,
+      "name": "InvalidAccountStatus",
+      "msg": "Invalid Account Status"
+    },
+    {
+      "code": 8773,
+      "name": "AccountAlreadyInitialized",
+      "msg": "Account already initialized"
+    },
+    {
+      "code": 8774,
+      "name": "BadBallot",
+      "msg": "Cannot vote with uninitialized account"
+    },
+    {
+      "code": 8775,
+      "name": "VotingIsNotOver",
+      "msg": "Cannot route until voting is over"
+    },
+    {
+      "code": 8776,
+      "name": "OperatorIsNotInSnapshot",
+      "msg": "Operator is not in snapshot"
+    },
+    {
+      "code": 8777,
+      "name": "InvalidAccountToCloseDiscriminator",
+      "msg": "Invalid account_to_close Discriminator"
+    },
+    {
+      "code": 8778,
+      "name": "CannotCloseAccount",
+      "msg": "Cannot close account"
+    },
+    {
+      "code": 8779,
+      "name": "CannotCloseAccountAlreadyClosed",
+      "msg": "Cannot close account - Already closed"
+    },
+    {
+      "code": 8780,
+      "name": "CannotCloseAccountNotEnoughEpochs",
+      "msg": "Cannot close account - Not enough epochs have passed since consensus reached"
+    },
+    {
+      "code": 8781,
+      "name": "CannotCloseAccountNoReceiverProvided",
+      "msg": "Cannot close account - No receiver provided"
+    },
+    {
+      "code": 8782,
+      "name": "CannotCloseEpochStateAccount",
+      "msg": "Cannot close epoch state account - Epoch state needs all other accounts to be closed first"
+    },
+    {
+      "code": 8783,
+      "name": "InvalidDaoWallet",
+      "msg": "Invalid DAO wallet"
+    },
+    {
+      "code": 8784,
+      "name": "EpochIsClosingDown",
+      "msg": "Epoch is closing down"
+    },
+    {
+      "code": 8785,
+      "name": "MarkerExists",
+      "msg": "Marker exists"
+    }
+  ],
+  "metadata": {
+    "origin": "shank",
+    "address": "RouterBmuRBkPUbgEDMtdvTZ75GBdSREZR5uGUxxxpb"
+  }
+}

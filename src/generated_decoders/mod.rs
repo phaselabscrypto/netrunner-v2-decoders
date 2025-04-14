@@ -4,7 +4,7 @@ pub mod raydium_concentrated_liquidity_decoder;
 #[allow(clippy::all)]
 pub mod tensor_marketplace_decoder;
 #[allow(clippy::all)]
-pub mod sanctum_unstake_decoder;
+pub mod jito_tip_router_decoder;
 #[allow(clippy::all)]
 pub mod marinade_finance_decoder;
 #[allow(clippy::all)]
@@ -29,6 +29,8 @@ pub mod candy_machine_core_decoder;
 pub mod candy_machine_v3_decoder;
 #[allow(clippy::all)]
 pub mod tensor_amm_decoder;
+#[allow(clippy::all)]
+pub mod sanctum_unstake_decoder;
 #[allow(clippy::all)]
 pub mod meteora_vault_decoder;
 #[allow(clippy::all)]
