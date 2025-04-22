@@ -42,7 +42,7 @@ pub enum BubblegumInstruction {
     UpdateMetadata(update_metadata::UpdateMetadata),
 }
 
-impl<'a> carbon_core::instruction::InstructionDecoder<'a> for BubblegumDecoder {
+impl carbon_core::instruction::InstructionDecoder<'_> for BubblegumDecoder {
     type InstructionType = BubblegumInstruction;
 
     fn decode_instruction(
