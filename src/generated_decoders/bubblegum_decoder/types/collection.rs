@@ -12,7 +12,7 @@ pub struct Collection {
 impl From<Collection> for BubblegumCollection {
     fn from(value: Collection) -> Self {
         Self {
-            verified: value.verified,
+            verified: true,
             key: value.key,
         }
     }
