@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xd355b841b7b1e9d9")]
-pub struct WithdrawStakeAccount{
+pub struct WithdrawStakeAccount {
     pub stake_index: u32,
     pub validator_index: u32,
     pub msol_amount: u64,
@@ -34,7 +33,9 @@ pub struct WithdrawStakeAccountInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for WithdrawStakeAccount {
     type ArrangedAccounts = WithdrawStakeAccountInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let state = accounts.get(0)?;
         let msol_mint = accounts.get(1)?;
         let burn_msol_from = accounts.get(2)?;

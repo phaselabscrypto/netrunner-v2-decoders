@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x00a4564c38480caa")]
-pub struct WithdrawFromTreasury{
+pub struct WithdrawFromTreasury {
     pub amount: u64,
 }
 
@@ -24,7 +23,9 @@ pub struct WithdrawFromTreasuryInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for WithdrawFromTreasury {
     type ArrangedAccounts = WithdrawFromTreasuryInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let admin_authority = accounts.get(0)?;
         let global_config = accounts.get(1)?;
         let mint = accounts.get(2)?;

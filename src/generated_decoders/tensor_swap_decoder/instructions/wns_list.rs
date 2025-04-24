@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xd4c1a1d7802bbecc")]
-pub struct WnsList{
+pub struct WnsList {
     pub price: u64,
 }
 
@@ -30,7 +29,9 @@ pub struct WnsListInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for WnsList {
     type ArrangedAccounts = WnsListInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let tswap = accounts.get(0)?;
         let nft_source = accounts.get(1)?;
         let nft_mint = accounts.get(2)?;

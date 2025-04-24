@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x66594200054454d8")]
-pub struct BuySingleListingT22{
+pub struct BuySingleListingT22 {
     pub max_price: u64,
 }
 
@@ -27,7 +26,9 @@ pub struct BuySingleListingT22InstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for BuySingleListingT22 {
     type ArrangedAccounts = BuySingleListingT22InstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let tswap = accounts.get(0)?;
         let fee_vault = accounts.get(1)?;
         let single_listing = accounts.get(2)?;

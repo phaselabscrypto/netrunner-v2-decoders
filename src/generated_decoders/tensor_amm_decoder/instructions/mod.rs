@@ -1,32 +1,37 @@
-
-
-
-
 use super::AmmProgramDecoder;
-pub mod tamm_noop;
-pub mod create_pool;
-pub mod edit_pool;
-pub mod close_pool;
-pub mod close_expired_pool;
-pub mod deposit_sol;
-pub mod withdraw_sol;
-pub mod deposit_nft;
-pub mod withdraw_nft;
 pub mod buy_nft;
-pub mod sell_nft_token_pool;
-pub mod sell_nft_trade_pool;
-pub mod deposit_nft_core;
-pub mod withdraw_nft_core;
 pub mod buy_nft_core;
-pub mod sell_nft_token_pool_core;
-pub mod sell_nft_trade_pool_core;
-pub mod deposit_nft_t22;
-pub mod withdraw_nft_t22;
 pub mod buy_nft_t22;
+pub mod close_expired_pool;
+pub mod close_pool;
+pub mod create_pool;
+pub mod deposit_nft;
+pub mod deposit_nft_core;
+pub mod deposit_nft_t22;
+pub mod deposit_sol;
+pub mod edit_pool;
+pub mod sell_nft_token_pool;
+pub mod sell_nft_token_pool_core;
 pub mod sell_nft_token_pool_t22;
+pub mod sell_nft_trade_pool;
+pub mod sell_nft_trade_pool_core;
 pub mod sell_nft_trade_pool_t22;
+pub mod tamm_noop;
+pub mod withdraw_nft;
+pub mod withdraw_nft_core;
+pub mod withdraw_nft_t22;
+pub mod withdraw_sol;
 
-#[derive(carbon_core::InstructionType, serde::Serialize, serde::Deserialize, PartialEq, Eq, Debug, Clone, Hash)]
+#[derive(
+    carbon_core::InstructionType,
+    serde::Serialize,
+    serde::Deserialize,
+    PartialEq,
+    Eq,
+    Debug,
+    Clone,
+    Hash,
+)]
 pub enum AmmProgramInstruction {
     TammNoop(tamm_noop::TammNoop),
     CreatePool(create_pool::CreatePool),

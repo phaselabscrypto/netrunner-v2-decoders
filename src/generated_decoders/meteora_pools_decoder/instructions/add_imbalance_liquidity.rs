@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x4f237a54ad0f5dbf")]
-pub struct AddImbalanceLiquidity{
+pub struct AddImbalanceLiquidity {
     pub minimum_pool_token_amount: u64,
     pub token_a_amount: u64,
     pub token_b_amount: u64,
@@ -33,7 +32,9 @@ pub struct AddImbalanceLiquidityInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for AddImbalanceLiquidity {
     type ArrangedAccounts = AddImbalanceLiquidityInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let pool = accounts.get(0)?;
         let lp_mint = accounts.get(1)?;
         let user_pool_lp = accounts.get(2)?;

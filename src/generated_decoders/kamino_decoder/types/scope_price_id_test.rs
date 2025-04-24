@@ -1,10 +1,9 @@
-
-
-use carbon_core::{CarbonDeserialize, borsh};
-
+use carbon_core::{borsh, CarbonDeserialize};
 
 #[allow(non_camel_case_types)]
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 pub enum ScopePriceIdTest {
     SOL,
     ETH,
@@ -77,5 +76,3 @@ pub enum ScopePriceIdTest {
     BSOL,
     LaineSOL,
 }
-
-

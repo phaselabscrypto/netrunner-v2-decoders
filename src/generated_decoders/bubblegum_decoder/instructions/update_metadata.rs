@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xaab62bef614ee1ba")]
-pub struct UpdateMetadata{
+pub struct UpdateMetadata {
     pub root: [u8; 32],
     pub nonce: u64,
     pub index: u32,
@@ -33,7 +33,9 @@ pub struct UpdateMetadataInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for UpdateMetadata {
     type ArrangedAccounts = UpdateMetadataInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let tree_authority = accounts.get(0)?;
         let authority = accounts.get(1)?;
         let collection_mint = accounts.get(2)?;

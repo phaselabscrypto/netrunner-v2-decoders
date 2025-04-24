@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xf8c69e91e17587c8")]
-pub struct Swap{
+pub struct Swap {
     pub in_amount: u64,
     pub minimum_out_amount: u64,
 }
@@ -31,7 +30,9 @@ pub struct SwapInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for Swap {
     type ArrangedAccounts = SwapInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let pool = accounts.get(0)?;
         let user_source_token = accounts.get(1)?;
         let user_destination_token = accounts.get(2)?;

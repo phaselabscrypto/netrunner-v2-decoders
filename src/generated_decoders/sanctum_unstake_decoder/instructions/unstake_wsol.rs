@@ -1,12 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x7d5dbe8759ae8e95")]
-pub struct UnstakeWsol{
-}
+pub struct UnstakeWsol {}
 
 pub struct UnstakeWsolInstructionAccounts {
     pub unstaker: solana_sdk::pubkey::Pubkey,
@@ -27,7 +25,9 @@ pub struct UnstakeWsolInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for UnstakeWsol {
     type ArrangedAccounts = UnstakeWsolInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let unstaker = accounts.get(0)?;
         let stake_account = accounts.get(1)?;
         let destination = accounts.get(2)?;

@@ -1,32 +1,37 @@
-
-
-
-
 use super::VaultDecoder;
-pub mod initialize;
+pub mod add_liquidity_event;
+pub mod add_strategy;
+pub mod claim_reward_event;
+pub mod collect_dust;
+pub mod deposit;
+pub mod deposit_strategy;
 pub mod enable_vault;
-pub mod set_operator;
+pub mod initialize;
 pub mod initialize_strategy;
+pub mod performance_fee_event;
+pub mod remove_liquidity_event;
 pub mod remove_strategy;
 pub mod remove_strategy2;
-pub mod collect_dust;
-pub mod add_strategy;
-pub mod deposit_strategy;
-pub mod withdraw_strategy;
-pub mod withdraw2;
-pub mod deposit;
-pub mod withdraw;
-pub mod withdraw_directly_from_strategy;
-pub mod add_liquidity_event;
-pub mod remove_liquidity_event;
+pub mod report_loss_event;
+pub mod set_operator;
 pub mod strategy_deposit_event;
 pub mod strategy_withdraw_event;
-pub mod claim_reward_event;
-pub mod performance_fee_event;
-pub mod report_loss_event;
 pub mod total_amount_event;
+pub mod withdraw;
+pub mod withdraw2;
+pub mod withdraw_directly_from_strategy;
+pub mod withdraw_strategy;
 
-#[derive(carbon_core::InstructionType, serde::Serialize, serde::Deserialize, PartialEq, Eq, Debug, Clone, Hash)]
+#[derive(
+    carbon_core::InstructionType,
+    serde::Serialize,
+    serde::Deserialize,
+    PartialEq,
+    Eq,
+    Debug,
+    Clone,
+    Hash,
+)]
 pub enum VaultInstruction {
     Initialize(initialize::Initialize),
     EnableVault(enable_vault::EnableVault),

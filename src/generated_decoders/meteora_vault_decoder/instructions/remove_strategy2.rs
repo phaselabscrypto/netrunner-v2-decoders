@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x8a68d0947e23c30e")]
-pub struct RemoveStrategy2{
+pub struct RemoveStrategy2 {
     pub max_admin_pay_amount: u64,
 }
 
@@ -27,7 +26,9 @@ pub struct RemoveStrategy2InstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for RemoveStrategy2 {
     type ArrangedAccounts = RemoveStrategy2InstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let vault = accounts.get(0)?;
         let strategy = accounts.get(1)?;
         let strategy_program = accounts.get(2)?;

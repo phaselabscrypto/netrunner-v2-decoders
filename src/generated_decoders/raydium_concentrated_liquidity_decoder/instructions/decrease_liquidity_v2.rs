@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x3a7fbc3e4f52c460")]
-pub struct DecreaseLiquidityV2{
+pub struct DecreaseLiquidityV2 {
     pub liquidity: u128,
     pub amount0_min: u64,
     pub amount1_min: u64,
@@ -33,7 +32,9 @@ pub struct DecreaseLiquidityV2InstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for DecreaseLiquidityV2 {
     type ArrangedAccounts = DecreaseLiquidityV2InstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let nft_owner = accounts.get(0)?;
         let nft_account = accounts.get(1)?;
         let personal_position = accounts.get(2)?;

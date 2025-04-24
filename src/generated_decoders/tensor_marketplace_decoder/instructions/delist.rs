@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x3788cd6b6bad041f")]
-pub struct Delist{
+pub struct Delist {
     pub nonce: u64,
     pub index: u32,
     pub root: [u8; 32],
@@ -29,7 +28,9 @@ pub struct DelistInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for Delist {
     type ArrangedAccounts = DelistInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let tree_authority = accounts.get(0)?;
         let merkle_tree = accounts.get(1)?;
         let log_wrapper = accounts.get(2)?;

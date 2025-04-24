@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xf3fb7c9cd3d376ef")]
-pub struct UpdateCandyMachine{
+pub struct UpdateCandyMachine {
     pub data: CandyMachineData,
 }
 
@@ -19,7 +19,9 @@ pub struct UpdateCandyMachineInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for UpdateCandyMachine {
     type ArrangedAccounts = UpdateCandyMachineInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let candy_machine = accounts.get(0)?;
         let authority = accounts.get(1)?;
         let wallet = accounts.get(2)?;

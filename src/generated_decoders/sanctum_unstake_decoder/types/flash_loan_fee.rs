@@ -1,10 +1,10 @@
-
 use super::*;
 
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
-pub struct FlashLoanFee { 
-        pub fee_ratio: Rational, 
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+pub struct FlashLoanFee {
+    pub fee_ratio: Rational,
 }

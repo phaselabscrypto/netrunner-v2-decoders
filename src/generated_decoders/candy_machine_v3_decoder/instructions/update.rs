@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xdbc858b09e3ffd7f")]
-pub struct Update{
+pub struct Update {
     pub data: Vec<u8>,
 }
 
@@ -19,7 +18,9 @@ pub struct UpdateInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for Update {
     type ArrangedAccounts = UpdateInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let candy_guard = accounts.get(0)?;
         let authority = accounts.get(1)?;
         let payer = accounts.get(2)?;

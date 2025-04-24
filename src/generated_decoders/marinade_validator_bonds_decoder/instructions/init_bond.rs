@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x5f5d5db5dd247e40")]
-pub struct InitBond{
+pub struct InitBond {
     pub init_bond_args: InitBondArgs,
 }
 
@@ -24,7 +24,9 @@ pub struct InitBondInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for InitBond {
     type ArrangedAccounts = InitBondInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let config = accounts.get(0)?;
         let vote_account = accounts.get(1)?;
         let validator_identity = accounts.get(2)?;

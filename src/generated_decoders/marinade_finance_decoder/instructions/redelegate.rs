@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xd45233a0e4507423")]
-pub struct Redelegate{
+pub struct Redelegate {
     pub stake_index: u32,
     pub source_validator_index: u32,
     pub dest_validator_index: u32,
@@ -32,7 +31,9 @@ pub struct RedelegateInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for Redelegate {
     type ArrangedAccounts = RedelegateInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let state = accounts.get(0)?;
         let validator_list = accounts.get(1)?;
         let stake_list = accounts.get(2)?;

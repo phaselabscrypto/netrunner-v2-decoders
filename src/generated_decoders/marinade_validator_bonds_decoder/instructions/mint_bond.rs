@@ -1,12 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xea5e55e1a766a920")]
-pub struct MintBond{
-}
+pub struct MintBond {}
 
 pub struct MintBondInstructionAccounts {
     pub config: solana_sdk::pubkey::Pubkey,
@@ -29,7 +27,9 @@ pub struct MintBondInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for MintBond {
     type ArrangedAccounts = MintBondInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let config = accounts.get(0)?;
         let bond = accounts.get(1)?;
         let mint = accounts.get(2)?;

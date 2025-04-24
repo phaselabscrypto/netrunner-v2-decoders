@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xb2b4b0f780ba2b09")]
-pub struct InitializeProrataVault{
+pub struct InitializeProrataVault {
     pub params: InitializeProrataVaultParams,
 }
 
@@ -23,7 +23,9 @@ pub struct InitializeProrataVaultInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for InitializeProrataVault {
     type ArrangedAccounts = InitializeProrataVaultInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let vault = accounts.get(0)?;
         let pool = accounts.get(1)?;
         let funder = accounts.get(2)?;

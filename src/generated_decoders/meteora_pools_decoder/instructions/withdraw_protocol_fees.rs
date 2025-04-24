@@ -1,12 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x0b44a56212d08649")]
-pub struct WithdrawProtocolFees{
-}
+pub struct WithdrawProtocolFees {}
 
 pub struct WithdrawProtocolFeesInstructionAccounts {
     pub pool: solana_sdk::pubkey::Pubkey,
@@ -21,7 +19,9 @@ pub struct WithdrawProtocolFeesInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for WithdrawProtocolFees {
     type ArrangedAccounts = WithdrawProtocolFeesInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let pool = accounts.get(0)?;
         let a_vault_lp = accounts.get(1)?;
         let protocol_token_a_fee = accounts.get(2)?;

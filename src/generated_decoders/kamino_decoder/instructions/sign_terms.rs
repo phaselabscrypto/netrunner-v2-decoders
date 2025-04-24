@@ -1,10 +1,10 @@
-
-
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 use serde_with::{serde_as, Bytes};
 
 #[serde_as]
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xe22aae8f909f8b01")]
 pub struct SignTerms {
     #[serde_as(as = "Bytes")]
@@ -21,7 +21,9 @@ pub struct SignTermsInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for SignTerms {
     type ArrangedAccounts = SignTermsInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let owner = accounts.get(0)?;
         let owner_signature_state = accounts.get(1)?;
         let system_program = accounts.get(2)?;

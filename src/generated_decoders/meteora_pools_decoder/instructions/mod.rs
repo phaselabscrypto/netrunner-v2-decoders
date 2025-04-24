@@ -1,54 +1,52 @@
-
-
-
-
 use super::AmmDecoder;
-pub mod initialize_permissioned_pool;
-pub mod initialize_permissionless_pool;
-pub mod initialize_permissionless_pool_with_fee_tier;
-pub mod enable_or_disable_pool;
-pub mod swap;
-pub mod remove_liquidity_single_side;
-pub mod add_imbalance_liquidity;
-pub mod remove_balance_liquidity;
 pub mod add_balance_liquidity;
-pub mod set_pool_fees;
-pub mod override_curve_param;
-pub mod get_pool_info;
+pub mod add_imbalance_liquidity;
+pub mod add_liquidity_event;
 pub mod bootstrap_liquidity;
-pub mod create_mint_metadata;
-pub mod create_lock_escrow;
-pub mod lock;
+pub mod bootstrap_liquidity_event;
 pub mod claim_fee;
-pub mod create_config;
+pub mod claim_fee_event;
 pub mod close_config;
+pub mod close_config_event;
+pub mod create_config;
+pub mod create_config_event;
+pub mod create_lock_escrow;
+pub mod create_lock_escrow_event;
+pub mod create_mint_metadata;
+pub mod enable_or_disable_pool;
+pub mod get_pool_info;
+pub mod initialize_customizable_permissionless_constant_product_pool;
+pub mod initialize_permissioned_pool;
 pub mod initialize_permissionless_constant_product_pool_with_config;
 pub mod initialize_permissionless_constant_product_pool_with_config2;
-pub mod initialize_customizable_permissionless_constant_product_pool;
-pub mod update_activation_point;
-pub mod withdraw_protocol_fees;
-pub mod set_whitelisted_vault;
-pub mod partner_claim_fee;
-pub mod add_liquidity_event;
-pub mod remove_liquidity_event;
-pub mod bootstrap_liquidity_event;
-pub mod swap_event;
-pub mod set_pool_fees_event;
-pub mod pool_info_event;
-pub mod transfer_admin_event;
+pub mod initialize_permissionless_pool;
+pub mod initialize_permissionless_pool_with_fee_tier;
+pub mod lock;
+pub mod lock_event;
+pub mod migrate_fee_account_event;
+pub mod override_curve_param;
 pub mod override_curve_param_event;
+pub mod partner_claim_fee;
+pub mod partner_claim_fees_event;
 pub mod pool_created_event;
 pub mod pool_enabled_event;
-pub mod migrate_fee_account_event;
-pub mod create_lock_escrow_event;
-pub mod lock_event;
-pub mod claim_fee_event;
-pub mod create_config_event;
-pub mod close_config_event;
+pub mod pool_info_event;
+pub mod remove_balance_liquidity;
+pub mod remove_liquidity_event;
+pub mod remove_liquidity_single_side;
+pub mod set_pool_fees;
+pub mod set_pool_fees_event;
+pub mod set_whitelisted_vault;
+pub mod swap;
+pub mod swap_event;
+pub mod transfer_admin_event;
+pub mod update_activation_point;
+pub mod withdraw_protocol_fees;
 pub mod withdraw_protocol_fees_event;
-pub mod partner_claim_fees_event;
 
-#[derive(carbon_core::InstructionType, serde::Serialize, serde::Deserialize, PartialEq, Debug, Clone)]
+#[derive(
+    carbon_core::InstructionType, serde::Serialize, serde::Deserialize, PartialEq, Debug, Clone,
+)]
 pub enum AmmInstruction {
     InitializePermissionedPool(initialize_permissioned_pool::InitializePermissionedPool),
     InitializePermissionlessPool(initialize_permissionless_pool::InitializePermissionlessPool),

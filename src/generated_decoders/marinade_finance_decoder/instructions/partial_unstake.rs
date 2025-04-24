@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x37f1cddd2d72cda3")]
-pub struct PartialUnstake{
+pub struct PartialUnstake {
     pub stake_index: u32,
     pub validator_index: u32,
     pub desired_unstake_amount: u64,
@@ -31,7 +30,9 @@ pub struct PartialUnstakeInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for PartialUnstake {
     type ArrangedAccounts = PartialUnstakeInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let state = accounts.get(0)?;
         let validator_manager_authority = accounts.get(1)?;
         let validator_list = accounts.get(2)?;

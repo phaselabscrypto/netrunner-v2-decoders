@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x4d55b29d3230d47e")]
-pub struct InitializePermissionedPool{
+pub struct InitializePermissionedPool {
     pub curve_type: CurveType,
 }
 
@@ -40,7 +40,9 @@ pub struct InitializePermissionedPoolInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for InitializePermissionedPool {
     type ArrangedAccounts = InitializePermissionedPoolInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let pool = accounts.get(0)?;
         let lp_mint = accounts.get(1)?;
         let token_a_mint = accounts.get(2)?;

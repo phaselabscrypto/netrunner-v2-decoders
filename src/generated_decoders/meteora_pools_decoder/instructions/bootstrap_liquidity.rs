@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x04e4d747e1fd77ce")]
-pub struct BootstrapLiquidity{
+pub struct BootstrapLiquidity {
     pub token_a_amount: u64,
     pub token_b_amount: u64,
 }
@@ -32,7 +31,9 @@ pub struct BootstrapLiquidityInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for BootstrapLiquidity {
     type ArrangedAccounts = BootstrapLiquidityInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let pool = accounts.get(0)?;
         let lp_mint = accounts.get(1)?;
         let user_pool_lp = accounts.get(2)?;

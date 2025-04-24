@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xb817ee6167c5d33d")]
-pub struct BuyV2{
+pub struct BuyV2 {
     pub buyer_price: u64,
     pub token_size: u64,
     pub buyer_state_expiry: i64,
@@ -30,7 +29,9 @@ pub struct BuyV2InstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for BuyV2 {
     type ArrangedAccounts = BuyV2InstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let wallet = accounts.get(0)?;
         let notary = accounts.get(1)?;
         let token_mint = accounts.get(2)?;

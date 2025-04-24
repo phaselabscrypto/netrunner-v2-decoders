@@ -1,12 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x38f7aaf659dd86c8")]
-pub struct CloseStrategy{
-}
+pub struct CloseStrategy {}
 
 pub struct CloseStrategyInstructionAccounts {
     pub admin_authority: solana_sdk::pubkey::Pubkey,
@@ -47,7 +45,9 @@ pub struct CloseStrategyInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for CloseStrategy {
     type ArrangedAccounts = CloseStrategyInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let admin_authority = accounts.get(0)?;
         let strategy = accounts.get(1)?;
         let old_position_or_base_vault_authority = accounts.get(2)?;
@@ -86,10 +86,14 @@ impl carbon_core::deserialize::ArrangeAccounts for CloseStrategy {
             admin_authority: admin_authority.pubkey,
             strategy: strategy.pubkey,
             old_position_or_base_vault_authority: old_position_or_base_vault_authority.pubkey,
-            old_position_mint_or_base_vault_authority: old_position_mint_or_base_vault_authority.pubkey,
-            old_position_token_account_or_base_vault_authority: old_position_token_account_or_base_vault_authority.pubkey,
-            old_tick_array_lower_or_base_vault_authority: old_tick_array_lower_or_base_vault_authority.pubkey,
-            old_tick_array_upper_or_base_vault_authority: old_tick_array_upper_or_base_vault_authority.pubkey,
+            old_position_mint_or_base_vault_authority: old_position_mint_or_base_vault_authority
+                .pubkey,
+            old_position_token_account_or_base_vault_authority:
+                old_position_token_account_or_base_vault_authority.pubkey,
+            old_tick_array_lower_or_base_vault_authority:
+                old_tick_array_lower_or_base_vault_authority.pubkey,
+            old_tick_array_upper_or_base_vault_authority:
+                old_tick_array_upper_or_base_vault_authority.pubkey,
             pool: pool.pubkey,
             token_a_vault: token_a_vault.pubkey,
             token_b_vault: token_b_vault.pubkey,

@@ -1,25 +1,30 @@
-
-
-
-
 use super::UnstakeDecoder;
-pub mod init_protocol_fee;
-pub mod set_protocol_fee;
-pub mod create_pool;
 pub mod add_liquidity;
+pub mod create_pool;
+pub mod deactivate_stake_account;
+pub mod init_protocol_fee;
+pub mod reclaim_stake_account;
 pub mod remove_liquidity;
+pub mod repay_flash_loan;
 pub mod set_fee;
 pub mod set_fee_authority;
+pub mod set_flash_loan_fee;
 pub mod set_lp_token_metadata;
-pub mod deactivate_stake_account;
-pub mod reclaim_stake_account;
+pub mod set_protocol_fee;
+pub mod take_flash_loan;
 pub mod unstake;
 pub mod unstake_wsol;
-pub mod set_flash_loan_fee;
-pub mod take_flash_loan;
-pub mod repay_flash_loan;
 
-#[derive(carbon_core::InstructionType, serde::Serialize, serde::Deserialize, PartialEq, Eq, Debug, Clone, Hash)]
+#[derive(
+    carbon_core::InstructionType,
+    serde::Serialize,
+    serde::Deserialize,
+    PartialEq,
+    Eq,
+    Debug,
+    Clone,
+    Hash,
+)]
 pub enum UnstakeInstruction {
     InitProtocolFee(init_protocol_fee::InitProtocolFee),
     SetProtocolFee(set_protocol_fee::SetProtocolFee),

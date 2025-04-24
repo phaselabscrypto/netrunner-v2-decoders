@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x1513d02bed3eff57")]
-pub struct Lock{
+pub struct Lock {
     pub max_amount: u64,
 }
 
@@ -28,7 +27,9 @@ pub struct LockInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for Lock {
     type ArrangedAccounts = LockInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let pool = accounts.get(0)?;
         let lp_mint = accounts.get(1)?;
         let lock_escrow = accounts.get(2)?;

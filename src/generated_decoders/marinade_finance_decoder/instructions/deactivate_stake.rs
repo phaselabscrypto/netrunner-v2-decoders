@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xa59ee561a8dcbbe1")]
-pub struct DeactivateStake{
+pub struct DeactivateStake {
     pub stake_index: u32,
     pub validator_index: u32,
 }
@@ -30,7 +29,9 @@ pub struct DeactivateStakeInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for DeactivateStake {
     type ArrangedAccounts = DeactivateStakeInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let state = accounts.get(0)?;
         let reserve_pda = accounts.get(1)?;
         let validator_list = accounts.get(2)?;

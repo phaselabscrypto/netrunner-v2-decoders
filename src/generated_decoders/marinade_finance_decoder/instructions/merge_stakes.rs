@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xd8248de1f34e7ded")]
-pub struct MergeStakes{
+pub struct MergeStakes {
     pub destination_stake_index: u32,
     pub source_stake_index: u32,
     pub validator_index: u32,
@@ -28,7 +27,9 @@ pub struct MergeStakesInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for MergeStakes {
     type ArrangedAccounts = MergeStakesInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let state = accounts.get(0)?;
         let stake_list = accounts.get(1)?;
         let validator_list = accounts.get(2)?;

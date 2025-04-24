@@ -1,12 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x0de3a4ec202706ff")]
-pub struct UpdateStrategyAdmin{
-}
+pub struct UpdateStrategyAdmin {}
 
 pub struct UpdateStrategyAdminInstructionAccounts {
     pub pending_admin: solana_sdk::pubkey::Pubkey,
@@ -16,7 +14,9 @@ pub struct UpdateStrategyAdminInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for UpdateStrategyAdmin {
     type ArrangedAccounts = UpdateStrategyAdminInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let pending_admin = accounts.get(0)?;
         let strategy = accounts.get(1)?;
 

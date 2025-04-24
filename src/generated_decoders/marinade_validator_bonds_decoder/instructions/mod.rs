@@ -1,52 +1,57 @@
-
-
-
-
 use super::ValidatorBondsDecoder;
-pub mod init_config;
-pub mod configure_config;
-pub mod init_bond;
-pub mod configure_bond;
-pub mod configure_bond_with_mint;
-pub mod mint_bond;
-pub mod fund_bond;
-pub mod init_withdraw_request;
-pub mod cancel_withdraw_request;
-pub mod claim_withdraw_request;
-pub mod init_settlement;
-pub mod upsize_settlement_claims;
 pub mod cancel_settlement;
-pub mod fund_settlement;
-pub mod merge_stake;
-pub mod reset_stake;
-pub mod withdraw_stake;
-pub mod emergency_pause;
-pub mod emergency_resume;
-pub mod close_settlement_v2;
-pub mod claim_settlement_v2;
-pub mod init_bond_event;
-pub mod configure_bond_event;
-pub mod configure_bond_with_mint_event;
-pub mod fund_bond_event;
-pub mod mint_bond_event;
-pub mod init_config_event;
-pub mod configure_config_event;
-pub mod emergency_pause_event;
-pub mod emergency_resume_event;
-pub mod claim_settlement_v2_event;
-pub mod init_settlement_event;
-pub mod close_settlement_event;
 pub mod cancel_settlement_event;
-pub mod fund_settlement_event;
-pub mod merge_stake_event;
-pub mod reset_stake_event;
-pub mod withdraw_stake_event;
-pub mod init_withdraw_request_event;
+pub mod cancel_withdraw_request;
 pub mod cancel_withdraw_request_event;
-pub mod claim_withdraw_request_event;
 pub mod claim_settlement_event;
+pub mod claim_settlement_v2;
+pub mod claim_settlement_v2_event;
+pub mod claim_withdraw_request;
+pub mod claim_withdraw_request_event;
+pub mod close_settlement_event;
+pub mod close_settlement_v2;
+pub mod configure_bond;
+pub mod configure_bond_event;
+pub mod configure_bond_with_mint;
+pub mod configure_bond_with_mint_event;
+pub mod configure_config;
+pub mod configure_config_event;
+pub mod emergency_pause;
+pub mod emergency_pause_event;
+pub mod emergency_resume;
+pub mod emergency_resume_event;
+pub mod fund_bond;
+pub mod fund_bond_event;
+pub mod fund_settlement;
+pub mod fund_settlement_event;
+pub mod init_bond;
+pub mod init_bond_event;
+pub mod init_config;
+pub mod init_config_event;
+pub mod init_settlement;
+pub mod init_settlement_event;
+pub mod init_withdraw_request;
+pub mod init_withdraw_request_event;
+pub mod merge_stake;
+pub mod merge_stake_event;
+pub mod mint_bond;
+pub mod mint_bond_event;
+pub mod reset_stake;
+pub mod reset_stake_event;
+pub mod upsize_settlement_claims;
+pub mod withdraw_stake;
+pub mod withdraw_stake_event;
 
-#[derive(carbon_core::InstructionType, serde::Serialize, serde::Deserialize, PartialEq, Eq, Debug, Clone, Hash)]
+#[derive(
+    carbon_core::InstructionType,
+    serde::Serialize,
+    serde::Deserialize,
+    PartialEq,
+    Eq,
+    Debug,
+    Clone,
+    Hash,
+)]
 pub enum ValidatorBondsInstruction {
     InitConfig(init_config::InitConfig),
     ConfigureConfig(configure_config::ConfigureConfig),

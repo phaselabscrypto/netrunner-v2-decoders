@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x2f2a9ce4f9a3feb9")]
-pub struct WithdrawSell{
+pub struct WithdrawSell {
     pub args: WithdrawSellArgs,
 }
 
@@ -29,7 +29,9 @@ pub struct WithdrawSellInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for WithdrawSell {
     type ArrangedAccounts = WithdrawSellInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let owner = accounts.get(0)?;
         let cosigner = accounts.get(1)?;
         let pool = accounts.get(2)?;

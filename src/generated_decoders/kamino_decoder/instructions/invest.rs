@@ -1,12 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x0df5b467feb67904")]
-pub struct Invest{
-}
+pub struct Invest {}
 
 pub struct InvestInstructionAccounts {
     pub payer: solana_sdk::pubkey::Pubkey,
@@ -40,7 +38,9 @@ pub struct InvestInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for Invest {
     type ArrangedAccounts = InvestInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let payer = accounts.get(0)?;
         let strategy = accounts.get(1)?;
         let global_config = accounts.get(2)?;
@@ -84,7 +84,8 @@ impl carbon_core::deserialize::ArrangeAccounts for Invest {
             token_program: token_program.pubkey,
             token_program2022: token_program2022.pubkey,
             position: position.pubkey,
-            raydium_protocol_position_or_base_vault_authority: raydium_protocol_position_or_base_vault_authority.pubkey,
+            raydium_protocol_position_or_base_vault_authority:
+                raydium_protocol_position_or_base_vault_authority.pubkey,
             position_token_account: position_token_account.pubkey,
             pool_token_vault_a: pool_token_vault_a.pubkey,
             pool_token_vault_b: pool_token_vault_b.pubkey,

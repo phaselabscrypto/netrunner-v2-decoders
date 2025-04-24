@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x016c8d0b047efbde")]
-pub struct FillDlmm{
+pub struct FillDlmm {
     pub max_amount: u64,
 }
 
@@ -31,7 +30,9 @@ pub struct FillDlmmInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for FillDlmm {
     type ArrangedAccounts = FillDlmmInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let vault = accounts.get(0)?;
         let token_vault = accounts.get(1)?;
         let token_out_vault = accounts.get(2)?;

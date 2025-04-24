@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x76b809468676729f")]
-pub struct ExtExecuteSaleV2{
+pub struct ExtExecuteSaleV2 {
     pub args: ExtExecuteSaleV2Args,
 }
 
@@ -39,7 +39,9 @@ pub struct ExtExecuteSaleV2InstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for ExtExecuteSaleV2 {
     type ArrangedAccounts = ExtExecuteSaleV2InstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let payer = accounts.get(0)?;
         let buyer = accounts.get(1)?;
         let seller = accounts.get(2)?;

@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xa9af7d5801108207")]
-pub struct WnsSellNftTradePool{
+pub struct WnsSellNftTradePool {
     pub config: PoolConfig,
     pub min_price: u64,
 }
@@ -30,7 +30,9 @@ pub struct WnsSellNftTradePoolInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for WnsSellNftTradePool {
     type ArrangedAccounts = WnsSellNftTradePoolInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let shared = accounts.get(0)?;
         let nft_escrow = accounts.get(1)?;
         let nft_receipt = accounts.get(2)?;

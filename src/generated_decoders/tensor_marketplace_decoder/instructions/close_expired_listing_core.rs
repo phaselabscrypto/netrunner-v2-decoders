@@ -1,12 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x59ab4e504abc3f3a")]
-pub struct CloseExpiredListingCore{
-}
+pub struct CloseExpiredListingCore {}
 
 pub struct CloseExpiredListingCoreInstructionAccounts {
     pub list_state: solana_sdk::pubkey::Pubkey,
@@ -22,7 +20,9 @@ pub struct CloseExpiredListingCoreInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for CloseExpiredListingCore {
     type ArrangedAccounts = CloseExpiredListingCoreInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let list_state = accounts.get(0)?;
         let asset = accounts.get(1)?;
         let collection = accounts.get(2)?;

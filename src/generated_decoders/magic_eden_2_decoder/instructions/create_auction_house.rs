@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xdd42f29ff9ce86f1")]
-pub struct CreateAuctionHouse{
+pub struct CreateAuctionHouse {
     pub bump: u8,
     pub treasury_bump: u8,
     pub seller_fee_basis_points: u16,
@@ -28,7 +27,9 @@ pub struct CreateAuctionHouseInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for CreateAuctionHouse {
     type ArrangedAccounts = CreateAuctionHouseInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let payer = accounts.get(0)?;
         let notary = accounts.get(1)?;
         let authority = accounts.get(2)?;

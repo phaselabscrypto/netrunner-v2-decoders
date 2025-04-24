@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x7f467728bce33d07")]
-pub struct UpdateOperationAccount{
+pub struct UpdateOperationAccount {
     pub param: u8,
     pub keys: Vec<solana_sdk::pubkey::Pubkey>,
 }
@@ -19,7 +18,9 @@ pub struct UpdateOperationAccountInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for UpdateOperationAccount {
     type ArrangedAccounts = UpdateOperationAccountInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let owner = accounts.get(0)?;
         let operation_state = accounts.get(1)?;
         let system_program = accounts.get(2)?;

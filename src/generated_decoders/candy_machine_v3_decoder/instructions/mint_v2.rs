@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x78791792ad6ec7cd")]
-pub struct MintV2{
+pub struct MintV2 {
     pub mint_args: Vec<u8>,
     pub label: Option<String>,
 }
@@ -41,7 +40,9 @@ pub struct MintV2InstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for MintV2 {
     type ArrangedAccounts = MintV2InstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let candy_guard = accounts.get(0)?;
         let candy_machine_program = accounts.get(1)?;
         let candy_machine = accounts.get(2)?;

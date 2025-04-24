@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xd02206935fda31a0")]
-pub struct DepositNftT22{
+pub struct DepositNftT22 {
     pub config: PoolConfig,
 }
 
@@ -27,7 +27,9 @@ pub struct DepositNftT22InstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for DepositNftT22 {
     type ArrangedAccounts = DepositNftT22InstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let tswap = accounts.get(0)?;
         let pool = accounts.get(1)?;
         let whitelist = accounts.get(2)?;

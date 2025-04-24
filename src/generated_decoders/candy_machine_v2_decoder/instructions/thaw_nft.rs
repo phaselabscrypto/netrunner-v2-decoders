@@ -1,12 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x5c2cd2bbac0640b7")]
-pub struct ThawNft{
-}
+pub struct ThawNft {}
 
 pub struct ThawNftInstructionAccounts {
     pub freeze_pda: solana_sdk::pubkey::Pubkey,
@@ -24,7 +22,9 @@ pub struct ThawNftInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for ThawNft {
     type ArrangedAccounts = ThawNftInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let freeze_pda = accounts.get(0)?;
         let candy_machine = accounts.get(1)?;
         let token_account = accounts.get(2)?;

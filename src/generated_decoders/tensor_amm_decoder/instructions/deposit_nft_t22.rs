@@ -1,12 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xd02206935fda31a0")]
-pub struct DepositNftT22{
-}
+pub struct DepositNftT22 {}
 
 pub struct DepositNftT22InstructionAccounts {
     pub transfer: solana_sdk::pubkey::Pubkey,
@@ -22,7 +20,9 @@ pub struct DepositNftT22InstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for DepositNftT22 {
     type ArrangedAccounts = DepositNftT22InstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let transfer = accounts.get(0)?;
         let t22 = accounts.get(1)?;
         let nft_receipt = accounts.get(2)?;

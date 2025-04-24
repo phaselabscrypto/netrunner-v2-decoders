@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xe202be65ca849c14")]
-pub struct FlashSwapUnevenVaultsEnd{
+pub struct FlashSwapUnevenVaultsEnd {
     pub min_repay_amount: u64,
     pub amount_to_leave_to_user: u64,
     pub a_to_b: bool,
@@ -37,7 +36,9 @@ pub struct FlashSwapUnevenVaultsEndInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for FlashSwapUnevenVaultsEnd {
     type ArrangedAccounts = FlashSwapUnevenVaultsEndInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let swapper = accounts.get(0)?;
         let strategy = accounts.get(1)?;
         let global_config = accounts.get(2)?;

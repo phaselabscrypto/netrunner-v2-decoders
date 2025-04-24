@@ -1,34 +1,39 @@
-
-
-
-
 use super::M2Decoder;
-pub mod withdraw_from_treasury;
-pub mod update_auction_house;
-pub mod create_auction_house;
-pub mod withdraw;
-pub mod deposit;
-pub mod sell;
-pub mod cancel_sell;
 pub mod buy;
 pub mod buy_v2;
 pub mod cancel_buy;
-pub mod ocp_sell;
-pub mod ocp_cancel_sell;
-pub mod ocp_execute_sale_v2;
-pub mod execute_sale_v2;
-pub mod mip1_sell;
-pub mod mip1_execute_sale_v2;
-pub mod mip1_cancel_sell;
-pub mod withdraw_by_mmm;
-pub mod ext_sell;
-pub mod ext_execute_sale_v2;
-pub mod ext_cancel_sell;
-pub mod core_sell;
+pub mod cancel_sell;
 pub mod core_cancel_sell;
 pub mod core_execute_sale_v2;
+pub mod core_sell;
+pub mod create_auction_house;
+pub mod deposit;
+pub mod execute_sale_v2;
+pub mod ext_cancel_sell;
+pub mod ext_execute_sale_v2;
+pub mod ext_sell;
+pub mod mip1_cancel_sell;
+pub mod mip1_execute_sale_v2;
+pub mod mip1_sell;
+pub mod ocp_cancel_sell;
+pub mod ocp_execute_sale_v2;
+pub mod ocp_sell;
+pub mod sell;
+pub mod update_auction_house;
+pub mod withdraw;
+pub mod withdraw_by_mmm;
+pub mod withdraw_from_treasury;
 
-#[derive(carbon_core::InstructionType, serde::Serialize, serde::Deserialize, PartialEq, Eq, Debug, Clone, Hash)]
+#[derive(
+    carbon_core::InstructionType,
+    serde::Serialize,
+    serde::Deserialize,
+    PartialEq,
+    Eq,
+    Debug,
+    Clone,
+    Hash,
+)]
 pub enum M2Instruction {
     WithdrawFromTreasury(withdraw_from_treasury::WithdrawFromTreasury),
     UpdateAuctionHouse(update_auction_house::UpdateAuctionHouse),

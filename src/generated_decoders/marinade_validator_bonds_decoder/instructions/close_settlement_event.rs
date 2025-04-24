@@ -1,11 +1,10 @@
-
-
 use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xe445a52e51cb9a1de2ad6f6f69da7667")]
-pub struct CloseSettlementEvent{
+pub struct CloseSettlementEvent {
     pub bond: solana_sdk::pubkey::Pubkey,
     pub settlement: solana_sdk::pubkey::Pubkey,
     pub merkle_root: [u8; 32],

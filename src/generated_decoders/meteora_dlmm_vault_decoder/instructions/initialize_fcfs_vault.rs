@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xa3cd4591eb472f15")]
-pub struct InitializeFcfsVault{
+pub struct InitializeFcfsVault {
     pub params: InitializeFcfsVaultParams,
 }
 
@@ -23,7 +23,9 @@ pub struct InitializeFcfsVaultInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for InitializeFcfsVault {
     type ArrangedAccounts = InitializeFcfsVaultInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let vault = accounts.get(0)?;
         let pool = accounts.get(1)?;
         let funder = accounts.get(2)?;

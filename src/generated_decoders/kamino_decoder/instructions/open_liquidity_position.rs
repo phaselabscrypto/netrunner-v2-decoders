@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xcceaccdb065b60f1")]
-pub struct OpenLiquidityPosition{
+pub struct OpenLiquidityPosition {
     pub tick_lower_index: i64,
     pub tick_upper_index: i64,
     pub bump: u8,
@@ -52,7 +51,9 @@ pub struct OpenLiquidityPositionInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for OpenLiquidityPosition {
     type ArrangedAccounts = OpenLiquidityPositionInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let admin_authority = accounts.get(0)?;
         let strategy = accounts.get(1)?;
         let global_config = accounts.get(2)?;
@@ -110,11 +111,15 @@ impl carbon_core::deserialize::ArrangeAccounts for OpenLiquidityPosition {
             memo_program: memo_program.pubkey,
             associated_token_program: associated_token_program.pubkey,
             pool_program: pool_program.pubkey,
-            old_tick_array_lower_or_base_vault_authority: old_tick_array_lower_or_base_vault_authority.pubkey,
-            old_tick_array_upper_or_base_vault_authority: old_tick_array_upper_or_base_vault_authority.pubkey,
+            old_tick_array_lower_or_base_vault_authority:
+                old_tick_array_lower_or_base_vault_authority.pubkey,
+            old_tick_array_upper_or_base_vault_authority:
+                old_tick_array_upper_or_base_vault_authority.pubkey,
             old_position_or_base_vault_authority: old_position_or_base_vault_authority.pubkey,
-            old_position_mint_or_base_vault_authority: old_position_mint_or_base_vault_authority.pubkey,
-            old_position_token_account_or_base_vault_authority: old_position_token_account_or_base_vault_authority.pubkey,
+            old_position_mint_or_base_vault_authority: old_position_mint_or_base_vault_authority
+                .pubkey,
+            old_position_token_account_or_base_vault_authority:
+                old_position_token_account_or_base_vault_authority.pubkey,
             token_a_vault: token_a_vault.pubkey,
             token_b_vault: token_b_vault.pubkey,
             token_a_mint: token_a_mint.pubkey,

@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x7034a74b20c9d389")]
-pub struct SetRewardParams{
+pub struct SetRewardParams {
     pub reward_index: u8,
     pub emissions_per_second_x64: u128,
     pub open_time: u64,
@@ -24,7 +23,9 @@ pub struct SetRewardParamsInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for SetRewardParams {
     type ArrangedAccounts = SetRewardParamsInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let authority = accounts.get(0)?;
         let amm_config = accounts.get(1)?;
         let pool_state = accounts.get(2)?;

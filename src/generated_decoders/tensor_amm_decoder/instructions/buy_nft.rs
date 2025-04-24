@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x60001cbe316b53de")]
-pub struct BuyNft{
+pub struct BuyNft {
     pub max_amount: u64,
     pub authorization_data: Option<AuthorizationDataLocal>,
     pub optional_royalty_pct: Option<u16>,
@@ -26,7 +26,9 @@ pub struct BuyNftInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for BuyNft {
     type ArrangedAccounts = BuyNftInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let trade = accounts.get(0)?;
         let mplx = accounts.get(1)?;
         let nft_receipt = accounts.get(2)?;

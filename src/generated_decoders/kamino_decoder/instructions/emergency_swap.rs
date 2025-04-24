@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x49e2f8d705c5d3e5")]
-pub struct EmergencySwap{
+pub struct EmergencySwap {
     pub a_to_b: bool,
     pub target_limit_bps: u64,
 }
@@ -38,7 +37,9 @@ pub struct EmergencySwapInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for EmergencySwap {
     type ArrangedAccounts = EmergencySwapInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let admin_authority = accounts.get(0)?;
         let strategy = accounts.get(1)?;
         let global_config = accounts.get(2)?;

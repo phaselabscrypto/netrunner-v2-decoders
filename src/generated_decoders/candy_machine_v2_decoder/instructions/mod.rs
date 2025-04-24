@@ -1,23 +1,28 @@
-
-
-
-
 use super::CandyMachineDecoder;
-pub mod initialize_candy_machine;
-pub mod update_candy_machine;
-pub mod update_authority;
 pub mod add_config_lines;
-pub mod set_collection;
-pub mod remove_collection;
+pub mod initialize_candy_machine;
 pub mod mint_nft;
-pub mod set_collection_during_mint;
-pub mod withdraw_funds;
-pub mod set_freeze;
+pub mod remove_collection;
 pub mod remove_freeze;
+pub mod set_collection;
+pub mod set_collection_during_mint;
+pub mod set_freeze;
 pub mod thaw_nft;
 pub mod unlock_funds;
+pub mod update_authority;
+pub mod update_candy_machine;
+pub mod withdraw_funds;
 
-#[derive(carbon_core::InstructionType, serde::Serialize, serde::Deserialize, PartialEq, Eq, Debug, Clone, Hash)]
+#[derive(
+    carbon_core::InstructionType,
+    serde::Serialize,
+    serde::Deserialize,
+    PartialEq,
+    Eq,
+    Debug,
+    Clone,
+    Hash,
+)]
 pub enum CandyMachineInstruction {
     InitializeCandyMachine(initialize_candy_machine::InitializeCandyMachine),
     UpdateCandyMachine(update_candy_machine::UpdateCandyMachine),

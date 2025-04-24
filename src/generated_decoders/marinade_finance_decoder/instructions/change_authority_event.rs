@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
 use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xe445a52e51cb9a1de46f2318bb4ee08a")]
-pub struct ChangeAuthorityEvent{
+pub struct ChangeAuthorityEvent {
     pub state: solana_sdk::pubkey::Pubkey,
     pub admin_change: Option<PubkeyValueChange>,
     pub validator_manager_change: Option<PubkeyValueChange>,

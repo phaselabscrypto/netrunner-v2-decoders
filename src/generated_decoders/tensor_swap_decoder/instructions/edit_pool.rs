@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x32ae222403a61dcc")]
-pub struct EditPool{
+pub struct EditPool {
     pub old_config: PoolConfig,
     pub new_config: PoolConfig,
     pub is_cosigned: Option<bool>,
@@ -28,7 +28,9 @@ pub struct EditPoolInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for EditPool {
     type ArrangedAccounts = EditPoolInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let tswap = accounts.get(0)?;
         let old_pool = accounts.get(1)?;
         let new_pool = accounts.get(2)?;

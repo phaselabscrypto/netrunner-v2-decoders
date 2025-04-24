@@ -1,12 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x2f7f5add0aa0b775")]
-pub struct ReclaimStakeAccount{
-}
+pub struct ReclaimStakeAccount {}
 
 pub struct ReclaimStakeAccountInstructionAccounts {
     pub stake_account: solana_sdk::pubkey::Pubkey,
@@ -21,7 +19,9 @@ pub struct ReclaimStakeAccountInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for ReclaimStakeAccount {
     type ArrangedAccounts = ReclaimStakeAccountInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let stake_account = accounts.get(0)?;
         let pool_account = accounts.get(1)?;
         let pool_sol_reserves = accounts.get(2)?;

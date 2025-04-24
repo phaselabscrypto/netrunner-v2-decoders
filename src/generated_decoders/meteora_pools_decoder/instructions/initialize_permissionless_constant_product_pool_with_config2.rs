@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x3095dc823d0b09b2")]
-pub struct InitializePermissionlessConstantProductPoolWithConfig2{
+pub struct InitializePermissionlessConstantProductPoolWithConfig2 {
     pub token_a_amount: u64,
     pub token_b_amount: u64,
     pub activation_point: Option<u64>,
@@ -40,10 +39,15 @@ pub struct InitializePermissionlessConstantProductPoolWithConfig2InstructionAcco
     pub system_program: solana_sdk::pubkey::Pubkey,
 }
 
-impl carbon_core::deserialize::ArrangeAccounts for InitializePermissionlessConstantProductPoolWithConfig2 {
-    type ArrangedAccounts = InitializePermissionlessConstantProductPoolWithConfig2InstructionAccounts;
+impl carbon_core::deserialize::ArrangeAccounts
+    for InitializePermissionlessConstantProductPoolWithConfig2
+{
+    type ArrangedAccounts =
+        InitializePermissionlessConstantProductPoolWithConfig2InstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let pool = accounts.get(0)?;
         let config = accounts.get(1)?;
         let lp_mint = accounts.get(2)?;
@@ -71,33 +75,35 @@ impl carbon_core::deserialize::ArrangeAccounts for InitializePermissionlessConst
         let associated_token_program = accounts.get(24)?;
         let system_program = accounts.get(25)?;
 
-        Some(InitializePermissionlessConstantProductPoolWithConfig2InstructionAccounts {
-            pool: pool.pubkey,
-            config: config.pubkey,
-            lp_mint: lp_mint.pubkey,
-            token_a_mint: token_a_mint.pubkey,
-            token_b_mint: token_b_mint.pubkey,
-            a_vault: a_vault.pubkey,
-            b_vault: b_vault.pubkey,
-            a_token_vault: a_token_vault.pubkey,
-            b_token_vault: b_token_vault.pubkey,
-            a_vault_lp_mint: a_vault_lp_mint.pubkey,
-            b_vault_lp_mint: b_vault_lp_mint.pubkey,
-            a_vault_lp: a_vault_lp.pubkey,
-            b_vault_lp: b_vault_lp.pubkey,
-            payer_token_a: payer_token_a.pubkey,
-            payer_token_b: payer_token_b.pubkey,
-            payer_pool_lp: payer_pool_lp.pubkey,
-            protocol_token_a_fee: protocol_token_a_fee.pubkey,
-            protocol_token_b_fee: protocol_token_b_fee.pubkey,
-            payer: payer.pubkey,
-            rent: rent.pubkey,
-            mint_metadata: mint_metadata.pubkey,
-            metadata_program: metadata_program.pubkey,
-            vault_program: vault_program.pubkey,
-            token_program: token_program.pubkey,
-            associated_token_program: associated_token_program.pubkey,
-            system_program: system_program.pubkey,
-        })
+        Some(
+            InitializePermissionlessConstantProductPoolWithConfig2InstructionAccounts {
+                pool: pool.pubkey,
+                config: config.pubkey,
+                lp_mint: lp_mint.pubkey,
+                token_a_mint: token_a_mint.pubkey,
+                token_b_mint: token_b_mint.pubkey,
+                a_vault: a_vault.pubkey,
+                b_vault: b_vault.pubkey,
+                a_token_vault: a_token_vault.pubkey,
+                b_token_vault: b_token_vault.pubkey,
+                a_vault_lp_mint: a_vault_lp_mint.pubkey,
+                b_vault_lp_mint: b_vault_lp_mint.pubkey,
+                a_vault_lp: a_vault_lp.pubkey,
+                b_vault_lp: b_vault_lp.pubkey,
+                payer_token_a: payer_token_a.pubkey,
+                payer_token_b: payer_token_b.pubkey,
+                payer_pool_lp: payer_pool_lp.pubkey,
+                protocol_token_a_fee: protocol_token_a_fee.pubkey,
+                protocol_token_b_fee: protocol_token_b_fee.pubkey,
+                payer: payer.pubkey,
+                rent: rent.pubkey,
+                mint_metadata: mint_metadata.pubkey,
+                metadata_program: metadata_program.pubkey,
+                vault_program: vault_program.pubkey,
+                token_program: token_program.pubkey,
+                associated_token_program: associated_token_program.pubkey,
+                system_program: system_program.pubkey,
+            },
+        )
     }
 }

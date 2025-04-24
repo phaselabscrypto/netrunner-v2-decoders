@@ -1,7 +1,3 @@
-
-
-
-
 use super::BubblegumDecoder;
 pub mod burn;
 pub mod cancel_redeem;
@@ -17,11 +13,20 @@ pub mod set_tree_delegate;
 pub mod transfer;
 pub mod unverify_collection;
 pub mod unverify_creator;
+pub mod update_metadata;
 pub mod verify_collection;
 pub mod verify_creator;
-pub mod update_metadata;
 
-#[derive(carbon_core::InstructionType, serde::Serialize, serde::Deserialize, PartialEq, Eq, Debug, Clone, Hash)]
+#[derive(
+    carbon_core::InstructionType,
+    serde::Serialize,
+    serde::Deserialize,
+    PartialEq,
+    Eq,
+    Debug,
+    Clone,
+    Hash,
+)]
 pub enum BubblegumInstruction {
     Burn(burn::Burn),
     CancelRedeem(cancel_redeem::CancelRedeem),

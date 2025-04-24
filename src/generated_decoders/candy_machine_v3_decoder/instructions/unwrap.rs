@@ -1,12 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x7eafc60ed445322c")]
-pub struct Unwrap{
-}
+pub struct Unwrap {}
 
 pub struct UnwrapInstructionAccounts {
     pub candy_guard: solana_sdk::pubkey::Pubkey,
@@ -19,7 +17,9 @@ pub struct UnwrapInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for Unwrap {
     type ArrangedAccounts = UnwrapInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let candy_guard = accounts.get(0)?;
         let authority = accounts.get(1)?;
         let candy_machine = accounts.get(2)?;

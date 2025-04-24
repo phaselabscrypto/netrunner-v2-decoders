@@ -1,11 +1,10 @@
-
-
 use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xe445a52e51cb9a1d2f55efd6cf1d9758")]
-pub struct WithdrawStakeEvent{
+pub struct WithdrawStakeEvent {
     pub config: solana_sdk::pubkey::Pubkey,
     pub operator_authority: solana_sdk::pubkey::Pubkey,
     pub settlement: solana_sdk::pubkey::Pubkey,

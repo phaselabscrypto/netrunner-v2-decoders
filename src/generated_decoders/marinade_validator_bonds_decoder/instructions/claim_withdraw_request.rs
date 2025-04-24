@@ -1,12 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x30e8173414867a76")]
-pub struct ClaimWithdrawRequest{
-}
+pub struct ClaimWithdrawRequest {}
 
 pub struct ClaimWithdrawRequestInstructionAccounts {
     pub config: solana_sdk::pubkey::Pubkey,
@@ -30,7 +28,9 @@ pub struct ClaimWithdrawRequestInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for ClaimWithdrawRequest {
     type ArrangedAccounts = ClaimWithdrawRequestInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let config = accounts.get(0)?;
         let bond = accounts.get(1)?;
         let vote_account = accounts.get(2)?;

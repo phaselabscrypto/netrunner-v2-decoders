@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x5055d14818ceb16c")]
-pub struct RemoveLiquidity{
+pub struct RemoveLiquidity {
     pub amount_lp: u64,
 }
 
@@ -24,7 +23,9 @@ pub struct RemoveLiquidityInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for RemoveLiquidity {
     type ArrangedAccounts = RemoveLiquidityInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let burn_lp_tokens_from_authority = accounts.get(0)?;
         let to = accounts.get(1)?;
         let pool_account = accounts.get(2)?;

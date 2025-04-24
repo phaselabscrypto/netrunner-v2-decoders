@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x09755de6dd04c7d4")]
-pub struct ListT22{
+pub struct ListT22 {
     pub price: u64,
 }
 
@@ -24,7 +23,9 @@ pub struct ListT22InstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for ListT22 {
     type ArrangedAccounts = ListT22InstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let tswap = accounts.get(0)?;
         let nft_source = accounts.get(1)?;
         let nft_mint = accounts.get(2)?;

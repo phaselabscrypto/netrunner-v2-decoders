@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x284ef14eccee2e8f")]
-pub struct WnsSellNftTokenPool{
+pub struct WnsSellNftTokenPool {
     pub config: PoolConfig,
     pub min_price: u64,
 }
@@ -29,7 +29,9 @@ pub struct WnsSellNftTokenPoolInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for WnsSellNftTokenPool {
     type ArrangedAccounts = WnsSellNftTokenPoolInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let shared = accounts.get(0)?;
         let owner_ata_acc = accounts.get(1)?;
         let token_program = accounts.get(2)?;

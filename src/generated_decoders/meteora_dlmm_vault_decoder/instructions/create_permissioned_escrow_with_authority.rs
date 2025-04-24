@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xd3e7c245410b7b5d")]
-pub struct CreatePermissionedEscrowWithAuthority{
+pub struct CreatePermissionedEscrowWithAuthority {
     pub max_cap: u64,
 }
 
@@ -23,7 +22,9 @@ pub struct CreatePermissionedEscrowWithAuthorityInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for CreatePermissionedEscrowWithAuthority {
     type ArrangedAccounts = CreatePermissionedEscrowWithAuthorityInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let vault = accounts.get(0)?;
         let pool = accounts.get(1)?;
         let escrow = accounts.get(2)?;

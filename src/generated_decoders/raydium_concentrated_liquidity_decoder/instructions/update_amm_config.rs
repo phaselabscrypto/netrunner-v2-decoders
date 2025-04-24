@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x313cae889a1c74c8")]
-pub struct UpdateAmmConfig{
+pub struct UpdateAmmConfig {
     pub param: u8,
     pub value: u32,
 }
@@ -18,7 +17,9 @@ pub struct UpdateAmmConfigInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for UpdateAmmConfig {
     type ArrangedAccounts = UpdateAmmConfigInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let owner = accounts.get(0)?;
         let amm_config = accounts.get(1)?;
 

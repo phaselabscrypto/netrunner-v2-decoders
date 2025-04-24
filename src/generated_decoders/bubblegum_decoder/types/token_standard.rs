@@ -1,9 +1,9 @@
+use carbon_core::{borsh, CarbonDeserialize};
+use mpl_bubblegum::types::TokenStandard as BubblegumTokenStandard;
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 pub enum TokenStandard {
     NonFungible,
     FungibleAsset,
@@ -11,4 +11,13 @@ pub enum TokenStandard {
     NonFungibleEdition,
 }
 
-
+impl From<TokenStandard> for BubblegumTokenStandard {
+    fn from(value: TokenStandard) -> Self {
+        match value {
+            TokenStandard::NonFungible => BubblegumTokenStandard::NonFungible,
+            TokenStandard::FungibleAsset => BubblegumTokenStandard::FungibleAsset,
+            TokenStandard::Fungible => BubblegumTokenStandard::Fungible,
+            TokenStandard::NonFungibleEdition => BubblegumTokenStandard::NonFungibleEdition,
+        }
+    }
+}

@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xd0779091b23969fc")]
-pub struct InitializeStrategy{
+pub struct InitializeStrategy {
     pub strategy_type: u64,
     pub token_a_collateral_id: u64,
     pub token_b_collateral_id: u64,
@@ -34,7 +33,9 @@ pub struct InitializeStrategyInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for InitializeStrategy {
     type ArrangedAccounts = InitializeStrategyInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let admin_authority = accounts.get(0)?;
         let global_config = accounts.get(1)?;
         let pool = accounts.get(2)?;

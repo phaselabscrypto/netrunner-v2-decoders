@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xbb69d389e03b1de3")]
-pub struct AttachPoolToMargin{
+pub struct AttachPoolToMargin {
     pub config: PoolConfig,
 }
 
@@ -23,7 +23,9 @@ pub struct AttachPoolToMarginInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for AttachPoolToMargin {
     type ArrangedAccounts = AttachPoolToMarginInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let tswap = accounts.get(0)?;
         let margin_account = accounts.get(1)?;
         let pool = accounts.get(2)?;

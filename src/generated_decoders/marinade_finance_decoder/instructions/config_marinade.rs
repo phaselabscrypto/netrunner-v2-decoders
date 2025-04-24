@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x43032272beb9113e")]
-pub struct ConfigMarinade{
+pub struct ConfigMarinade {
     pub params: ConfigMarinadeParams,
 }
 
@@ -18,7 +18,9 @@ pub struct ConfigMarinadeInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for ConfigMarinade {
     type ArrangedAccounts = ConfigMarinadeInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let state = accounts.get(0)?;
         let admin_authority = accounts.get(1)?;
 

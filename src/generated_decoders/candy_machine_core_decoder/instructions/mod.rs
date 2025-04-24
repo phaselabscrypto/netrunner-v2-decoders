@@ -1,7 +1,3 @@
-
-
-
-
 use super::CandyMachineCoreDecoder;
 pub mod add_config_lines;
 pub mod initialize;

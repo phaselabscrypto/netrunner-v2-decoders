@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x5a934bb255580489")]
-pub struct Delegate{
+pub struct Delegate {
     pub root: [u8; 32],
     pub data_hash: [u8; 32],
     pub creator_hash: [u8; 32],
@@ -27,7 +26,9 @@ pub struct DelegateInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for Delegate {
     type ArrangedAccounts = DelegateInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let tree_authority = accounts.get(0)?;
         let leaf_owner = accounts.get(1)?;
         let previous_leaf_delegate = accounts.get(2)?;

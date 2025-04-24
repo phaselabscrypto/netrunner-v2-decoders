@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x728025a747e328b2")]
-pub struct ReallocPool{
+pub struct ReallocPool {
     pub config: PoolConfig,
 }
 
@@ -22,7 +22,9 @@ pub struct ReallocPoolInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for ReallocPool {
     type ArrangedAccounts = ReallocPoolInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let tswap = accounts.get(0)?;
         let pool = accounts.get(1)?;
         let whitelist = accounts.get(2)?;

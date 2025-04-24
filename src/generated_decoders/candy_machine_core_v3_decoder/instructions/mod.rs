@@ -1,7 +1,3 @@
-
-
-
-
 use super::CandyMachineCoreDecoder;
 pub mod add_config_lines;
 pub mod initialize;
@@ -16,7 +12,16 @@ pub mod set_token_standard;
 pub mod update;
 pub mod withdraw;
 
-#[derive(carbon_core::InstructionType, serde::Serialize, serde::Deserialize, PartialEq, Eq, Debug, Clone, Hash)]
+#[derive(
+    carbon_core::InstructionType,
+    serde::Serialize,
+    serde::Deserialize,
+    PartialEq,
+    Eq,
+    Debug,
+    Clone,
+    Hash,
+)]
 pub enum CandyMachineCoreInstruction {
     AddConfigLines(add_config_lines::AddConfigLines),
     Initialize(initialize::Initialize),

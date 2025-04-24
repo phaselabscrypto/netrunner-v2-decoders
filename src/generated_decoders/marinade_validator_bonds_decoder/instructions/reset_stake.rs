@@ -1,12 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xb725459fa38bd4eb")]
-pub struct ResetStake{
-}
+pub struct ResetStake {}
 
 pub struct ResetStakeInstructionAccounts {
     pub config: solana_sdk::pubkey::Pubkey,
@@ -26,7 +24,9 @@ pub struct ResetStakeInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for ResetStake {
     type ArrangedAccounts = ResetStakeInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let config = accounts.get(0)?;
         let bond = accounts.get(1)?;
         let settlement = accounts.get(2)?;

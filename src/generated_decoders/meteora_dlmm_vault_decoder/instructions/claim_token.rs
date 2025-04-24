@@ -1,12 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x74ce1bbfa6130049")]
-pub struct ClaimToken{
-}
+pub struct ClaimToken {}
 
 pub struct ClaimTokenInstructionAccounts {
     pub vault: solana_sdk::pubkey::Pubkey,
@@ -23,7 +21,9 @@ pub struct ClaimTokenInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for ClaimToken {
     type ArrangedAccounts = ClaimTokenInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let vault = accounts.get(0)?;
         let escrow = accounts.get(1)?;
         let token_out_vault = accounts.get(2)?;

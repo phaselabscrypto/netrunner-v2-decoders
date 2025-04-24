@@ -1,12 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x3c9aaacafc6d53c7")]
-pub struct CreateNewEscrow{
-}
+pub struct CreateNewEscrow {}
 
 pub struct CreateNewEscrowInstructionAccounts {
     pub vault: solana_sdk::pubkey::Pubkey,
@@ -23,7 +21,9 @@ pub struct CreateNewEscrowInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for CreateNewEscrow {
     type ArrangedAccounts = CreateNewEscrowInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let vault = accounts.get(0)?;
         let pool = accounts.get(1)?;
         let escrow = accounts.get(2)?;

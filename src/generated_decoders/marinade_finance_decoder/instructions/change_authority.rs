@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x326a426863769158")]
-pub struct ChangeAuthority{
+pub struct ChangeAuthority {
     pub data: ChangeAuthorityData,
 }
 
@@ -18,7 +18,9 @@ pub struct ChangeAuthorityInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for ChangeAuthority {
     type ArrangedAccounts = ChangeAuthorityInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let state = accounts.get(0)?;
         let admin_authority = accounts.get(1)?;
 

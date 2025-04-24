@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x387165fd4f377aa9")]
-pub struct VerifyCollection{
+pub struct VerifyCollection {
     pub root: [u8; 32],
     pub data_hash: [u8; 32],
     pub creator_hash: [u8; 32],
@@ -37,7 +37,9 @@ pub struct VerifyCollectionInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for VerifyCollection {
     type ArrangedAccounts = VerifyCollectionInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let tree_authority = accounts.get(0)?;
         let leaf_owner = accounts.get(1)?;
         let leaf_delegate = accounts.get(2)?;

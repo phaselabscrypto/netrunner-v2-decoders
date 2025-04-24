@@ -1,12 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x7b86510031446262")]
-pub struct ClosePosition{
-}
+pub struct ClosePosition {}
 
 pub struct ClosePositionInstructionAccounts {
     pub nft_owner: solana_sdk::pubkey::Pubkey,
@@ -20,7 +18,9 @@ pub struct ClosePositionInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for ClosePosition {
     type ArrangedAccounts = ClosePositionInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let nft_owner = accounts.get(0)?;
         let position_nft_mint = accounts.get(1)?;
         let position_nft_account = accounts.get(2)?;

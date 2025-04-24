@@ -1,12 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xdf346ad93ddc24a0")]
-pub struct RemoveCollection{
-}
+pub struct RemoveCollection {}
 
 pub struct RemoveCollectionInstructionAccounts {
     pub candy_machine: solana_sdk::pubkey::Pubkey,
@@ -21,7 +19,9 @@ pub struct RemoveCollectionInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for RemoveCollection {
     type ArrangedAccounts = RemoveCollectionInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let candy_machine = accounts.get(0)?;
         let authority = accounts.get(1)?;
         let collection_pda = accounts.get(2)?;

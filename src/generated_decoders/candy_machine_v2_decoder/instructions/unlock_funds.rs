@@ -1,12 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xaf7710f58d37ff2b")]
-pub struct UnlockFunds{
-}
+pub struct UnlockFunds {}
 
 pub struct UnlockFundsInstructionAccounts {
     pub candy_machine: solana_sdk::pubkey::Pubkey,
@@ -19,7 +17,9 @@ pub struct UnlockFundsInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for UnlockFunds {
     type ArrangedAccounts = UnlockFundsInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let candy_machine = accounts.get(0)?;
         let wallet = accounts.get(1)?;
         let authority = accounts.get(2)?;

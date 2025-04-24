@@ -1,12 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xfd764225be319a66")]
-pub struct SetTreeDelegate{
-}
+pub struct SetTreeDelegate {}
 
 pub struct SetTreeDelegateInstructionAccounts {
     pub tree_authority: solana_sdk::pubkey::Pubkey,
@@ -19,7 +17,9 @@ pub struct SetTreeDelegateInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for SetTreeDelegate {
     type ArrangedAccounts = SetTreeDelegateInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let tree_authority = accounts.get(0)?;
         let tree_creator = accounts.get(1)?;
         let new_tree_delegate = accounts.get(2)?;

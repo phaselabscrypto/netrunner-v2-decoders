@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x8cbdd117ef3eef0b")]
-pub struct ClosePool{
+pub struct ClosePool {
     pub config: PoolConfig,
 }
 
@@ -23,7 +23,9 @@ pub struct ClosePoolInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for ClosePool {
     type ArrangedAccounts = ClosePoolInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let tswap = accounts.get(0)?;
         let pool = accounts.get(1)?;
         let sol_escrow = accounts.get(2)?;

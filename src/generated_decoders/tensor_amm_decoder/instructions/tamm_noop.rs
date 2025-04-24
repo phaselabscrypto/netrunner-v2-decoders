@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x1fa2e49e99a0c6b6")]
-pub struct TammNoop{
+pub struct TammNoop {
     pub event: TAmmEvent,
 }
 
@@ -17,11 +17,11 @@ pub struct TammNoopInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for TammNoop {
     type ArrangedAccounts = TammNoopInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let pool = accounts.get(0)?;
 
-        Some(TammNoopInstructionAccounts {
-            pool: pool.pubkey,
-        })
+        Some(TammNoopInstructionAccounts { pool: pool.pubkey })
     }
 }

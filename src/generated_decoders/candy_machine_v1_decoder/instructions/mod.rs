@@ -1,17 +1,22 @@
-
-
-
-
 use super::NftCandyMachineDecoder;
-pub mod mint_nft;
-pub mod update_candy_machine;
-pub mod initialize_config;
 pub mod add_config_lines;
 pub mod initialize_candy_machine;
+pub mod initialize_config;
+pub mod mint_nft;
 pub mod update_authority;
+pub mod update_candy_machine;
 pub mod withdraw_funds;
 
-#[derive(carbon_core::InstructionType, serde::Serialize, serde::Deserialize, PartialEq, Eq, Debug, Clone, Hash)]
+#[derive(
+    carbon_core::InstructionType,
+    serde::Serialize,
+    serde::Deserialize,
+    PartialEq,
+    Eq,
+    Debug,
+    Clone,
+    Hash,
+)]
 pub enum NftCandyMachineInstruction {
     MintNft(mint_nft::MintNft),
     UpdateCandyMachine(update_candy_machine::UpdateCandyMachine),

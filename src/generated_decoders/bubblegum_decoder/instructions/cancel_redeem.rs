@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x6f4ce83227af30f2")]
-pub struct CancelRedeem{
+pub struct CancelRedeem {
     pub root: [u8; 32],
 }
 
@@ -22,7 +21,9 @@ pub struct CancelRedeemInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for CancelRedeem {
     type ArrangedAccounts = CancelRedeemInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let tree_authority = accounts.get(0)?;
         let leaf_owner = accounts.get(1)?;
         let merkle_tree = accounts.get(2)?;

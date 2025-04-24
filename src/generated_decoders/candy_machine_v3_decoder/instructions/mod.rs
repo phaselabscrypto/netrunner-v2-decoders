@@ -1,7 +1,3 @@
-
-
-
-
 use super::CandyGuardDecoder;
 pub mod initialize;
 pub mod mint;
@@ -13,7 +9,16 @@ pub mod update;
 pub mod withdraw;
 pub mod wrap;
 
-#[derive(carbon_core::InstructionType, serde::Serialize, serde::Deserialize, PartialEq, Eq, Debug, Clone, Hash)]
+#[derive(
+    carbon_core::InstructionType,
+    serde::Serialize,
+    serde::Deserialize,
+    PartialEq,
+    Eq,
+    Debug,
+    Clone,
+    Hash,
+)]
 pub enum CandyGuardInstruction {
     Initialize(initialize::Initialize),
     Mint(mint::Mint),

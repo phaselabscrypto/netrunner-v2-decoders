@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
 use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xe445a52e51cb9a1d87fd91e9e31dbc8d")]
-pub struct ClaimSettlementEvent{
+pub struct ClaimSettlementEvent {
     pub settlement_claim: solana_sdk::pubkey::Pubkey,
     pub settlement: solana_sdk::pubkey::Pubkey,
     pub settlement_lamports_claimed: U64ValueChange,

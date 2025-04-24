@@ -1,12 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x452a6c605d6170c8")]
-pub struct CloseIfBalanceInvalid{
-}
+pub struct CloseIfBalanceInvalid {}
 
 pub struct CloseIfBalanceInvalidInstructionAccounts {
     pub authority: solana_sdk::pubkey::Pubkey,
@@ -19,7 +17,9 @@ pub struct CloseIfBalanceInvalidInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for CloseIfBalanceInvalid {
     type ArrangedAccounts = CloseIfBalanceInvalidInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let authority = accounts.get(0)?;
         let owner = accounts.get(1)?;
         let pool = accounts.get(2)?;

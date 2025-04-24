@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x2349858b2037d58c")]
-pub struct WithdrawByMmm{
+pub struct WithdrawByMmm {
     pub args: WithdrawByMMMArgs,
 }
 
@@ -20,7 +20,9 @@ pub struct WithdrawByMmmInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for WithdrawByMmm {
     type ArrangedAccounts = WithdrawByMmmInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let mmm_pool = accounts.get(0)?;
         let to = accounts.get(1)?;
         let escrow_payment_account = accounts.get(2)?;

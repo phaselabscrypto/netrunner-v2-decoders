@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x17eb73e8a86001e7")]
-pub struct InitConfig{
+pub struct InitConfig {
     pub init_config_args: InitConfigArgs,
 }
 
@@ -21,7 +21,9 @@ pub struct InitConfigInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for InitConfig {
     type ArrangedAccounts = InitConfigInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let config = accounts.get(0)?;
         let rent_payer = accounts.get(1)?;
         let system_program = accounts.get(2)?;

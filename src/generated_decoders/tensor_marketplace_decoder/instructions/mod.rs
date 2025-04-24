@@ -1,31 +1,36 @@
-
-
-
-
 use super::TcompDecoder;
-pub mod tcomp_noop;
-pub mod withdraw_fees;
-pub mod buy;
-pub mod buy_spl;
-pub mod buy_core;
-pub mod list;
-pub mod delist;
-pub mod edit;
-pub mod list_core;
-pub mod delist_core;
 pub mod bid;
+pub mod buy;
+pub mod buy_core;
+pub mod buy_spl;
 pub mod cancel_bid;
 pub mod close_expired_bid;
 pub mod close_expired_listing;
 pub mod close_expired_listing_core;
-pub mod take_bid_meta_hash;
+pub mod delist;
+pub mod delist_core;
+pub mod edit;
+pub mod list;
+pub mod list_core;
+pub mod take_bid_core;
 pub mod take_bid_full_meta;
 pub mod take_bid_legacy;
+pub mod take_bid_meta_hash;
 pub mod take_bid_t22;
 pub mod take_bid_wns;
-pub mod take_bid_core;
+pub mod tcomp_noop;
+pub mod withdraw_fees;
 
-#[derive(carbon_core::InstructionType, serde::Serialize, serde::Deserialize, PartialEq, Eq, Debug, Clone, Hash)]
+#[derive(
+    carbon_core::InstructionType,
+    serde::Serialize,
+    serde::Deserialize,
+    PartialEq,
+    Eq,
+    Debug,
+    Clone,
+    Hash,
+)]
 pub enum TcompInstruction {
     TcompNoop(tcomp_noop::TcompNoop),
     WithdrawFees(withdraw_fees::WithdrawFees),

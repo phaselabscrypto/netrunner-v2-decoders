@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x5fe38adcf05f9671")]
-pub struct WithdrawFromTopup{
+pub struct WithdrawFromTopup {
     pub amount: u64,
 }
 
@@ -18,7 +17,9 @@ pub struct WithdrawFromTopupInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for WithdrawFromTopup {
     type ArrangedAccounts = WithdrawFromTopupInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let admin_authority = accounts.get(0)?;
         let topup_vault = accounts.get(1)?;
         let system = accounts.get(2)?;

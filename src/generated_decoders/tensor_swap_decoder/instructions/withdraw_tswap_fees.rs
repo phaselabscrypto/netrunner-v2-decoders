@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x1be58069737db497")]
-pub struct WithdrawTswapFees{
+pub struct WithdrawTswapFees {
     pub amount: u64,
 }
 
@@ -20,7 +19,9 @@ pub struct WithdrawTswapFeesInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for WithdrawTswapFees {
     type ArrangedAccounts = WithdrawTswapFeesInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let tswap = accounts.get(0)?;
         let cosigner = accounts.get(1)?;
         let owner = accounts.get(2)?;

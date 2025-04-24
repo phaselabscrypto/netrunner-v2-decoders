@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x9b227aa5f589936b")]
-pub struct UpdateSharesMetadata{
+pub struct UpdateSharesMetadata {
     pub name: String,
     pub symbol: String,
     pub uri: String,
@@ -24,7 +23,9 @@ pub struct UpdateSharesMetadataInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for UpdateSharesMetadata {
     type ArrangedAccounts = UpdateSharesMetadataInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let admin_authority = accounts.get(0)?;
         let strategy = accounts.get(1)?;
         let global_config = accounts.get(2)?;

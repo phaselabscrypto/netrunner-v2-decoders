@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xcfeba6ffa3a2952c")]
-pub struct WithdrawMarginAccountCpiTlock{
+pub struct WithdrawMarginAccountCpiTlock {
     pub bump: u8,
     pub order_id: [u8; 32],
     pub lamports: u64,
@@ -22,7 +21,9 @@ pub struct WithdrawMarginAccountCpiTlockInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for WithdrawMarginAccountCpiTlock {
     type ArrangedAccounts = WithdrawMarginAccountCpiTlockInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let margin_account = accounts.get(0)?;
         let order_state = accounts.get(1)?;
         let owner = accounts.get(2)?;

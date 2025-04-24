@@ -1,39 +1,44 @@
-
-
-
-
 use super::MmmDecoder;
+pub mod close_if_balance_invalid;
+pub mod cnft_fulfill_buy;
 pub mod create_pool;
-pub mod update_pool;
-pub mod update_allowlists;
-pub mod sol_close_pool;
-pub mod sol_deposit_buy;
-pub mod sol_withdraw_buy;
-pub mod sol_fulfill_buy;
-pub mod sol_fulfill_sell;
-pub mod withdraw_sell;
 pub mod deposit_sell;
-pub mod ocp_deposit_sell;
-pub mod sol_ocp_fulfill_buy;
-pub mod sol_ocp_fulfill_sell;
-pub mod ocp_withdraw_sell;
+pub mod ext_deposit_sell;
+pub mod ext_withdraw_sell;
 pub mod mip1_deposit_sell;
 pub mod mip1_withdraw_sell;
-pub mod sol_mip1_fulfill_sell;
-pub mod sol_mip1_fulfill_buy;
-pub mod close_if_balance_invalid;
-pub mod set_shared_escrow;
-pub mod ext_deposit_sell;
-pub mod sol_ext_fulfill_sell;
-pub mod sol_ext_fulfill_buy;
-pub mod ext_withdraw_sell;
 pub mod mpl_core_deposit_sell;
 pub mod mpl_core_withdraw_sell;
-pub mod sol_mpl_core_fulfill_sell;
+pub mod ocp_deposit_sell;
+pub mod ocp_withdraw_sell;
+pub mod set_shared_escrow;
+pub mod sol_close_pool;
+pub mod sol_deposit_buy;
+pub mod sol_ext_fulfill_buy;
+pub mod sol_ext_fulfill_sell;
+pub mod sol_fulfill_buy;
+pub mod sol_fulfill_sell;
+pub mod sol_mip1_fulfill_buy;
+pub mod sol_mip1_fulfill_sell;
 pub mod sol_mpl_core_fulfill_buy;
-pub mod cnft_fulfill_buy;
+pub mod sol_mpl_core_fulfill_sell;
+pub mod sol_ocp_fulfill_buy;
+pub mod sol_ocp_fulfill_sell;
+pub mod sol_withdraw_buy;
+pub mod update_allowlists;
+pub mod update_pool;
+pub mod withdraw_sell;
 
-#[derive(carbon_core::InstructionType, serde::Serialize, serde::Deserialize, PartialEq, Eq, Debug, Clone, Hash)]
+#[derive(
+    carbon_core::InstructionType,
+    serde::Serialize,
+    serde::Deserialize,
+    PartialEq,
+    Eq,
+    Debug,
+    Clone,
+    Hash,
+)]
 pub enum MmmInstruction {
     CreatePool(create_pool::CreatePool),
     UpdatePool(update_pool::UpdatePool),

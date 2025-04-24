@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xd33906a70fdb23fb")]
-pub struct MintNft{
+pub struct MintNft {
     pub creator_bump: u8,
 }
 
@@ -31,7 +30,9 @@ pub struct MintNftInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for MintNft {
     type ArrangedAccounts = MintNftInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let candy_machine = accounts.get(0)?;
         let candy_machine_creator = accounts.get(1)?;
         let payer = accounts.get(2)?;

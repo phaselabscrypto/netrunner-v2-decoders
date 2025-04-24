@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x1629d9dc15683d63")]
-pub struct OcpSell{
+pub struct OcpSell {
     pub args: OCPSellArgs,
 }
 
@@ -34,7 +34,9 @@ pub struct OcpSellInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for OcpSell {
     type ArrangedAccounts = OcpSellInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let wallet = accounts.get(0)?;
         let notary = accounts.get(1)?;
         let program_as_signer = accounts.get(2)?;

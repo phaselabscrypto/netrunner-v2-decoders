@@ -1,10 +1,19 @@
+use carbon_core::{borsh, CarbonDeserialize};
+use mpl_bubblegum::types::Collection as BubblegumCollection;
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 pub struct Collection {
     pub verified: bool,
     pub key: solana_sdk::pubkey::Pubkey,
+}
+
+impl From<Collection> for BubblegumCollection {
+    fn from(value: Collection) -> Self {
+        Self {
+            verified: value.verified,
+            key: value.key,
+        }
+    }
 }

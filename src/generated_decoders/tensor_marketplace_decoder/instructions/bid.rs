@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xc738552692f3259e")]
-pub struct Bid{
+pub struct Bid {
     pub bid_id: solana_sdk::pubkey::Pubkey,
     pub target: Target,
     pub target_id: solana_sdk::pubkey::Pubkey,
@@ -33,7 +33,9 @@ pub struct BidInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for Bid {
     type ArrangedAccounts = BidInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let system_program = accounts.get(0)?;
         let tcomp_program = accounts.get(1)?;
         let bid_state = accounts.get(2)?;

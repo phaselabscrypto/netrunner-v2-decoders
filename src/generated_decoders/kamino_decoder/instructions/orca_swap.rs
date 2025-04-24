@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x215ef961fafec65d")]
-pub struct OrcaSwap{
+pub struct OrcaSwap {
     pub amount: u64,
     pub other_amount_threshold: u64,
     pub sqrt_price_limit: u128,
@@ -36,7 +35,9 @@ pub struct OrcaSwapInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for OrcaSwap {
     type ArrangedAccounts = OrcaSwapInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let funder = accounts.get(0)?;
         let token_a_token_program = accounts.get(1)?;
         let token_b_token_program = accounts.get(2)?;

@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x12fa71f21ff41396")]
-pub struct TakeBidT22{
+pub struct TakeBidT22 {
     pub min_amount: u64,
 }
 
@@ -34,7 +33,9 @@ pub struct TakeBidT22InstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for TakeBidT22 {
     type ArrangedAccounts = TakeBidT22InstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let tcomp = accounts.get(0)?;
         let seller = accounts.get(1)?;
         let bid_state = accounts.get(2)?;

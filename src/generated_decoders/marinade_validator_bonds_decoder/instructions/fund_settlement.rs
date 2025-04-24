@@ -1,12 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xb39271221e5c1a13")]
-pub struct FundSettlement{
-}
+pub struct FundSettlement {}
 
 pub struct FundSettlementInstructionAccounts {
     pub config: solana_sdk::pubkey::Pubkey,
@@ -32,7 +30,9 @@ pub struct FundSettlementInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for FundSettlement {
     type ArrangedAccounts = FundSettlementInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let config = accounts.get(0)?;
         let bond = accounts.get(1)?;
         let vote_account = accounts.get(2)?;

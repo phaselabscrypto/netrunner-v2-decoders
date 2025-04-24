@@ -1,11 +1,16 @@
-
-
-
-
 use super::JitoTipRouterDecoder;
 pub mod claim_with_payer;
 
-#[derive(carbon_core::InstructionType, serde::Serialize, serde::Deserialize, PartialEq, Eq, Debug, Clone, Hash)]
+#[derive(
+    carbon_core::InstructionType,
+    serde::Serialize,
+    serde::Deserialize,
+    PartialEq,
+    Eq,
+    Debug,
+    Clone,
+    Hash,
+)]
 pub enum JitoTipRouterInstruction {
     ClaimWithPayer(claim_with_payer::ClaimWithPayer),
 }

@@ -1,12 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xa724204f61aab76c")]
-pub struct PermisionlessWithdrawFromTreasury{
-}
+pub struct PermisionlessWithdrawFromTreasury {}
 
 pub struct PermisionlessWithdrawFromTreasuryInstructionAccounts {
     pub signer: solana_sdk::pubkey::Pubkey,
@@ -21,7 +19,9 @@ pub struct PermisionlessWithdrawFromTreasuryInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for PermisionlessWithdrawFromTreasury {
     type ArrangedAccounts = PermisionlessWithdrawFromTreasuryInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let signer = accounts.get(0)?;
         let global_config = accounts.get(1)?;
         let mint = accounts.get(2)?;

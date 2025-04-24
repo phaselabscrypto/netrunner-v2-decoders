@@ -1,58 +1,63 @@
-
-
-
-
 use super::TensorswapDecoder;
-pub mod init_update_tswap;
-pub mod init_pool;
-pub mod close_pool;
-pub mod deposit_nft;
-pub mod withdraw_nft;
-pub mod deposit_sol;
-pub mod withdraw_sol;
-pub mod buy_nft;
-pub mod sell_nft_token_pool;
-pub mod sell_nft_trade_pool;
-pub mod edit_pool;
-pub mod realloc_pool;
-pub mod init_margin_account;
-pub mod close_margin_account;
-pub mod deposit_margin_account;
-pub mod withdraw_margin_account;
 pub mod attach_pool_to_margin;
+pub mod buy_nft;
+pub mod buy_nft_t22;
+pub mod buy_sell_event;
+pub mod buy_single_listing;
+pub mod buy_single_listing_t22;
+pub mod close_margin_account;
+pub mod close_pool;
+pub mod delist;
+pub mod delist_event;
+pub mod delist_t22;
+pub mod deposit_margin_account;
+pub mod deposit_nft;
+pub mod deposit_nft_t22;
+pub mod deposit_sol;
 pub mod detach_pool_from_margin;
+pub mod edit_pool;
+pub mod edit_pool_in_place;
+pub mod edit_single_listing;
+pub mod init_margin_account;
+pub mod init_pool;
+pub mod init_update_tswap;
+pub mod list;
+pub mod list_t22;
+pub mod realloc_pool;
+pub mod sell_nft_token_pool;
+pub mod sell_nft_token_pool_t22;
+pub mod sell_nft_trade_pool;
+pub mod sell_nft_trade_pool_t22;
 pub mod set_pool_freeze;
 pub mod take_snipe;
-pub mod edit_pool_in_place;
-pub mod withdraw_tswap_fees;
-pub mod list;
-pub mod delist;
-pub mod buy_single_listing;
-pub mod edit_single_listing;
-pub mod withdraw_mm_fee;
+pub mod withdraw_margin_account;
 pub mod withdraw_margin_account_cpi;
 pub mod withdraw_margin_account_cpi_tcomp;
 pub mod withdraw_margin_account_cpi_tlock;
-pub mod buy_nft_t22;
-pub mod deposit_nft_t22;
-pub mod sell_nft_token_pool_t22;
-pub mod sell_nft_trade_pool_t22;
+pub mod withdraw_mm_fee;
+pub mod withdraw_nft;
 pub mod withdraw_nft_t22;
-pub mod buy_single_listing_t22;
-pub mod list_t22;
-pub mod delist_t22;
+pub mod withdraw_sol;
+pub mod withdraw_tswap_fees;
 pub mod wns_buy_nft;
+pub mod wns_buy_single_listing;
+pub mod wns_delist;
 pub mod wns_deposit_nft;
+pub mod wns_list;
 pub mod wns_sell_nft_token_pool;
 pub mod wns_sell_nft_trade_pool;
 pub mod wns_withdraw_nft;
-pub mod wns_buy_single_listing;
-pub mod wns_list;
-pub mod wns_delist;
-pub mod buy_sell_event;
-pub mod delist_event;
 
-#[derive(carbon_core::InstructionType, serde::Serialize, serde::Deserialize, PartialEq, Eq, Debug, Clone, Hash)]
+#[derive(
+    carbon_core::InstructionType,
+    serde::Serialize,
+    serde::Deserialize,
+    PartialEq,
+    Eq,
+    Debug,
+    Clone,
+    Hash,
+)]
 pub enum TensorswapInstruction {
     InitUpdateTswap(init_update_tswap::InitUpdateTswap),
     InitPool(init_pool::InitPool),

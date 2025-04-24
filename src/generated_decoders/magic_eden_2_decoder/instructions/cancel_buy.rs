@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xee4c24da84b1e0e9")]
-pub struct CancelBuy{
+pub struct CancelBuy {
     pub buyer_price: u64,
     pub token_size: u64,
     pub buyer_state_expiry: i64,
@@ -24,7 +23,9 @@ pub struct CancelBuyInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for CancelBuy {
     type ArrangedAccounts = CancelBuyInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let wallet = accounts.get(0)?;
         let notary = accounts.get(1)?;
         let token_mint = accounts.get(2)?;

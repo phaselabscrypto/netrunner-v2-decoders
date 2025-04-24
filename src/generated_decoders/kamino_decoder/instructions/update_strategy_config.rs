@@ -1,13 +1,12 @@
-
-
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 use serde_with::{serde_as, Bytes};
 
-
 #[serde_as]
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x51d9b14128e308a5")]
-pub struct UpdateStrategyConfig{
+pub struct UpdateStrategyConfig {
     pub mode: u16,
     #[serde_as(as = "Bytes")]
     pub value: [u8; 128],
@@ -24,7 +23,9 @@ pub struct UpdateStrategyConfigInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for UpdateStrategyConfig {
     type ArrangedAccounts = UpdateStrategyConfigInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let admin_authority = accounts.get(0)?;
         let new_account = accounts.get(1)?;
         let strategy = accounts.get(2)?;

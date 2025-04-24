@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x0a18a8775630e111")]
-pub struct ConfigLp{
+pub struct ConfigLp {
     pub params: ConfigLpParams,
 }
 
@@ -18,7 +18,9 @@ pub struct ConfigLpInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for ConfigLp {
     type ArrangedAccounts = ConfigLpInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let state = accounts.get(0)?;
         let admin_authority = accounts.get(1)?;
 

@@ -1,45 +1,50 @@
-
-
-
-
 use super::AmmV3Decoder;
-pub mod create_amm_config;
-pub mod update_amm_config;
-pub mod create_pool;
-pub mod update_pool_status;
-pub mod create_operation_account;
-pub mod update_operation_account;
-pub mod transfer_reward_owner;
-pub mod initialize_reward;
-pub mod collect_remaining_rewards;
-pub mod update_reward_infos;
-pub mod set_reward_params;
-pub mod collect_protocol_fee;
+pub mod close_position;
 pub mod collect_fund_fee;
+pub mod collect_personal_fee_event;
+pub mod collect_protocol_fee;
+pub mod collect_protocol_fee_event;
+pub mod collect_remaining_rewards;
+pub mod config_change_event;
+pub mod create_amm_config;
+pub mod create_operation_account;
+pub mod create_personal_position_event;
+pub mod create_pool;
+pub mod decrease_liquidity;
+pub mod decrease_liquidity_event;
+pub mod decrease_liquidity_v2;
+pub mod increase_liquidity;
+pub mod increase_liquidity_event;
+pub mod increase_liquidity_v2;
+pub mod initialize_reward;
+pub mod liquidity_calculate_event;
+pub mod liquidity_change_event;
 pub mod open_position;
 pub mod open_position_v2;
 pub mod open_position_with_token22_nft;
-pub mod close_position;
-pub mod increase_liquidity;
-pub mod increase_liquidity_v2;
-pub mod decrease_liquidity;
-pub mod decrease_liquidity_v2;
-pub mod swap;
-pub mod swap_v2;
-pub mod swap_router_base_in;
-pub mod config_change_event;
-pub mod create_personal_position_event;
-pub mod increase_liquidity_event;
-pub mod decrease_liquidity_event;
-pub mod liquidity_calculate_event;
-pub mod collect_personal_fee_event;
-pub mod update_reward_infos_event;
 pub mod pool_created_event;
-pub mod collect_protocol_fee_event;
+pub mod set_reward_params;
+pub mod swap;
 pub mod swap_event;
-pub mod liquidity_change_event;
+pub mod swap_router_base_in;
+pub mod swap_v2;
+pub mod transfer_reward_owner;
+pub mod update_amm_config;
+pub mod update_operation_account;
+pub mod update_pool_status;
+pub mod update_reward_infos;
+pub mod update_reward_infos_event;
 
-#[derive(carbon_core::InstructionType, serde::Serialize, serde::Deserialize, PartialEq, Eq, Debug, Clone, Hash)]
+#[derive(
+    carbon_core::InstructionType,
+    serde::Serialize,
+    serde::Deserialize,
+    PartialEq,
+    Eq,
+    Debug,
+    Clone,
+    Hash,
+)]
 pub enum AmmV3Instruction {
     CreateAmmConfig(create_amm_config::CreateAmmConfig),
     UpdateAmmConfig(update_amm_config::UpdateAmmConfig),

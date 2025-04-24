@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
 use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xe445a52e51cb9a1dceafa9d0f1d223dd")]
-pub struct InitializeEvent{
+pub struct InitializeEvent {
     pub state: solana_sdk::pubkey::Pubkey,
     pub params: InitializeData,
     pub stake_list: solana_sdk::pubkey::Pubkey,

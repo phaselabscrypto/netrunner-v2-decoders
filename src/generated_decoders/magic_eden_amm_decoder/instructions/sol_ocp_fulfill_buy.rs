@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x71e1aa41b5d40a21")]
-pub struct SolOcpFulfillBuy{
+pub struct SolOcpFulfillBuy {
     pub args: SolFulfillBuyArgs,
 }
 
@@ -39,7 +39,9 @@ pub struct SolOcpFulfillBuyInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for SolOcpFulfillBuy {
     type ArrangedAccounts = SolOcpFulfillBuyInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let payer = accounts.get(0)?;
         let owner = accounts.get(1)?;
         let cosigner = accounts.get(2)?;

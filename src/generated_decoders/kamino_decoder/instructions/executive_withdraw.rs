@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x9f276e8964eacc8d")]
-pub struct ExecutiveWithdraw{
+pub struct ExecutiveWithdraw {
     pub action: u8,
 }
 
@@ -40,7 +39,9 @@ pub struct ExecutiveWithdrawInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for ExecutiveWithdraw {
     type ArrangedAccounts = ExecutiveWithdrawInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let admin_authority = accounts.get(0)?;
         let strategy = accounts.get(1)?;
         let global_config = accounts.get(2)?;
@@ -73,7 +74,8 @@ impl carbon_core::deserialize::ArrangeAccounts for ExecutiveWithdraw {
             global_config: global_config.pubkey,
             pool: pool.pubkey,
             position: position.pubkey,
-            raydium_protocol_position_or_base_vault_authority: raydium_protocol_position_or_base_vault_authority.pubkey,
+            raydium_protocol_position_or_base_vault_authority:
+                raydium_protocol_position_or_base_vault_authority.pubkey,
             position_token_account: position_token_account.pubkey,
             tick_array_lower: tick_array_lower.pubkey,
             tick_array_upper: tick_array_upper.pubkey,

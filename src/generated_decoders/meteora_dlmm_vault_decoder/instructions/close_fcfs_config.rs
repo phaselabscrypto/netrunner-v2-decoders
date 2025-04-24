@@ -1,12 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x30b2d465178ae95a")]
-pub struct CloseFcfsConfig{
-}
+pub struct CloseFcfsConfig {}
 
 pub struct CloseFcfsConfigInstructionAccounts {
     pub config: solana_sdk::pubkey::Pubkey,
@@ -17,7 +15,9 @@ pub struct CloseFcfsConfigInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for CloseFcfsConfig {
     type ArrangedAccounts = CloseFcfsConfigInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let config = accounts.get(0)?;
         let admin = accounts.get(1)?;
         let rent_receiver = accounts.get(2)?;

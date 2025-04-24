@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xbe55f23c775121c0")]
-pub struct DepositMarginAccount{
+pub struct DepositMarginAccount {
     pub lamports: u64,
 }
 
@@ -19,7 +18,9 @@ pub struct DepositMarginAccountInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for DepositMarginAccount {
     type ArrangedAccounts = DepositMarginAccountInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let tswap = accounts.get(0)?;
         let margin_account = accounts.get(1)?;
         let owner = accounts.get(2)?;

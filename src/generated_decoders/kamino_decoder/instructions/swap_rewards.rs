@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x5c29ac1ebe41ae5a")]
-pub struct SwapRewards{
+pub struct SwapRewards {
     pub token_a_in: u64,
     pub token_b_in: u64,
     pub reward_index: u64,
@@ -43,7 +42,9 @@ pub struct SwapRewardsInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for SwapRewards {
     type ArrangedAccounts = SwapRewardsInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let user = accounts.get(0)?;
         let strategy = accounts.get(1)?;
         let global_config = accounts.get(2)?;

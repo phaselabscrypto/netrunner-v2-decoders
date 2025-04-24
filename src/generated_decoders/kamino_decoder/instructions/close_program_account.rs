@@ -1,12 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xf50ec0d3632aaabb")]
-pub struct CloseProgramAccount{
-}
+pub struct CloseProgramAccount {}
 
 pub struct CloseProgramAccountInstructionAccounts {
     pub admin_authority: solana_sdk::pubkey::Pubkey,
@@ -19,7 +17,9 @@ pub struct CloseProgramAccountInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for CloseProgramAccount {
     type ArrangedAccounts = CloseProgramAccountInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let admin_authority = accounts.get(0)?;
         let program = accounts.get(1)?;
         let program_data = accounts.get(2)?;

@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xa553888e59ca2fdc")]
-pub struct CreateTree{
+pub struct CreateTree {
     pub max_depth: u32,
     pub max_buffer_size: u32,
     pub public: Option<bool>,
@@ -24,7 +23,9 @@ pub struct CreateTreeInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for CreateTree {
     type ArrangedAccounts = CreateTreeInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let tree_authority = accounts.get(0)?;
         let merkle_tree = accounts.get(1)?;
         let payer = accounts.get(2)?;

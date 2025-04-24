@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x98b2004134d2f73a")]
-pub struct InitSettlement{
+pub struct InitSettlement {
     pub init_settlement_args: InitSettlementArgs,
 }
 
@@ -25,7 +25,9 @@ pub struct InitSettlementInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for InitSettlement {
     type ArrangedAccounts = InitSettlementInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let config = accounts.get(0)?;
         let bond = accounts.get(1)?;
         let settlement = accounts.get(2)?;

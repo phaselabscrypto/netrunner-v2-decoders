@@ -1,12 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x28f3bed9d0fd56ce")]
-pub struct CancelBid{
-}
+pub struct CancelBid {}
 
 pub struct CancelBidInstructionAccounts {
     pub bid_state: solana_sdk::pubkey::Pubkey,
@@ -19,7 +17,9 @@ pub struct CancelBidInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for CancelBid {
     type ArrangedAccounts = CancelBidInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let bid_state = accounts.get(0)?;
         let owner = accounts.get(1)?;
         let system_program = accounts.get(2)?;

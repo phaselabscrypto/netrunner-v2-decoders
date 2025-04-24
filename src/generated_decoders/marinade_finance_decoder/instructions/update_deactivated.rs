@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x10e883739c64ef32")]
-pub struct UpdateDeactivated{
+pub struct UpdateDeactivated {
     pub stake_index: u32,
 }
 
@@ -18,7 +17,9 @@ pub struct UpdateDeactivatedInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for UpdateDeactivated {
     type ArrangedAccounts = UpdateDeactivatedInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let common = accounts.get(0)?;
         let operational_sol_account = accounts.get(1)?;
         let system_program = accounts.get(2)?;

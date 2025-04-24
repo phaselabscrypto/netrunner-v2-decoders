@@ -1,12 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x77ef122dc26b1fee")]
-pub struct RepayFlashLoan{
-}
+pub struct RepayFlashLoan {}
 
 pub struct RepayFlashLoanInstructionAccounts {
     pub repayer: solana_sdk::pubkey::Pubkey,
@@ -22,7 +20,9 @@ pub struct RepayFlashLoanInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for RepayFlashLoan {
     type ArrangedAccounts = RepayFlashLoanInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let repayer = accounts.get(0)?;
         let pool_account = accounts.get(1)?;
         let pool_sol_reserves = accounts.get(2)?;

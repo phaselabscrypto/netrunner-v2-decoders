@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xd0779091b23969fc")]
-pub struct InitializeStrategy{
+pub struct InitializeStrategy {
     pub bumps: StrategyBumps,
     pub strategy_type: StrategyType,
 }
@@ -27,7 +27,9 @@ pub struct InitializeStrategyInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for InitializeStrategy {
     type ArrangedAccounts = InitializeStrategyInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let vault = accounts.get(0)?;
         let strategy_program = accounts.get(1)?;
         let strategy = accounts.get(2)?;

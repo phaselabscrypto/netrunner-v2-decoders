@@ -1,12 +1,12 @@
-
 use super::super::types::*;
 
-use carbon_core::{CarbonDeserialize, borsh};
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x37f3fdf04ebae8a6")]
-pub struct CreateMerkleRootConfig{
+pub struct CreateMerkleRootConfig {
     pub params: CreateMerkleRootConfigParams,
 }
 
@@ -22,7 +22,9 @@ pub struct CreateMerkleRootConfigInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for CreateMerkleRootConfig {
     type ArrangedAccounts = CreateMerkleRootConfigInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let vault = accounts.get(0)?;
         let merkle_root_config = accounts.get(1)?;
         let admin = accounts.get(2)?;

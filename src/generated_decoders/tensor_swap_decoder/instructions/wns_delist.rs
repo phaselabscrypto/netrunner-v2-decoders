@@ -1,12 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x83e2a186e984f39f")]
-pub struct WnsDelist{
-}
+pub struct WnsDelist {}
 
 pub struct WnsDelistInstructionAccounts {
     pub tswap: solana_sdk::pubkey::Pubkey,
@@ -30,7 +28,9 @@ pub struct WnsDelistInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for WnsDelist {
     type ArrangedAccounts = WnsDelistInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
         let tswap = accounts.get(0)?;
         let nft_dest = accounts.get(1)?;
         let nft_mint = accounts.get(2)?;
