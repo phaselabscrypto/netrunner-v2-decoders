@@ -15,6 +15,14 @@ pub mod jito_tip_distribution_decoder;
 #[allow(clippy::all)]
 pub mod jito_tip_router_decoder;
 #[allow(clippy::all)]
+pub mod jupiter_v1_decoder;
+#[allow(clippy::all)]
+pub mod jupiter_v2_decoder;
+#[allow(clippy::all)]
+pub mod jupiter_v3_decoder;
+#[allow(clippy::all)]
+pub mod jupiter_v4_decoder;
+#[allow(clippy::all)]
 pub mod kamino_decoder;
 #[allow(clippy::all)]
 pub mod magic_eden_2_decoder;
