@@ -30,7 +30,7 @@ pub mod meteora_dlmm_vault_decoder;
 #[allow(clippy::all)]
 pub mod kamino_decoder;
 #[allow(clippy::all)]
-pub mod score_decoder;
+pub mod staratlas_score_decoder;
 #[allow(clippy::all)]
 pub mod whirlpool_decoder;
 #[allow(clippy::all)]
