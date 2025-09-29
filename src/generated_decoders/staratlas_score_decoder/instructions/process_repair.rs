@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x2ddd658f139a413c")]
-pub struct ProcessRepair{
+pub struct ProcessRepair {
     pub staking_bump: u8,
     pub scorevars_bump: u8,
     pub scorevars_ship_bump: u8,
@@ -30,25 +29,14 @@ pub struct ProcessRepairInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for ProcessRepair {
     type ArrangedAccounts = ProcessRepairInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
-        let [
-            token_owner_account,
-            player_account,
-            ship_staking_account,
-            score_vars_account,
-            score_vars_ship_account,
-            system_program,
-            token_program,
-            clock,
-            rent,
-            ship_mint,
-            toolkit_mint,
-            toolkit_token_account_source,
-            _remaining @ ..
-        ] = accounts else {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
+        let [token_owner_account, player_account, ship_staking_account, score_vars_account, score_vars_ship_account, system_program, token_program, clock, rent, ship_mint, toolkit_mint, toolkit_token_account_source, _remaining @ ..] =
+            accounts
+        else {
             return None;
         };
-       
 
         Some(ProcessRepairInstructionAccounts {
             token_owner_account: token_owner_account.pubkey,

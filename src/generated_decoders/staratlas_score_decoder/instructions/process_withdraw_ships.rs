@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x4bc617d1abe4cf55")]
-pub struct ProcessWithdrawShips{
+pub struct ProcessWithdrawShips {
     pub staking_bump: u8,
     pub scorevars_bump: u8,
     pub scorevars_ship_bump: u8,
@@ -37,29 +36,14 @@ pub struct ProcessWithdrawShipsInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for ProcessWithdrawShips {
     type ArrangedAccounts = ProcessWithdrawShipsInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
-        let [
-            player_account,
-            ship_staking_account,
-            score_vars_account,
-            score_vars_ship_account,
-            player_atlas_token_account,
-            ship_token_account_escrow,
-            ship_token_account_return,
-            toolkit_token_account_source,
-            treasury_token_account,
-            treasury_authority_account,
-            escrow_authority,
-            token_program,
-            system_program,
-            clock,
-            ship_mint,
-            toolkit_mint,
-            _remaining @ ..
-        ] = accounts else {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
+        let [player_account, ship_staking_account, score_vars_account, score_vars_ship_account, player_atlas_token_account, ship_token_account_escrow, ship_token_account_return, toolkit_token_account_source, treasury_token_account, treasury_authority_account, escrow_authority, token_program, system_program, clock, ship_mint, toolkit_mint, _remaining @ ..] =
+            accounts
+        else {
             return None;
         };
-       
 
         Some(ProcessWithdrawShipsInstructionAccounts {
             player_account: player_account.pubkey,

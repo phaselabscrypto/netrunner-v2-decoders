@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0xc198255408300f5a")]
-pub struct ProcessRegisterShip{
+pub struct ProcessRegisterShip {
     pub scorevars_bump: u8,
     pub scorevars_ship_bump: u8,
     pub reward_rate_per_second: u64,
@@ -30,18 +29,14 @@ pub struct ProcessRegisterShipInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for ProcessRegisterShip {
     type ArrangedAccounts = ProcessRegisterShipInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
-        let [
-            update_authority_account,
-            score_vars_account,
-            score_vars_ship_account,
-            ship_mint,
-            system_program,
-            _remaining @ ..
-        ] = accounts else {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
+        let [update_authority_account, score_vars_account, score_vars_ship_account, ship_mint, system_program, _remaining @ ..] =
+            accounts
+        else {
             return None;
         };
-       
 
         Some(ProcessRegisterShipInstructionAccounts {
             update_authority_account: update_authority_account.pubkey,

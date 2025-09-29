@@ -1,7 +1,3 @@
-
-
-
-
 use super::ScoreDecoder;
 pub mod process_close_accounts;
 pub mod process_deregister_ship;
@@ -21,7 +17,16 @@ pub mod process_withdraw_food;
 pub mod process_withdraw_fuel;
 pub mod process_withdraw_ships;
 
-#[derive(carbon_core::InstructionType, serde::Serialize, serde::Deserialize, PartialEq, Eq, Debug, Clone, Hash)]
+#[derive(
+    carbon_core::InstructionType,
+    serde::Serialize,
+    serde::Deserialize,
+    PartialEq,
+    Eq,
+    Debug,
+    Clone,
+    Hash,
+)]
 pub enum ScoreInstruction {
     ProcessCloseAccounts(process_close_accounts::ProcessCloseAccounts),
     ProcessDeregisterShip(process_deregister_ship::ProcessDeregisterShip),

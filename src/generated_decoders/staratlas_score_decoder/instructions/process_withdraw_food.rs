@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x9e9c5d4837219895")]
-pub struct ProcessWithdrawFood{
+pub struct ProcessWithdrawFood {
     pub staking_bump: u8,
     pub scorevars_bump: u8,
     pub scorevars_ship_bump: u8,
@@ -30,24 +29,14 @@ pub struct ProcessWithdrawFoodInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for ProcessWithdrawFood {
     type ArrangedAccounts = ProcessWithdrawFoodInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
-        let [
-            player_account,
-            ship_staking_account,
-            score_vars_account,
-            score_vars_ship_account,
-            food_token_account_escrow,
-            food_token_account_return,
-            food_mint,
-            escrow_authority,
-            token_program,
-            clock,
-            ship_mint,
-            _remaining @ ..
-        ] = accounts else {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
+        let [player_account, ship_staking_account, score_vars_account, score_vars_ship_account, food_token_account_escrow, food_token_account_return, food_mint, escrow_authority, token_program, clock, ship_mint, _remaining @ ..] =
+            accounts
+        else {
             return None;
         };
-       
 
         Some(ProcessWithdrawFoodInstructionAccounts {
             player_account: player_account.pubkey,

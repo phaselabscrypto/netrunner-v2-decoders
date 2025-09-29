@@ -1,11 +1,10 @@
+use carbon_core::{borsh, CarbonDeserialize};
 
-
-use carbon_core::{CarbonDeserialize, borsh};
-
-
-#[derive(CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash)]
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
 #[carbon(discriminator = "0x42871ec29ddb21db")]
-pub struct ProcessRearm{
+pub struct ProcessRearm {
     pub staking_bump: u8,
     pub scorevars_bump: u8,
     pub scorevars_ship_bump: u8,
@@ -34,27 +33,14 @@ pub struct ProcessRearmInstructionAccounts {
 impl carbon_core::deserialize::ArrangeAccounts for ProcessRearm {
     type ArrangedAccounts = ProcessRearmInstructionAccounts;
 
-    fn arrange_accounts(accounts: &[solana_sdk::instruction::AccountMeta]) -> Option<Self::ArrangedAccounts> {
-        let [
-            token_owner_account,
-            player_account,
-            ship_staking_account,
-            score_vars_account,
-            score_vars_ship_account,
-            escrow_authority,
-            system_program,
-            token_program,
-            clock,
-            rent,
-            ship_mint,
-            arms_mint,
-            arms_token_account_source,
-            arms_token_account_escrow,
-            _remaining @ ..
-        ] = accounts else {
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
+        let [token_owner_account, player_account, ship_staking_account, score_vars_account, score_vars_ship_account, escrow_authority, system_program, token_program, clock, rent, ship_mint, arms_mint, arms_token_account_source, arms_token_account_escrow, _remaining @ ..] =
+            accounts
+        else {
             return None;
         };
-       
 
         Some(ProcessRearmInstructionAccounts {
             token_owner_account: token_owner_account.pubkey,
