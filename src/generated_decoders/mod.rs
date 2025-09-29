@@ -43,6 +43,8 @@ pub mod raydium_concentrated_liquidity_decoder;
 #[allow(clippy::all)]
 pub mod sanctum_unstake_decoder;
 #[allow(clippy::all)]
+pub mod staratlas_score_decoder;
+#[allow(clippy::all)]
 pub mod tensor_amm_decoder;
 #[allow(clippy::all)]
 pub mod tensor_marketplace_decoder;
