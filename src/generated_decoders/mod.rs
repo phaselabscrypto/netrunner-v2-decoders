@@ -39,6 +39,8 @@ pub mod meteora_pools_decoder;
 #[allow(clippy::all)]
 pub mod meteora_vault_decoder;
 #[allow(clippy::all)]
+pub mod okx_dex_v2_decoder;
+#[allow(clippy::all)]
 pub mod raydium_concentrated_liquidity_decoder;
 #[allow(clippy::all)]
 pub mod sanctum_unstake_decoder;
