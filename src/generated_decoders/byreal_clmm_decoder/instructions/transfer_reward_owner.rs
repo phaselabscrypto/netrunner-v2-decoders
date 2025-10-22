@@ -1,0 +1,33 @@
+use carbon_core::{borsh, CarbonDeserialize};
+
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0x07160c53f22b3079")]
+pub struct TransferRewardOwner {
+    pub new_owner: solana_sdk::pubkey::Pubkey,
+}
+
+pub struct TransferRewardOwnerInstructionAccounts {
+    pub authority: solana_sdk::pubkey::Pubkey,
+    pub admin_group: solana_sdk::pubkey::Pubkey,
+    pub pool_state: solana_sdk::pubkey::Pubkey,
+}
+
+impl carbon_core::deserialize::ArrangeAccounts for TransferRewardOwner {
+    type ArrangedAccounts = TransferRewardOwnerInstructionAccounts;
+
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
+        let authority = accounts.get(0)?;
+        let admin_group = accounts.get(1)?;
+        let pool_state = accounts.get(2)?;
+
+        Some(TransferRewardOwnerInstructionAccounts {
+            authority: authority.pubkey,
+            admin_group: admin_group.pubkey,
+            pool_state: pool_state.pubkey,
+        })
+    }
+}

@@ -1,0 +1,48 @@
+use super::*;
+
+use carbon_core::{borsh, CarbonDeserialize};
+
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+pub enum Action {
+    WhirlpoolsSwap(WhirlpoolsSwapOptions),
+    ClearpoolsSwap(ClearpoolsSwapOptions),
+    RaydiumAmmSwap(RaydiumAmmSwapOptions),
+    LifinityV2Swap(LifinityV2SwapOptions),
+    MeteoraDlmmSwap(MeteoraDlmmSwapOptions),
+    RaydiumClmmSwap(RaydiumClmmSwapOptions),
+    RaydiumClmmSwapV2(RaydiumClmmSwapV2Options),
+    PhoenixSwap(PhoenixSwapOptions),
+    PumpFunBuy(PumpFunBuyOptions),
+    PumpFunSell(PumpFunSellOptions),
+    GammaSwap(GammaSwapOptions),
+    ObricV2Swap(ObricV2SwapOptions),
+    PumpFunAmmBuy(PumpFunAmmBuyOptions),
+    PumpFunAmmSell(PumpFunAmmSellOptions),
+    SolFiSwap(SolFiSwapOptions),
+    RubiconSwap(RubiconSwapOptions),
+    MeteoraDammV1Swap(MeteoraDammV1SwapOptions),
+    RaydiumCpSwap(RaydiumCpSwapOptions),
+    StabbleStableSwap(StabbleStableSwapOptions),
+    TesseraVSwap(TesseraVSwapOptions),
+    MeteoraDammV2Swap(MeteoraDammV2SwapOptions),
+    RaydiumLaunchlabSwap(RaydiumLaunchlabSwapOptions),
+    MeteoraDbcSwap(MeteoraDbcSwapOptions),
+    HumidiFiSwap(HumidiFiSwapOptions),
+    WhirlpoolsSwapV2(WhirlpoolsSwapV2Options),
+    MeteoraDlmmSwapV2(MeteoraDlmmSwapV2Options),
+    ZeroFiSwap(ZeroFiSwapOptions),
+    AlphaQSwap(AlphaQSwapOptions),
+    TokenSwap(TokenSwapOptions),
+    SolFiV2Swap(SolFiV2SwapOptions),
+    MozartSwap(MozartSwapOptions),
+    DFlowDynamicRouteV1(DFlowDynamicRouteV1Options),
+    HeavenSwap(HeavenSwapOptions),
+    NexusSwap(NexusSwapOptions),
+    SarosDlmmSwap(SarosDlmmSwapOptions),
+    TransferFee(TransferFeeOptions),
+    TransferFeeWithMint(TransferFeeOptions),
+    RecordId(RecordIdOptions),
+    RecordId2(RecordId2Options),
+}
