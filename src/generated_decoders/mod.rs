@@ -1,6 +1,10 @@
 #[allow(clippy::all)]
 pub mod bubblegum_decoder;
 #[allow(clippy::all)]
+pub mod byreal_clmm_decoder;
+#[allow(clippy::all)]
+pub mod byreal_router_decoder;
+#[allow(clippy::all)]
 pub mod candy_machine_core_decoder;
 #[allow(clippy::all)]
 pub mod candy_machine_core_v3_decoder;
@@ -10,6 +14,10 @@ pub mod candy_machine_v1_decoder;
 pub mod candy_machine_v2_decoder;
 #[allow(clippy::all)]
 pub mod candy_machine_v3_decoder;
+#[allow(clippy::all)]
+pub mod dflow_v4_decoder;
+#[allow(clippy::all)]
+pub mod heaven_dex_decoder;
 #[allow(clippy::all)]
 pub mod jito_tip_distribution_decoder;
 #[allow(clippy::all)]
