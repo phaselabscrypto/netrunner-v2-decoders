@@ -23,6 +23,8 @@ pub mod jito_tip_distribution_decoder;
 #[allow(clippy::all)]
 pub mod jito_tip_router_decoder;
 #[allow(clippy::all)]
+pub mod jupiter_locked_voter_decoder;
+#[allow(clippy::all)]
 pub mod jupiter_v1_decoder;
 #[allow(clippy::all)]
 pub mod jupiter_v2_decoder;
