@@ -1,0 +1,53 @@
+use super::super::types::*;
+
+use carbon_core::{borsh, CarbonDeserialize};
+
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0x676a12392c7fca9f")]
+pub struct GetAddCollateralQuote {
+    pub params: GetAddCollateralQuoteParams,
+}
+
+pub struct GetAddCollateralQuoteInstructionAccounts {
+    pub perpetuals: solana_sdk::pubkey::Pubkey,
+    pub pool: solana_sdk::pubkey::Pubkey,
+    pub position: solana_sdk::pubkey::Pubkey,
+    pub market: solana_sdk::pubkey::Pubkey,
+    pub target_custody: solana_sdk::pubkey::Pubkey,
+    pub target_oracle_account: solana_sdk::pubkey::Pubkey,
+    pub collateral_custody: solana_sdk::pubkey::Pubkey,
+    pub collateral_oracle_account: solana_sdk::pubkey::Pubkey,
+    pub receiving_custody: solana_sdk::pubkey::Pubkey,
+    pub receiving_oracle_account: solana_sdk::pubkey::Pubkey,
+    pub ix_sysvar: solana_sdk::pubkey::Pubkey,
+}
+
+impl carbon_core::deserialize::ArrangeAccounts for GetAddCollateralQuote {
+    type ArrangedAccounts = GetAddCollateralQuoteInstructionAccounts;
+
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
+        let [perpetuals, pool, position, market, target_custody, target_oracle_account, collateral_custody, collateral_oracle_account, receiving_custody, receiving_oracle_account, ix_sysvar, _remaining @ ..] =
+            accounts
+        else {
+            return None;
+        };
+
+        Some(GetAddCollateralQuoteInstructionAccounts {
+            perpetuals: perpetuals.pubkey,
+            pool: pool.pubkey,
+            position: position.pubkey,
+            market: market.pubkey,
+            target_custody: target_custody.pubkey,
+            target_oracle_account: target_oracle_account.pubkey,
+            collateral_custody: collateral_custody.pubkey,
+            collateral_oracle_account: collateral_oracle_account.pubkey,
+            receiving_custody: receiving_custody.pubkey,
+            receiving_oracle_account: receiving_oracle_account.pubkey,
+            ix_sysvar: ix_sysvar.pubkey,
+        })
+    }
+}

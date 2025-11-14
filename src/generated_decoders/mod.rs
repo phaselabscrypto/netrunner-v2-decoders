@@ -17,6 +17,8 @@ pub mod candy_machine_v3_decoder;
 #[allow(clippy::all)]
 pub mod dflow_v4_decoder;
 #[allow(clippy::all)]
+pub mod flash_trade_perps_decoder;
+#[allow(clippy::all)]
 pub mod heaven_dex_decoder;
 #[allow(clippy::all)]
 pub mod jito_tip_distribution_decoder;
