@@ -1,0 +1,25 @@
+use super::*;
+
+use carbon_core::{borsh, CarbonDeserialize};
+
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+pub struct AddCustodyParams {
+    pub is_stable: bool,
+    pub oracle: OracleParams,
+    pub pricing: PricingParams,
+    pub permissions: Permissions,
+    pub hourly_funding_dbps: u64,
+    pub target_ratio_bps: u64,
+    pub increase_position_bps: u64,
+    pub decrease_position_bps: u64,
+    pub doves_oracle: solana_sdk::pubkey::Pubkey,
+    pub max_position_size_usd: u64,
+    pub jump_rate: JumpRateState,
+    pub price_impact_fee_factor: u64,
+    pub price_impact_exponent: u64,
+    pub delta_imbalance_threshold_decimal: u64,
+    pub max_fee_bps: u64,
+    pub doves_ag_oracle: solana_sdk::pubkey::Pubkey,
+}

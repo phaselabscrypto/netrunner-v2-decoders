@@ -1,0 +1,63 @@
+use super::super::types::*;
+
+use carbon_core::{borsh, CarbonDeserialize};
+
+#[derive(
+    CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
+)]
+#[carbon(discriminator = "0xc52656a5c71726ea")]
+pub struct InstantIncreasePositionPreSwap {
+    pub params: InstantIncreasePositionPreSwapParams,
+}
+
+pub struct InstantIncreasePositionPreSwapInstructionAccounts {
+    pub owner: solana_sdk::pubkey::Pubkey,
+    pub funding_account: solana_sdk::pubkey::Pubkey,
+    pub receiving_account: solana_sdk::pubkey::Pubkey,
+    pub transfer_authority: solana_sdk::pubkey::Pubkey,
+    pub perpetuals: solana_sdk::pubkey::Pubkey,
+    pub pool: solana_sdk::pubkey::Pubkey,
+    pub receiving_custody: solana_sdk::pubkey::Pubkey,
+    pub receiving_custody_doves_price_account: solana_sdk::pubkey::Pubkey,
+    pub receiving_custody_token_account: solana_sdk::pubkey::Pubkey,
+    pub dispensing_custody: solana_sdk::pubkey::Pubkey,
+    pub dispensing_custody_doves_price_account: solana_sdk::pubkey::Pubkey,
+    pub dispensing_custody_token_account: solana_sdk::pubkey::Pubkey,
+    pub token_program: solana_sdk::pubkey::Pubkey,
+    pub instruction: solana_sdk::pubkey::Pubkey,
+    pub event_authority: solana_sdk::pubkey::Pubkey,
+    pub program: solana_sdk::pubkey::Pubkey,
+}
+
+impl carbon_core::deserialize::ArrangeAccounts for InstantIncreasePositionPreSwap {
+    type ArrangedAccounts = InstantIncreasePositionPreSwapInstructionAccounts;
+
+    fn arrange_accounts(
+        accounts: &[solana_sdk::instruction::AccountMeta],
+    ) -> Option<Self::ArrangedAccounts> {
+        let [owner, funding_account, receiving_account, transfer_authority, perpetuals, pool, receiving_custody, receiving_custody_doves_price_account, receiving_custody_token_account, dispensing_custody, dispensing_custody_doves_price_account, dispensing_custody_token_account, token_program, instruction, event_authority, program, _remaining @ ..] =
+            accounts
+        else {
+            return None;
+        };
+
+        Some(InstantIncreasePositionPreSwapInstructionAccounts {
+            owner: owner.pubkey,
+            funding_account: funding_account.pubkey,
+            receiving_account: receiving_account.pubkey,
+            transfer_authority: transfer_authority.pubkey,
+            perpetuals: perpetuals.pubkey,
+            pool: pool.pubkey,
+            receiving_custody: receiving_custody.pubkey,
+            receiving_custody_doves_price_account: receiving_custody_doves_price_account.pubkey,
+            receiving_custody_token_account: receiving_custody_token_account.pubkey,
+            dispensing_custody: dispensing_custody.pubkey,
+            dispensing_custody_doves_price_account: dispensing_custody_doves_price_account.pubkey,
+            dispensing_custody_token_account: dispensing_custody_token_account.pubkey,
+            token_program: token_program.pubkey,
+            instruction: instruction.pubkey,
+            event_authority: event_authority.pubkey,
+            program: program.pubkey,
+        })
+    }
+}
