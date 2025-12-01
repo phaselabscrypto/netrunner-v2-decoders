@@ -39,4 +39,6 @@ pub enum AdminInstruction {
     SetTokenStakeLevel,
     InitRevenueTokenAccount,
     ResizeInternalOracle,
+    WithdrawUnclaimedTokens,
+    InitRebateVault,
 }
