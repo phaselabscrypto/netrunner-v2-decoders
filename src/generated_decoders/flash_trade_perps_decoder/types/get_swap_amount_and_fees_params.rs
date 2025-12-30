@@ -5,5 +5,4 @@ use carbon_core::{borsh, CarbonDeserialize};
 )]
 pub struct GetSwapAmountAndFeesParams {
     pub amount_in: u64,
-    pub use_fee_pool: bool,
 }

@@ -26,4 +26,5 @@ pub struct LiquidateLogV3Event {
     pub oracle_account_type: u8,
     pub oracle_account_price: u64,
     pub oracle_account_price_exponent: i32,
+    pub padding: [u64; 4],
 }

@@ -17,10 +17,6 @@ pub struct SwapFeeInternalInstructionAccounts {
     pub reward_custody: solana_sdk::pubkey::Pubkey,
     pub reward_custody_oracle_account: solana_sdk::pubkey::Pubkey,
     pub reward_custody_token_account: solana_sdk::pubkey::Pubkey,
-    pub custody: solana_sdk::pubkey::Pubkey,
-    pub custody_oracle_account: solana_sdk::pubkey::Pubkey,
-    pub custody_token_account: solana_sdk::pubkey::Pubkey,
-    pub token_program: solana_sdk::pubkey::Pubkey,
     pub event_authority: solana_sdk::pubkey::Pubkey,
     pub program: solana_sdk::pubkey::Pubkey,
     pub ix_sysvar: solana_sdk::pubkey::Pubkey,
@@ -32,7 +28,7 @@ impl carbon_core::deserialize::ArrangeAccounts for SwapFeeInternal {
     fn arrange_accounts(
         accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
-        let [owner, perpetuals, pool, reward_custody, reward_custody_oracle_account, reward_custody_token_account, custody, custody_oracle_account, custody_token_account, token_program, event_authority, program, ix_sysvar, _remaining @ ..] =
+        let [owner, perpetuals, pool, reward_custody, reward_custody_oracle_account, reward_custody_token_account, event_authority, program, ix_sysvar, _remaining @ ..] =
             accounts
         else {
             return None;
@@ -45,10 +41,6 @@ impl carbon_core::deserialize::ArrangeAccounts for SwapFeeInternal {
             reward_custody: reward_custody.pubkey,
             reward_custody_oracle_account: reward_custody_oracle_account.pubkey,
             reward_custody_token_account: reward_custody_token_account.pubkey,
-            custody: custody.pubkey,
-            custody_oracle_account: custody_oracle_account.pubkey,
-            custody_token_account: custody_token_account.pubkey,
-            token_program: token_program.pubkey,
             event_authority: event_authority.pubkey,
             program: program.pubkey,
             ix_sysvar: ix_sysvar.pubkey,

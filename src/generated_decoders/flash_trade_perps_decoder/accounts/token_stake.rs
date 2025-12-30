@@ -19,5 +19,5 @@ pub struct TokenStake {
     pub reward_tokens: u64,
     pub unclaimed_revenue_amount: u64,
     pub revenue_snapshot: u128,
-    pub padding: [u64; 1],
+    pub claimable_rebate_usd: u64,
 }

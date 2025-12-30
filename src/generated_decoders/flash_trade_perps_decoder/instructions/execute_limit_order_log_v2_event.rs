@@ -23,6 +23,6 @@ pub struct ExecuteLimitOrderLogV2Event {
     pub oracle_account_price_exponent: i32,
     pub limit_price: u64,
     pub limit_price_exponent: i32,
-    pub fee_rebate_amount: u64,
+    pub fee_rebate_usd_amount: u64,
     pub padding: [u64; 3],
 }

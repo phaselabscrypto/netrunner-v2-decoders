@@ -4,5 +4,5 @@ use carbon_core::{borsh, CarbonDeserialize};
     CarbonDeserialize, Debug, serde::Serialize, serde::Deserialize, PartialEq, Eq, Clone, Hash,
 )]
 pub struct RemoveCollateralParams {
-    pub collateral_delta: u64,
+    pub collateral_delta_usd: u64,
 }
