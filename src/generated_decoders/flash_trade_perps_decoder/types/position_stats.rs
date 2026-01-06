@@ -14,7 +14,7 @@ pub struct PositionStats {
     pub locked_amount: u64,
     pub locked_usd: u64,
     pub collateral_amount: u64,
-    pub collateral_usd: u64,
+    pub collateral_liability_usd: u64,
     pub unsettled_fee_usd: u64,
     pub cumulative_lock_fee_snapshot: u128,
     pub size_decimals: u8,

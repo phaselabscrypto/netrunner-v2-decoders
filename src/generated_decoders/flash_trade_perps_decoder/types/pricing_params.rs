@@ -19,6 +19,6 @@ pub struct PricingParams {
     pub max_utilization: u32,
     pub degen_position_factor: u16,
     pub degen_exposure_factor: u16,
-    pub max_position_locked_usd: u64,
+    pub max_position_size_usd: u64,
     pub max_exposure_usd: u64,
 }

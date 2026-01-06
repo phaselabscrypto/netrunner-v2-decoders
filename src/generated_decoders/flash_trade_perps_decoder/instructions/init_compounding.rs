@@ -16,7 +16,6 @@ pub struct InitCompoundingInstructionAccounts {
     pub transfer_authority: solana_sdk::pubkey::Pubkey,
     pub perpetuals: solana_sdk::pubkey::Pubkey,
     pub pool: solana_sdk::pubkey::Pubkey,
-    pub custody: solana_sdk::pubkey::Pubkey,
     pub lp_token_mint: solana_sdk::pubkey::Pubkey,
     pub compounding_vault: solana_sdk::pubkey::Pubkey,
     pub compounding_token_mint: solana_sdk::pubkey::Pubkey,
@@ -33,7 +32,7 @@ impl carbon_core::deserialize::ArrangeAccounts for InitCompounding {
     fn arrange_accounts(
         accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
-        let [admin, multisig, transfer_authority, perpetuals, pool, custody, lp_token_mint, compounding_vault, compounding_token_mint, metadata_account, system_program, token_program, metadata_program, rent, _remaining @ ..] =
+        let [admin, multisig, transfer_authority, perpetuals, pool, lp_token_mint, compounding_vault, compounding_token_mint, metadata_account, system_program, token_program, metadata_program, rent, _remaining @ ..] =
             accounts
         else {
             return None;
@@ -45,7 +44,6 @@ impl carbon_core::deserialize::ArrangeAccounts for InitCompounding {
             transfer_authority: transfer_authority.pubkey,
             perpetuals: perpetuals.pubkey,
             pool: pool.pubkey,
-            custody: custody.pubkey,
             lp_token_mint: lp_token_mint.pubkey,
             compounding_vault: compounding_vault.pubkey,
             compounding_token_mint: compounding_token_mint.pubkey,

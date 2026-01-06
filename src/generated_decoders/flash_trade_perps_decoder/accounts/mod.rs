@@ -12,10 +12,12 @@ pub mod perpetuals;
 pub mod pool;
 pub mod position;
 pub mod protocol_vault;
+pub mod rebate_vault;
 pub mod referral;
 pub mod token_stake;
 pub mod token_vault;
 pub mod trading;
+pub mod whitelist;
 
 pub enum FlashTradePerpsAccount {
     Custody(custody::Custody),
@@ -28,10 +30,12 @@ pub enum FlashTradePerpsAccount {
     Pool(pool::Pool),
     Position(position::Position),
     ProtocolVault(protocol_vault::ProtocolVault),
+    RebateVault(rebate_vault::RebateVault),
     Referral(referral::Referral),
     TokenStake(token_stake::TokenStake),
     TokenVault(token_vault::TokenVault),
     Trading(trading::Trading),
+    Whitelist(whitelist::Whitelist),
 }
 
 impl<'a> AccountDecoder<'a> for FlashTradePerpsDecoder {
@@ -145,6 +149,18 @@ impl<'a> AccountDecoder<'a> for FlashTradePerpsDecoder {
             });
         }
 
+        if let Some(decoded_account) =
+            rebate_vault::RebateVault::deserialize(account.data.as_slice())
+        {
+            return Some(carbon_core::account::DecodedAccount {
+                lamports: account.lamports,
+                data: FlashTradePerpsAccount::RebateVault(decoded_account),
+                owner: account.owner,
+                executable: account.executable,
+                rent_epoch: account.rent_epoch,
+            });
+        }
+
         if let Some(decoded_account) = referral::Referral::deserialize(account.data.as_slice()) {
             return Some(carbon_core::account::DecodedAccount {
                 lamports: account.lamports,
@@ -181,6 +197,16 @@ impl<'a> AccountDecoder<'a> for FlashTradePerpsDecoder {
             return Some(carbon_core::account::DecodedAccount {
                 lamports: account.lamports,
                 data: FlashTradePerpsAccount::Trading(decoded_account),
+                owner: account.owner,
+                executable: account.executable,
+                rent_epoch: account.rent_epoch,
+            });
+        }
+
+        if let Some(decoded_account) = whitelist::Whitelist::deserialize(account.data.as_slice()) {
+            return Some(carbon_core::account::DecodedAccount {
+                lamports: account.lamports,
+                data: FlashTradePerpsAccount::Whitelist(decoded_account),
                 owner: account.owner,
                 executable: account.executable,
                 rent_epoch: account.rent_epoch,

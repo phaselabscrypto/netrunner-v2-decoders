@@ -7,5 +7,5 @@ use carbon_core::{borsh, CarbonDeserialize};
 )]
 pub struct NewPositionPricesAndFee {
     pub entry_price: OraclePrice,
-    pub fee: u64,
+    pub fee_usd: u64,
 }

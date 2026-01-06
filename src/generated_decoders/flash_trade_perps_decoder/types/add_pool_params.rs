@@ -14,4 +14,8 @@ pub struct AddPoolParams {
     pub metadata_uri: String,
     pub staking_fee_share_bps: u64,
     pub vp_volume_factor: u8,
+    pub staking_fee_boost_bps: [u64; 6],
+    pub min_lp_price_usd: u64,
+    pub max_lp_price_usd: u64,
+    pub threshold_usd: u64,
 }

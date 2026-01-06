@@ -38,5 +38,7 @@ pub struct Pool {
     pub lp_price: u64,
     pub compounding_lp_price: u64,
     pub last_updated_timestamp: i64,
-    pub padding2: [u64; 1],
+    pub fees_obligation_usd: u64,
+    pub rebate_obligation_usd: u64,
+    pub threshold_usd: u64,
 }

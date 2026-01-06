@@ -5,5 +5,4 @@ use carbon_core::{borsh, CarbonDeserialize};
 )]
 pub struct SwapAndAddCollateralParams {
     pub amount_in: u64,
-    pub min_collateral_amount_out: u64,
 }

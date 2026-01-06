@@ -7,6 +7,5 @@ use carbon_core::{borsh, CarbonDeserialize};
 )]
 pub struct CloseAndSwapParams {
     pub price_with_slippage: OraclePrice,
-    pub min_swap_amount_out: u64,
     pub privilege: Privilege,
 }
