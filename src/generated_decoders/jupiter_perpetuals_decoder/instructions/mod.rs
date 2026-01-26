@@ -6,8 +6,8 @@ pub mod add_pool;
 pub mod borrow_from_custody;
 pub mod borrow_from_custody_event;
 pub mod close_borrow_position;
-pub mod close_position_request;
 pub mod close_position_request2;
+pub mod close_position_request3;
 pub mod close_position_request_event;
 pub mod create_and_delegate_stake_account;
 pub mod create_decrease_position_market_request;
@@ -39,6 +39,7 @@ pub mod instant_create_limit_order_event;
 pub mod instant_create_tpsl;
 pub mod instant_create_tpsl_event;
 pub mod instant_decrease_position;
+pub mod instant_decrease_position2;
 pub mod instant_decrease_position_event;
 pub mod instant_increase_position;
 pub mod instant_increase_position_event;
@@ -52,6 +53,7 @@ pub mod liquidate_full_position4;
 pub mod liquidate_full_position_event;
 pub mod operator_set_custody_config;
 pub mod operator_set_pool_config;
+pub mod partial_liquidate_borrow_position;
 pub mod pool_swap_event;
 pub mod pool_swap_exact_out_event;
 pub mod realloc_custody;
@@ -78,6 +80,7 @@ pub mod update_decrease_position_request2;
 pub mod withdraw_collateral_event;
 pub mod withdraw_collateral_for_borrows;
 pub mod withdraw_fees2;
+pub mod withdraw_fees_event;
 pub mod withdraw_stake;
 pub mod withdraw_stake_event;
 
@@ -132,8 +135,8 @@ pub enum JupiterPerpetualsInstruction {
     UpdateDecreasePositionRequest2(
         update_decrease_position_request2::UpdateDecreasePositionRequest2,
     ),
-    ClosePositionRequest(close_position_request::ClosePositionRequest),
     ClosePositionRequest2(close_position_request2::ClosePositionRequest2),
+    ClosePositionRequest3(close_position_request3::ClosePositionRequest3),
     IncreasePosition4(increase_position4::IncreasePosition4),
     IncreasePositionPreSwap(increase_position_pre_swap::IncreasePositionPreSwap),
     IncreasePositionWithInternalSwap(
@@ -154,6 +157,7 @@ pub enum JupiterPerpetualsInstruction {
     InstantCreateLimitOrder(instant_create_limit_order::InstantCreateLimitOrder),
     InstantIncreasePosition(instant_increase_position::InstantIncreasePosition),
     InstantDecreasePosition(instant_decrease_position::InstantDecreasePosition),
+    InstantDecreasePosition2(instant_decrease_position2::InstantDecreasePosition2),
     InstantUpdateLimitOrder(instant_update_limit_order::InstantUpdateLimitOrder),
     InstantUpdateTpsl(instant_update_tpsl::InstantUpdateTpsl),
     GetAddLiquidityAmountAndFee2(get_add_liquidity_amount_and_fee2::GetAddLiquidityAmountAndFee2),
@@ -166,6 +170,9 @@ pub enum JupiterPerpetualsInstruction {
     DepositCollateralForBorrows(deposit_collateral_for_borrows::DepositCollateralForBorrows),
     WithdrawCollateralForBorrows(withdraw_collateral_for_borrows::WithdrawCollateralForBorrows),
     LiquidateBorrowPosition(liquidate_borrow_position::LiquidateBorrowPosition),
+    PartialLiquidateBorrowPosition(
+        partial_liquidate_borrow_position::PartialLiquidateBorrowPosition,
+    ),
     CloseBorrowPosition(close_borrow_position::CloseBorrowPosition),
     CreatePositionRequestEvent(create_position_request_event::CreatePositionRequestEvent),
     InstantCreateTpslEvent(instant_create_tpsl_event::InstantCreateTpslEvent),
@@ -191,6 +198,7 @@ pub enum JupiterPerpetualsInstruction {
     RedeemStakeEvent(redeem_stake_event::RedeemStakeEvent),
     WithdrawStakeEvent(withdraw_stake_event::WithdrawStakeEvent),
     DelegateStakeEvent(delegate_stake_event::DelegateStakeEvent),
+    WithdrawFeesEvent(withdraw_fees_event::WithdrawFeesEvent),
 }
 
 impl<'a> carbon_core::instruction::InstructionDecoder<'a> for JupiterPerpetualsDecoder {
@@ -231,8 +239,8 @@ impl<'a> carbon_core::instruction::InstructionDecoder<'a> for JupiterPerpetualsD
             JupiterPerpetualsInstruction::CreateDecreasePositionRequest2 => create_decrease_position_request2::CreateDecreasePositionRequest2,
             JupiterPerpetualsInstruction::CreateDecreasePositionMarketRequest => create_decrease_position_market_request::CreateDecreasePositionMarketRequest,
             JupiterPerpetualsInstruction::UpdateDecreasePositionRequest2 => update_decrease_position_request2::UpdateDecreasePositionRequest2,
-            JupiterPerpetualsInstruction::ClosePositionRequest => close_position_request::ClosePositionRequest,
             JupiterPerpetualsInstruction::ClosePositionRequest2 => close_position_request2::ClosePositionRequest2,
+            JupiterPerpetualsInstruction::ClosePositionRequest3 => close_position_request3::ClosePositionRequest3,
             JupiterPerpetualsInstruction::IncreasePosition4 => increase_position4::IncreasePosition4,
             JupiterPerpetualsInstruction::IncreasePositionPreSwap => increase_position_pre_swap::IncreasePositionPreSwap,
             JupiterPerpetualsInstruction::IncreasePositionWithInternalSwap => increase_position_with_internal_swap::IncreasePositionWithInternalSwap,
@@ -247,6 +255,7 @@ impl<'a> carbon_core::instruction::InstructionDecoder<'a> for JupiterPerpetualsD
             JupiterPerpetualsInstruction::InstantCreateLimitOrder => instant_create_limit_order::InstantCreateLimitOrder,
             JupiterPerpetualsInstruction::InstantIncreasePosition => instant_increase_position::InstantIncreasePosition,
             JupiterPerpetualsInstruction::InstantDecreasePosition => instant_decrease_position::InstantDecreasePosition,
+            JupiterPerpetualsInstruction::InstantDecreasePosition2 => instant_decrease_position2::InstantDecreasePosition2,
             JupiterPerpetualsInstruction::InstantUpdateLimitOrder => instant_update_limit_order::InstantUpdateLimitOrder,
             JupiterPerpetualsInstruction::InstantUpdateTpsl => instant_update_tpsl::InstantUpdateTpsl,
             JupiterPerpetualsInstruction::GetAddLiquidityAmountAndFee2 => get_add_liquidity_amount_and_fee2::GetAddLiquidityAmountAndFee2,
@@ -257,6 +266,7 @@ impl<'a> carbon_core::instruction::InstructionDecoder<'a> for JupiterPerpetualsD
             JupiterPerpetualsInstruction::DepositCollateralForBorrows => deposit_collateral_for_borrows::DepositCollateralForBorrows,
             JupiterPerpetualsInstruction::WithdrawCollateralForBorrows => withdraw_collateral_for_borrows::WithdrawCollateralForBorrows,
             JupiterPerpetualsInstruction::LiquidateBorrowPosition => liquidate_borrow_position::LiquidateBorrowPosition,
+            JupiterPerpetualsInstruction::PartialLiquidateBorrowPosition => partial_liquidate_borrow_position::PartialLiquidateBorrowPosition,
             JupiterPerpetualsInstruction::CloseBorrowPosition => close_borrow_position::CloseBorrowPosition,
             JupiterPerpetualsInstruction::CreatePositionRequestEvent => create_position_request_event::CreatePositionRequestEvent,
             JupiterPerpetualsInstruction::InstantCreateTpslEvent => instant_create_tpsl_event::InstantCreateTpslEvent,
@@ -282,6 +292,7 @@ impl<'a> carbon_core::instruction::InstructionDecoder<'a> for JupiterPerpetualsD
             JupiterPerpetualsInstruction::RedeemStakeEvent => redeem_stake_event::RedeemStakeEvent,
             JupiterPerpetualsInstruction::WithdrawStakeEvent => withdraw_stake_event::WithdrawStakeEvent,
             JupiterPerpetualsInstruction::DelegateStakeEvent => delegate_stake_event::DelegateStakeEvent,
+            JupiterPerpetualsInstruction::WithdrawFeesEvent => withdraw_fees_event::WithdrawFeesEvent,
         )
     }
 }
