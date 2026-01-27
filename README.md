@@ -30,8 +30,6 @@ You can use the tool in two modes: using a local JSON IDL file or fetching it di
 
 ### Mode 1: Generate from Local IDL
 
-### Mode 1: Generate from Local IDL
-
 Place your JSON IDL file in the `src/idl_inputs/` directory (or anywhere else). Run the command pointing to the file:
 
 ```sh
