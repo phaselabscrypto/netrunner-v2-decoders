@@ -69,4 +69,6 @@ pub mod tensor_marketplace_decoder;
 #[allow(clippy::all)]
 pub mod tensor_swap_decoder;
 #[allow(clippy::all)]
+pub mod titan_swap_decoder;
+#[allow(clippy::all)]
 pub mod whirlpool_decoder;

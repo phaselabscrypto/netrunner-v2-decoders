@@ -4,8 +4,7 @@ use std::io::Write;
 use std::path::{Path, PathBuf};
 use std::process::Command;
 
-const DECODER_OUTPUT_DIR: &str = "generated_decoders";
-const IDL_INPUT_DIR: &str = "idl_inputs";
+const DECODER_OUTPUT_DIR: &str = "src/generated_decoders";
 
 fn generate_decoder(idl_or_address: &str, decoder_name: &str) -> Result<(), String> {
     let output_dir = DECODER_OUTPUT_DIR;
@@ -14,12 +13,12 @@ fn generate_decoder(idl_or_address: &str, decoder_name: &str) -> Result<(), Stri
     cmd.arg("parse");
 
     if idl_or_address.ends_with(".json") {
-        cmd.args(&["--idl", &format!("{}/{}", IDL_INPUT_DIR, idl_or_address)]);
+        cmd.args(&["--idl", idl_or_address]);
     } else {
         cmd.args(&["--idl", idl_or_address, "-u", "mainnet-beta"]);
     }
 
-    cmd.args(&["--output", output_dir]);
+    cmd.args(&["-o", output_dir]);
 
     let output = cmd
         .output()
@@ -130,9 +129,14 @@ fn main() {
     }
 
     let idl_or_address = &args[1];
-    let decoder_name = idl_or_address
-        .strip_suffix(".json")
-        .unwrap_or(idl_or_address);
+    let decoder_name = if idl_or_address.ends_with(".json") {
+        Path::new(idl_or_address)
+            .file_stem()
+            .and_then(|s| s.to_str())
+            .unwrap_or(idl_or_address)
+    } else {
+        idl_or_address
+    };
 
     // Ensure "-" is replaced with "_"
     let valid_name = decoder_name.replace("-", "_");
