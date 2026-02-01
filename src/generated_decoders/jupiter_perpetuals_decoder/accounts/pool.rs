@@ -18,4 +18,7 @@ pub struct Pool {
     pub parameter_update_oracle: Secp256k1Pubkey,
     pub aum_usd_updated_at: i64,
     pub max_trigger_price_diff_bps: u64,
+    pub disable_close_position_request: bool,
+    pub max_lp_token_price_change_bps: u64,
+    pub aum_usd_refreshed_at_slot: u64,
 }

@@ -11,4 +11,6 @@ pub struct SetPoolConfigParams {
     pub max_request_execution_sec: i64,
     pub parameter_update_oracle: Secp256k1Pubkey,
     pub max_trigger_price_diff_bps: u64,
+    pub disable_close_position_request: bool,
+    pub max_lp_token_price_change_bps: u64,
 }

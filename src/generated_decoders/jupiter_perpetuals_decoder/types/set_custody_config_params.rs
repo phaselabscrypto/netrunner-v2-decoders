@@ -28,4 +28,7 @@ pub struct SetCustodyConfigParams {
     pub min_interest_fee_grace_period_seconds: u64,
     pub max_total_staked_amount_lamports: u64,
     pub external_swap_fee_multiplier_bps: u64,
+    pub disable_close_position_request: bool,
+    pub withdrawal_limit_interval_seconds: u64,
+    pub withdrawal_limit_token_amount: u64,
 }

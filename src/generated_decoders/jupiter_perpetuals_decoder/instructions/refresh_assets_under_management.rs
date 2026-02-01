@@ -14,6 +14,7 @@ pub struct RefreshAssetsUnderManagementInstructionAccounts {
     pub keeper: solana_sdk::pubkey::Pubkey,
     pub perpetuals: solana_sdk::pubkey::Pubkey,
     pub pool: solana_sdk::pubkey::Pubkey,
+    pub lp_token_mint: solana_sdk::pubkey::Pubkey,
 }
 
 impl carbon_core::deserialize::ArrangeAccounts for RefreshAssetsUnderManagement {
@@ -22,7 +23,7 @@ impl carbon_core::deserialize::ArrangeAccounts for RefreshAssetsUnderManagement 
     fn arrange_accounts(
         accounts: &[solana_sdk::instruction::AccountMeta],
     ) -> Option<Self::ArrangedAccounts> {
-        let [keeper, perpetuals, pool, _remaining @ ..] = accounts else {
+        let [keeper, perpetuals, pool, lp_token_mint, _remaining @ ..] = accounts else {
             return None;
         };
 
@@ -30,6 +31,7 @@ impl carbon_core::deserialize::ArrangeAccounts for RefreshAssetsUnderManagement 
             keeper: keeper.pubkey,
             perpetuals: perpetuals.pubkey,
             pool: pool.pubkey,
+            lp_token_mint: lp_token_mint.pubkey,
         })
     }
 }

@@ -10,4 +10,6 @@ pub struct OperatorSetPoolConfigParams {
     pub limit: Limit,
     pub max_request_execution_sec: i64,
     pub max_trigger_price_diff_bps: u64,
+    pub disable_close_position_request: bool,
+    pub max_lp_token_price_change_bps: u64,
 }

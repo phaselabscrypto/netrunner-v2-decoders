@@ -31,4 +31,5 @@ pub struct InstantDecreasePositionEvent {
     pub price_impact_fee_usd: u64,
     pub position_open_time: i64,
     pub position_price: u64,
+    pub position_request: Option<solana_sdk::pubkey::Pubkey>,
 }
