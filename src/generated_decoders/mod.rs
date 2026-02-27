@@ -57,6 +57,11 @@ pub mod meteora_vault_decoder;
 #[allow(clippy::all)]
 pub mod okx_dex_v2_decoder;
 #[allow(clippy::all)]
+pub mod onchain_labs_dex_v1_decoder;
+#[allow(clippy::all)]
+#[allow(clippy::all)]
+pub mod onchain_labs_dex_v2_decoder;
+#[allow(clippy::all)]
 pub mod raydium_concentrated_liquidity_decoder;
 #[allow(clippy::all)]
 pub mod sanctum_unstake_decoder;
